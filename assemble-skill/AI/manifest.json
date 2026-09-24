@@ -1,0 +1,1404 @@
+{
+  "$comment": "Machine-readable index of the Assemble design system. Generated from the Skill DS vault. This file is an INDEX, not a source of truth: every doc path below is authoritative over any value restated here. open_items counts are as of the consistency pass recorded in ../Components/checklist.md.",
+  "skill": {
+    "name": "assemble-design-system",
+    "version": "1.0.0",
+    "title": "Assemble — McAfee Design System",
+    "entry_point": "SKILL.md",
+    "source_of_truth": "../",
+    "docs_root": {
+      "foundations": "../Foundations/",
+      "components": "../Components/",
+      "drafts": "../Components/drafts/",
+      "template": "../Components/_component-doc-template.md",
+      "checklist": "../Components/checklist.md"
+    },
+    "targets": [
+      "claude-code",
+      "cursor",
+      "copilot",
+      "figma-make",
+      "figma-mcp",
+      "generic-agent"
+    ],
+    "triggers": [
+      "Assemble",
+      "ASM",
+      "Asm*",
+      "Pegasus",
+      "McAfee UI",
+      "design system",
+      "alert card",
+      "navigation rail",
+      "peek label",
+      "guided action panel",
+      "md.sys.color",
+      "md.spacing",
+      "md.border",
+      "AsmTokens",
+      "asmColorScheme",
+      "which component should I use",
+      "is this on-system",
+      "on-brand",
+      "design token",
+      "Assemble React",
+      "Figma Make prototype",
+      "prototype this screen"
+    ]
+  },
+  "platform": {
+    "form_factor": "desktop applications with resizable windows",
+    "has_mobile_build": false,
+    "derived_from": "Material 3",
+    "sanctioned_bindings": {
+      "count": 2,
+      "flutter": {
+        "status": "sanctioned",
+        "purpose": "McAfee production products",
+        "framework": "Flutter",
+        "implementation_repo": "Pegasus Flutter",
+        "widget_prefix": "Asm",
+        "token_package": "assemble_flutter_tokens",
+        "documented": true,
+        "documented_in": "the '## Flutter Usage' section of all 34 component docs",
+        "reconciled_against_figma": true,
+        "precedence_tier": 8,
+        "validation_group": "G5"
+      },
+      "react": {
+        "status": "sanctioned",
+        "purpose": "prototyping — Figma Make and similar",
+        "framework": "React",
+        "widget_prefix": null,
+        "naming_convention": "a different prefix or plain names — NEVER Asm*; verify from source",
+        "token_source": "the web build of the same token source (CSS custom properties / JS export)",
+        "documented": false,
+        "documented_in": "nothing. The only written record is AI/react-binding.md",
+        "reconciled_against_figma": false,
+        "api_parity_with_flutter": "not guaranteed — a looser prototyping approximation",
+        "component_coverage": "unknown; verify per component",
+        "precedence_tier": 9,
+        "design_authority": "none",
+        "validation_group": "G7",
+        "notes": "authoritative about what React does, because it is code; carries no authority about what the system means"
+      }
+    },
+    "flow_rule": {
+      "allowed": "design law -> either binding",
+      "forbidden": [
+        "React -> Flutter (a prototype is never an implementation spec)",
+        "React -> design law (an approximation is never evidence about the system)",
+        "Flutter -> React (widget APIs do not carry across)"
+      ],
+      "detail": "AI/react-binding.md section 1"
+    },
+    "has_sanctioned_web_implementation": true,
+    "sanctioned_web_implementation_scope": "React, for prototyping only — undocumented, unreconciled, parity not guaranteed, never a production spec",
+    "documented_divergences_from_material_3": [
+      "typeface is McAfee Sans / McAfee Sans Mono, not Roboto",
+      "an extra Heavy weight, on display and headline only",
+      "mono label variants for machine values",
+      "focus rings instead of focus-layer-only",
+      "keyed state colors by action meaning (primary/secondary/neutral/error)",
+      "shadow-based elevation, not tonal elevation"
+    ],
+    "layer_split": {
+      "layers": 3,
+      "layer_a_design_law": {
+        "is": "everything above the '## Flutter Usage' heading in any component doc",
+        "contains": [
+          "banner",
+          "Overview",
+          "Anatomy",
+          "Sizes",
+          "Variants",
+          "Modifiers",
+          "States",
+          "Behaviors",
+          "Content",
+          "Decision Tree",
+          "Accessibility",
+          "Anti-Patterns",
+          "Rules",
+          "Open Items"
+        ],
+        "portable": "fully — applies to both bindings and to translations",
+        "precedence_tiers": "2-7",
+        "note": "this is where all the authority lives; neither binding is the design law"
+      },
+      "layer_b_flutter": {
+        "is": "the '## Flutter Usage' section",
+        "portable": false,
+        "precedence_tier": 8,
+        "authority_for_other_bindings": "none"
+      },
+      "layer_b_react": {
+        "is": "the React source — undocumented",
+        "portable": false,
+        "precedence_tier": 9,
+        "authority_for_other_bindings": "none",
+        "authority_for_design_questions": "none"
+      }
+    }
+  },
+  "load_order": [
+    {
+      "step": 1,
+      "read": "SKILL.md",
+      "when": "always"
+    },
+    {
+      "step": 2,
+      "read": "component-router.md",
+      "when": "the question is which component"
+    },
+    {
+      "step": 3,
+      "read": "<component>.md in full",
+      "when": "building or reviewing a component"
+    },
+    {
+      "step": 4,
+      "read": "token-contract.md",
+      "when": "any token or value is involved"
+    },
+    {
+      "step": 5,
+      "read": "../Foundations/<owner>.md",
+      "when": "the token contract is not enough"
+    },
+    {
+      "step": 6,
+      "read": "decision-priority.md",
+      "when": "two sources disagree"
+    },
+    {
+      "step": 7,
+      "read": "platform-adapters.md",
+      "when": "target is not Flutter",
+      "mandatory": true
+    },
+    {
+      "step": 8,
+      "read": "react-binding.md",
+      "when": "target is React or Figma Make",
+      "mandatory": true
+    },
+    {
+      "step": 9,
+      "read": "validation.md",
+      "when": "before returning any answer",
+      "mandatory": true
+    }
+  ],
+  "ai_docs": [
+    {
+      "file": "SKILL.md",
+      "role": "entry point: constraints, traps, answer shape, refusals"
+    },
+    {
+      "file": "manifest.json",
+      "role": "machine-readable index (this file)"
+    },
+    {
+      "file": "decision-priority.md",
+      "role": "12-tier precedence ladder for conflicting sources"
+    },
+    {
+      "file": "reasoning-engine.md",
+      "role": "phases 0-8: request to decision to output"
+    },
+    {
+      "file": "validation.md",
+      "role": "gate groups G1-G7 plus the self-report block"
+    },
+    {
+      "file": "component-router.md",
+      "role": "global routing: job to candidate component (target-independent, Layer A)"
+    },
+    {
+      "file": "token-contract.md",
+      "role": "consolidated token law: allowed and forbidden namespaces, closed scales, per-binding accessors"
+    },
+    {
+      "file": "platform-adapters.md",
+      "role": "mandatory for non-Flutter targets; target router, three-layer model, labels"
+    },
+    {
+      "file": "react-binding.md",
+      "role": "the React prototyping binding — the ONLY written record; the one-way flow rule"
+    },
+    {
+      "file": "anti-patterns.md",
+      "role": "cross-component failure catalogue"
+    },
+    {
+      "file": "known-gaps.md",
+      "role": "the ~600 open items surface, undocumented components, behavior under uncertainty"
+    },
+    {
+      "file": "glossary.md",
+      "role": "naming collisions and Figma-to-code drift"
+    },
+    {
+      "file": "README.md",
+      "role": "human-facing overview and install matrix"
+    },
+    {
+      "file": "adapters/claude-code.md",
+      "role": "Claude Code install and usage"
+    },
+    {
+      "file": "adapters/cursor.mdc",
+      "role": "Cursor project rule"
+    },
+    {
+      "file": "adapters/copilot-instructions.md",
+      "role": "GitHub Copilot custom instructions"
+    },
+    {
+      "file": "adapters/AGENTS.md",
+      "role": "generic agent instructions (AGENTS.md convention)"
+    },
+    {
+      "file": "adapters/figma-make.md",
+      "role": "Figma Make / design-tool guidance — uses the Assemble React library, fidelity-notice labeled"
+    }
+  ],
+  "token_namespaces": {
+    "allowed_in_ui": [
+      "md.sys.color.*",
+      "mcafee.color.extended.*",
+      "md.spacing.*",
+      "md.border.size.*",
+      "md.border.radius.*",
+      "md.border.focus",
+      "md.sys.state.*",
+      "md.sys.typescale.*"
+    ],
+    "forbidden_in_ui": [
+      "md.key.*",
+      "md.ref.palette.*",
+      "md.ref.brand.*",
+      "md.ref.type.font.*",
+      "md.type.size.*"
+    ],
+    "architecture": [
+      "key (md.key.*)",
+      "reference (md.ref.*)",
+      "semantic (md.sys.* / mcafee.*)"
+    ],
+    "builds": {
+      "$comment": "One token source, two builds. Both bindings consume the same semantic layer, so there is no mapping to declare between them.",
+      "flutter": {
+        "package": "assemble_flutter_tokens",
+        "consumed_by": "the Flutter binding"
+      },
+      "web": {
+        "package": "the web token build — read it from the web token package",
+        "form": "CSS custom properties, a JS export, or both",
+        "consumed_by": "the React binding",
+        "token_names_carry_across": true,
+        "naming_transform": "mechanical, and NOT recorded in these docs. Read it from the web token package once, confirm it, use it everywhere. Never guess it, and never fall back to a literal because you could not find the variable.",
+        "missing_token": "a gap in the web build to report — never licence to inline a value"
+      }
+    },
+    "flutter_accessors": [
+      "asmColorScheme(brightness:)",
+      "AsmTokens.of(context)",
+      "context.asmTokens",
+      "context.asmExtendedColors",
+      "context.asmStateColors",
+      "context.asmGradients",
+      "context.asmTokens.shadows",
+      "AsmSpacing.*"
+    ]
+  },
+  "closed_scales": {
+    "spacing": {
+      "token": "md.spacing.{step}",
+      "steps": {
+        "0": 0,
+        "50": 2,
+        "100": 4,
+        "200": 8,
+        "250": 10,
+        "300": 12,
+        "400": 16,
+        "500": 20,
+        "600": 24,
+        "700": 28,
+        "800": 32,
+        "900": 36,
+        "1000": 40,
+        "1100": 44,
+        "1200": 48
+      },
+      "count": 15,
+      "default": "md.spacing.400",
+      "bands": {
+        "inside_an_element": [
+          0,
+          8
+        ],
+        "between_elements": [
+          10,
+          24
+        ],
+        "between_groups": [
+          28,
+          48
+        ]
+      },
+      "optical_corrections": [
+        "md.spacing.50",
+        "md.spacing.250"
+      ],
+      "owner": "../Foundations/Spacing.md"
+    },
+    "border_width": {
+      "token": "md.border.size.{step}",
+      "values": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "owner": "../Foundations/Spacing.md"
+    },
+    "border_radius": {
+      "token": "md.border.radius.{step}",
+      "values": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        12,
+        16,
+        24,
+        32,
+        36,
+        40,
+        48,
+        56,
+        64,
+        999
+      ],
+      "pill": 999,
+      "owner": "../Foundations/Spacing.md"
+    },
+    "elevation": {
+      "model": "shadow-based, not tonal",
+      "count": 3,
+      "all_offsets": "zero",
+      "shadows": [
+        {
+          "name": "elevation-subtle",
+          "blur": 4,
+          "color_token": "md.sys.color.shadow"
+        },
+        {
+          "name": "elevation-light",
+          "blur": 20,
+          "color_token": "md.sys.color.shadow"
+        },
+        {
+          "name": "elevation-heavy",
+          "blur": 25,
+          "color_token": "mcafee.color.extended.opaque.dark-40"
+        }
+      ],
+      "default": "no shadow",
+      "forbidden": [
+        "Material(elevation:)",
+        "Card(elevation:)",
+        "surface-container-* as an elevation scale"
+      ],
+      "owner": "../Foundations/Elevation.md"
+    },
+    "state_layer_opacity": {
+      "hover": 0.08,
+      "focus": 0.1,
+      "pressed": 0.1,
+      "dragged": 0.16,
+      "enabled": "absence of a layer",
+      "disabled": {
+        "container": 0.12,
+        "content": 0.38,
+        "derived_from": "on-surface"
+      },
+      "combination": "additive",
+      "precedence": [
+        "disabled",
+        "pressed",
+        "focus",
+        "hover",
+        "enabled"
+      ],
+      "roles": [
+        "primary",
+        "secondary",
+        "neutral",
+        "error"
+      ],
+      "role_chosen_by": "the action's meaning, not the element's current colour",
+      "owner": "../Foundations/States.md"
+    },
+    "focus_ring": {
+      "token": "md.border.focus",
+      "color": "md.sys.color.primary",
+      "width_token": "md.border.size.200",
+      "width_px": 2,
+      "style": "solid",
+      "offset_px": 2,
+      "trigger": "keyboard only",
+      "owner": "../Foundations/States.md"
+    },
+    "icon_sizes": {
+      "values": [
+        16,
+        20,
+        24,
+        40,
+        48
+      ],
+      "family": "Material Symbols Outlined",
+      "weight": 400,
+      "filled_reserved_for": "selected state",
+      "interactive_minimum_px": 48,
+      "no_asm_icon_widget": true,
+      "widgets": [
+        "AsmIconButton",
+        "AsmIconContainer (60x60 box, 24px glyph)"
+      ],
+      "owner": "../Foundations/Icons.md"
+    },
+    "typography": {
+      "families": [
+        "McAfee Sans",
+        "McAfee Sans Mono"
+      ],
+      "emphasized_weight": 700,
+      "heavy_restricted_to": [
+        "display",
+        "headline"
+      ],
+      "heavy_context": "promotional only",
+      "mono_restricted_to": "data values, used sparingly",
+      "scale": {
+        "display": {
+          "large": 57,
+          "medium": 44,
+          "small": 36
+        },
+        "headline": {
+          "large": 32,
+          "medium": 28,
+          "small": 24
+        },
+        "title": {
+          "large": 22,
+          "medium": 18,
+          "small": 16
+        },
+        "label": {
+          "large": 14,
+          "medium": 12,
+          "small": 11
+        },
+        "label.mono": {
+          "large": 14,
+          "medium": 12,
+          "small": 11,
+          "line_height": 1.0
+        },
+        "body": {
+          "large": 16,
+          "medium": 14,
+          "small": 12
+        }
+      },
+      "owner": "../Foundations/Typography.md"
+    }
+  },
+  "layout": {
+    "thresholds_px": [
+      500,
+      980
+    ],
+    "threshold_count": 2,
+    "tiers": [
+      {
+        "name": "SM",
+        "range": "500-979",
+        "columns": 4,
+        "nav": "overlay drawer",
+        "secondary_surface": "bottom sheet"
+      },
+      {
+        "name": "MD",
+        "range": "980-1279",
+        "columns": 12,
+        "nav": "persistent rail",
+        "secondary_surface": "side panel"
+      },
+      {
+        "name": "Default",
+        "range": "1280-1439",
+        "columns": 12,
+        "nav": "persistent rail",
+        "secondary_surface": "side panel"
+      },
+      {
+        "name": "Max",
+        "range": "1440+",
+        "columns": 12,
+        "nav": "persistent rail",
+        "secondary_surface": "side panel"
+      }
+    ],
+    "structurally_identical_tiers": [
+      "MD",
+      "Default",
+      "Max"
+    ],
+    "content_region_formula": "window - 16 (margin) - 60 (rail) - 16 (margin) - 386 (panel, if present)",
+    "grid": {
+      "columns_md_plus": 12,
+      "columns_sm": 4,
+      "gutter_px": 16,
+      "outer_margin_px": 16,
+      "max_content_width_px": 992,
+      "max_width_derivation": "(12 x 68) + (11 x 16) = 992",
+      "overflow_behaviour": "caps at 992 and centres; surplus becomes symmetric margin",
+      "fixed_regions_outside_grid": {
+        "rail_px": 60,
+        "side_panel_px": 386
+      },
+      "vertical_rhythm_px": {
+        "between_items": 24,
+        "at_section_boundary": 30
+      },
+      "nested_grid_inside_card": "forbidden"
+    },
+    "flutter_binding": {
+      "use": [
+        "LayoutBuilder",
+        "constraints.maxWidth"
+      ],
+      "never": [
+        "MediaQuery.of(context).size.width for layout decisions"
+      ],
+      "mediaquery_still_correct_for": [
+        "safe areas",
+        "insets",
+        "text scale"
+      ]
+    },
+    "tokenized": false,
+    "note": "500, 980, 992, 386, 60, 16, 24, 30 are measured values, not tokens. This is a standing gap.",
+    "owners": [
+      "../Foundations/Breakpoints.md",
+      "../Foundations/Grid.md"
+    ]
+  },
+  "accessibility_floor": [
+    {
+      "id": "a11y-1",
+      "rule": "48x48 minimum touch target, via padding, holding at 200% text scale"
+    },
+    {
+      "id": "a11y-2",
+      "rule": "visible keyboard focus ring: md.sys.color.primary, 2px, 2px offset"
+    },
+    {
+      "id": "a11y-3",
+      "rule": "never convey meaning by colour alone"
+    },
+    {
+      "id": "a11y-4",
+      "rule": "every meaningful icon has an accessible name; decorative icons are hidden"
+    },
+    {
+      "id": "a11y-5",
+      "rule": "icon-only controls need both an accessible label and a tooltip"
+    },
+    {
+      "id": "a11y-6",
+      "rule": "contrast: 4.5:1 normal text, 3:1 large text, 3:1 interactive and non-text"
+    },
+    {
+      "id": "a11y-7",
+      "rule": "nothing consequential lives only in a transient or hover-only surface"
+    },
+    {
+      "id": "a11y-8",
+      "rule": "disabled elements leave the tab order and receive no other state"
+    }
+  ],
+  "accessibility_documented_exceptions": [
+    {
+      "case": "disabled content at 38% opacity",
+      "why_accepted": "non-interactive; therefore disabled text may never be the only place information appears"
+    },
+    {
+      "case": "Cards 'brand' variant at 3.9:1",
+      "why_accepted": "large text only; not a licence to relax contrast elsewhere"
+    }
+  ],
+  "foundations": [
+    {
+      "name": "Color",
+      "doc": "../Foundations/Color.md",
+      "owns": [
+        "colour tokens",
+        "three-layer architecture",
+        "state layer colours",
+        "dark mode mapping",
+        "gradients",
+        "contrast minimums"
+      ],
+      "open_items": 0
+    },
+    {
+      "name": "Typography",
+      "doc": "../Foundations/Typography.md",
+      "owns": [
+        "type scale",
+        "weights",
+        "emphasized",
+        "mono",
+        "heavy"
+      ],
+      "open_items": 0
+    },
+    {
+      "name": "Spacing",
+      "doc": "../Foundations/Spacing.md",
+      "owns": [
+        "spacing scale",
+        "bands",
+        "border width",
+        "border radius"
+      ],
+      "open_items": 0
+    },
+    {
+      "name": "Grid",
+      "doc": "../Foundations/Grid.md",
+      "owns": [
+        "columns",
+        "gutters",
+        "margins",
+        "992 cap",
+        "vertical rhythm"
+      ],
+      "open_items": 4
+    },
+    {
+      "name": "Breakpoints",
+      "doc": "../Foundations/Breakpoints.md",
+      "owns": [
+        "tiers",
+        "thresholds",
+        "content region formula",
+        "SM transforms"
+      ],
+      "open_items": 4
+    },
+    {
+      "name": "States",
+      "doc": "../Foundations/States.md",
+      "owns": [
+        "state layers",
+        "opacities",
+        "roles",
+        "focus ring",
+        "disabled",
+        "precedence"
+      ],
+      "open_items": 0
+    },
+    {
+      "name": "Elevation",
+      "doc": "../Foundations/Elevation.md",
+      "owns": [
+        "the three shadows",
+        "shadow-not-tonal model"
+      ],
+      "open_items": 0
+    },
+    {
+      "name": "Icons",
+      "doc": "../Foundations/Icons.md",
+      "owns": [
+        "glyph family",
+        "sizes",
+        "icon-component pairing",
+        "filled = selected",
+        "AsmIconButton",
+        "AsmIconContainer"
+      ],
+      "open_items": 0
+    }
+  ],
+  "components": [
+    {
+      "name": "Accordion",
+      "doc": "../Components/Accordion.md",
+      "open_items": 12,
+      "type_decided_by": "page background"
+    },
+    {
+      "name": "Alert Banner",
+      "doc": "../Components/Alert Banner.md",
+      "open_items": 11
+    },
+    {
+      "name": "Alert Card",
+      "doc": "../Components/Alert Card.md",
+      "open_items": 25,
+      "built_on": "Cards",
+      "layout_decided_by": "available width (>=480 expanded / 375-479 medium / <375 compact)",
+      "routes_to_undocumented": [
+        "guided action panel"
+      ]
+    },
+    {
+      "name": "Badges",
+      "doc": "../Components/Badges.md",
+      "widget": "AsmBadge",
+      "open_items": 19,
+      "type_decided_by": "the surface behind the badge",
+      "naming_collision": "badge"
+    },
+    {
+      "name": "Button",
+      "doc": "../Components/Button.md",
+      "widget": "AsmButton",
+      "open_items": 14,
+      "rules": 21,
+      "variants": [
+        "filled",
+        "tonal",
+        "outline",
+        "text",
+        "textNoPadding",
+        "ghost",
+        "strictBlack",
+        "strictWhite"
+      ],
+      "sizes": {
+        "large": 70,
+        "medium": 60,
+        "small": 52,
+        "xsmall": 48
+      },
+      "shipped_defaults": {
+        "variant": "text",
+        "size": "large"
+      },
+      "documented_defaults": {
+        "variant": "filled",
+        "size": "medium"
+      },
+      "defaults_contradict_guidance": true,
+      "figma_to_code_size_map": {
+        "huge": "large",
+        "spacious": "medium",
+        "default": "small",
+        "compact": "xsmall"
+      },
+      "reference_implementation": true
+    },
+    {
+      "name": "Cards",
+      "doc": "../Components/Cards.md",
+      "open_items": 15,
+      "is_substrate_for": [
+        "Alert Card",
+        "Expanded Card",
+        "list feature row",
+        "list feature card",
+        "floating card",
+        "strip card"
+      ],
+      "a11y_exception": "brand variant at 3.9:1, large text only"
+    },
+    {
+      "name": "Carousel",
+      "doc": "../Components/Carousel.md",
+      "open_items": 14,
+      "widget": "AsmCarouselIndicator / AsmDotIndicator",
+      "no_reusable_component": true,
+      "note": "indicator only; the one working carousel is private to Alert Card and does not use this indicator"
+    },
+    {
+      "name": "Chat Bubble",
+      "doc": "../Components/Chat Bubble.md",
+      "open_items": 10,
+      "caller_owes": [
+        "width constraint ~70-80%",
+        "per-sender alignment",
+        "sender attribution for assistive tech",
+        "timestamps",
+        "entry animation"
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "doc": "../Components/Checkbox.md",
+      "open_items": 12,
+      "commit_semantics": "on submit"
+    },
+    {
+      "name": "Data Arc Chart",
+      "doc": "../Components/Data Arc Chart.md",
+      "open_items": 14,
+      "parts_range": [
+        2,
+        4
+      ],
+      "shares_open_items_with": "Data Linear Chart",
+      "caller_owes": [
+        "the breakdown — the legend is not announced",
+        "zero-sum check at the call site"
+      ]
+    },
+    {
+      "name": "Data Linear Chart",
+      "doc": "../Components/Data Linear Chart.md",
+      "open_items": 16,
+      "parts_range": [
+        2,
+        5
+      ],
+      "shares_open_items_with": "Data Arc Chart",
+      "visually_identical_to": "Progress Bar",
+      "caller_owes": [
+        "the breakdown — the legend is not announced",
+        "zero-sum check at the call site"
+      ]
+    },
+    {
+      "name": "Date Picker",
+      "doc": "../Components/Date Picker.md",
+      "open_items": 21,
+      "is_family": [
+        "typed field",
+        "month grid",
+        "month/year lists"
+      ],
+      "rule": "the typed field must always be available"
+    },
+    {
+      "name": "Divider",
+      "doc": "../Components/Divider.md",
+      "open_items": 8
+    },
+    {
+      "name": "Empty State",
+      "doc": "../Components/Empty State.md",
+      "open_items": 12
+    },
+    {
+      "name": "Expanded Card",
+      "doc": "../Components/Expanded Card.md",
+      "open_items": 14,
+      "built_on": "Cards",
+      "asserts": "both options and expandedContent supplied"
+    },
+    {
+      "name": "Feedback",
+      "doc": "../Components/Feedback.md",
+      "open_items": 19,
+      "caller_owes": [
+        "acknowledgement — the component's own visual change is not acknowledgement"
+      ]
+    },
+    {
+      "name": "Loaders",
+      "doc": "../Components/Loaders.md",
+      "open_items": 16,
+      "forms": [
+        "indeterminate spinner",
+        "AI thinking row",
+        "determinate branded shield"
+      ],
+      "threshold_ms": 300
+    },
+    {
+      "name": "Menu",
+      "doc": "../Components/Menu.md",
+      "open_items": 22,
+      "note": "compact density is 40px — under the 48 touch floor"
+    },
+    {
+      "name": "Modal",
+      "doc": "../Components/Modal.md",
+      "open_items": 21
+    },
+    {
+      "name": "Navigation Rail",
+      "doc": "../Components/Navigation Rail.md",
+      "open_items": 25,
+      "widgets": [
+        "AsmNavigationRail",
+        "AsmNavDrawer"
+      ],
+      "width_px": 60,
+      "absolute_placement_rule": "docked left at every tier, without exception",
+      "forbidden_shipped_constructor": "AsmNavigationRail.bottom",
+      "routes_to_undocumented": [
+        "topbars"
+      ]
+    },
+    {
+      "name": "Peek Label",
+      "doc": "../Components/Peek Label.md",
+      "open_items": 15,
+      "silently_ignored_combination": "inverse + offline",
+      "routes_to_undocumented": [
+        "guided action panel"
+      ]
+    },
+    {
+      "name": "Popover",
+      "doc": "../Components/Popover.md",
+      "open_items": 17,
+      "no_implementation_ships": true,
+      "note": "nearest shipped placement logic is the private popup inside menu.dart; do not write AsmPopover"
+    },
+    {
+      "name": "Progress Bar",
+      "doc": "../Components/Progress Bar.md",
+      "open_items": 13,
+      "has_track": true,
+      "visually_identical_to": "Data Linear Chart"
+    },
+    {
+      "name": "Radio",
+      "doc": "../Components/Radio.md",
+      "open_items": 13,
+      "commit_semantics": "on submit",
+      "note": "the group owns selection, the name, and the default; a radio never exists alone",
+      "visible_option_range": [
+        2,
+        5
+      ]
+    },
+    {
+      "name": "Scrollbar",
+      "doc": "../Components/Scrollbar.md",
+      "widget": "AsmScrollbar",
+      "open_items": 16,
+      "note": "fades when idle and is invisible to screen readers"
+    },
+    {
+      "name": "Sheets",
+      "doc": "../Components/Sheets.md",
+      "open_items": 19,
+      "covers": [
+        "bottom sheet",
+        "side sheet"
+      ],
+      "side_panel_width_px": 386
+    },
+    {
+      "name": "Skeleton Loader",
+      "doc": "../Components/Skeleton Loader.md",
+      "open_items": 12
+    },
+    {
+      "name": "Snackbar",
+      "doc": "../Components/Snackbar.md",
+      "open_items": 15
+    },
+    {
+      "name": "Status Indicators",
+      "doc": "../Components/Status Indicators.md",
+      "widget": "AsmStatusIndicator",
+      "open_items": 18,
+      "covers": [
+        "status label (dot + word)",
+        "bare dot",
+        "notification badge"
+      ],
+      "naming_collision": "badge"
+    },
+    {
+      "name": "Switch",
+      "doc": "../Components/Switch.md",
+      "open_items": 14,
+      "commit_semantics": "immediate",
+      "note": "the small size's hit region is under 48x48"
+    },
+    {
+      "name": "Tabs",
+      "doc": "../Components/Tabs.md",
+      "open_items": 23,
+      "note": "design gives the selected tab three signals; the shipped component delivers two — never remove another",
+      "routes_to_undocumented": [
+        "topbars"
+      ]
+    },
+    {
+      "name": "Tags",
+      "doc": "../Components/Tags.md",
+      "open_items": 18,
+      "variants": [
+        "standard",
+        "filter"
+      ],
+      "note": "tag bodies are never pressable; only the filter variant's x is interactive"
+    },
+    {
+      "name": "Text Fields",
+      "doc": "../Components/Text Fields.md",
+      "open_items": 33,
+      "widgets": [
+        "AsmTextField",
+        "AsmTextFormField"
+      ],
+      "filled_vs_outlined_decided_by": "whether a four-sided stroke competes with a busy or coloured surface — then all fields on that surface match"
+    },
+    {
+      "name": "Tooltip",
+      "doc": "../Components/Tooltip.md",
+      "open_items": 17,
+      "rule": "nothing focusable inside; use Popover"
+    }
+  ],
+  "templates": {
+    "what_they_are": "whole-screen compositions: region geometry, section order, vertical rhythm, slot assignment",
+    "what_they_are_not": "component specs. every component a template places is governed by that component's own doc, which wins on every detail",
+    "scope": "Layer A design law — target-independent; applies to both sanctioned bindings",
+    "index": "../templates/README.md",
+    "precedence_note": "a template outranks Figma (tier 10) because its conflicts are resolved toward the docs, and loses to any component or foundation doc",
+    "items": [
+      {
+        "name": "Home Feature Layout",
+        "doc": "../templates/home-feature-layout.md",
+        "figma": {
+          "file": "Feature Layouts",
+          "node": "125:2435",
+          "frame": "app",
+          "window": "1306x911"
+        },
+        "regions": [
+          "system app bar",
+          "navigation rail (60, fixed)",
+          "content region (flexes)",
+          "guided action panel (386, fixed)"
+        ],
+        "sections": [
+          "header",
+          "alert deck",
+          "quick actions"
+        ],
+        "components_placed": [
+          "Navigation Rail",
+          "Alert Card",
+          "Badges",
+          "Cards",
+          "Button",
+          "Loaders",
+          "Scrollbar"
+        ],
+        "undocumented_parts": [
+          "guided action panel",
+          "quick action",
+          "wayfinder",
+          "system app bar"
+        ],
+        "open_items": 9
+      }
+    ]
+  },
+  "undocumented_components": [
+    {
+      "name": "guided action panel",
+      "priority": 1,
+      "routed_to_from": [
+        "Alert Card",
+        "Peek Label",
+        "Cards"
+      ],
+      "naming_conflict": "called 'Guided Journey panel' in ../Components/drafts/Alert Card.md; see Alert Card open item 23"
+    },
+    {
+      "name": "topbars",
+      "priority": 2,
+      "routed_to_from": [
+        "Navigation Rail",
+        "Tabs"
+      ],
+      "note": "Breakpoints requires the SM menu affordance that opens the overlay drawer, and no component owns it"
+    },
+    {
+      "name": "lists",
+      "priority": 3,
+      "routed_to_from": [
+        "Cards",
+        "Expanded Card"
+      ],
+      "note": "list feature row / list feature card"
+    },
+    {
+      "name": "brand",
+      "priority": 4
+    },
+    {
+      "name": "feature banner",
+      "priority": 5
+    },
+    {
+      "name": "quick action",
+      "priority": 6
+    },
+    {
+      "name": "toggle groups",
+      "priority": 7
+    }
+  ],
+  "counts": {
+    "foundation_docs": 8,
+    "component_docs": 34,
+    "undocumented_components": 7,
+    "approximate_open_items": 600,
+    "spacing_steps": 15,
+    "shadows": 3,
+    "breakpoint_thresholds": 2
+  },
+  "standing_gaps": [
+    {
+      "gap": "the React binding is entirely undocumented",
+      "priority": 1,
+      "detail": "no doc records the React components' names, props, variant/size coverage, defaults, or divergences from Flutter — so every one of those questions resolves to 'read the source', and nothing catches drift between the two bindings",
+      "why_it_persists": "the component-doc template forbids mentioning web, HTML, CSS, React, or web components at all — correct when Flutter was the only binding, and now the reason a real sanctioned implementation has no home in the docs",
+      "fix": [
+        "amend ../Components/_component-doc-template.md to add a '## React Usage' section alongside '## Flutter Usage', and narrow the web prohibition to the design-law sections only",
+        "reconcile per component the way Flutter was: read the React source, compare against the doc and Figma, log every disagreement as a numbered open item"
+      ],
+      "interim_record": "AI/react-binding.md"
+    },
+    {
+      "gap": "no breakpoint tokens",
+      "detail": "500 and 980 are measured, not tokenized"
+    },
+    {
+      "gap": "no layout tokens",
+      "detail": "992, 386, 60, 16, 24, 30 are measured, not tokenized"
+    },
+    {
+      "gap": "no motion tokens",
+      "detail": "visible in at least 5 components (Accordion item 8, both charts, Navigation Rail item 24); should be promoted to a Foundations gap"
+    },
+    {
+      "gap": "no column-span-per-component record",
+      "detail": "Grid defines the grid; which span each card takes at each tier was never written down"
+    },
+    {
+      "gap": "`wayfinder` is recorded nowhere — not in Components/, not in Foundations/, and not on the undocumented-components list",
+      "found_via": "templates/home-feature-layout.md, read from Figma node 125:2435",
+      "why_it_matters": "a component invisible to the gap tracking is never scheduled for a doc",
+      "fix": [
+        "verify from source whether it is a shared component or a one-off inside the guided action panel",
+        "if shared, add it to undocumented_components and the checklist"
+      ]
+    }
+  ],
+  "known_traps": [
+    {
+      "id": "trap-1",
+      "trap": "library defaults contradict the guidance",
+      "example": "AsmButton defaults to variant: text, size: large",
+      "mitigation": "always pass variant and size explicitly; treat every Asm* default as untrusted"
+    },
+    {
+      "id": "trap-2",
+      "trap": "Figma names and code names disagree",
+      "example": "Button: Figma 'default' maps to code 'small'",
+      "mitigation": "translate through the doc's own mapping table"
+    },
+    {
+      "id": "trap-3",
+      "trap": "routing within before routing away",
+      "example": "most modals should have been a snackbar or an alert banner",
+      "mitigation": "answer 'is this the right component at all' first"
+    },
+    {
+      "id": "trap-4",
+      "trap": "three different things are called 'badge'",
+      "example": "AsmBadge severity chip vs notification badge vs status label",
+      "mitigation": "if it holds a count it is not Badges"
+    },
+    {
+      "id": "trap-5",
+      "trap": "two components that look identical mean opposite things",
+      "example": "Progress Bar (has a track; remainder = not yet) vs Data Linear Chart (no track; the split is the message)",
+      "mitigation": "ask whether the unfilled part means 'not yet'"
+    },
+    {
+      "id": "trap-6",
+      "trap": "treating the two bindings as peers",
+      "example": "porting an approved React prototype into Flutter, or citing a React-only prop as evidence that Assemble has that modifier",
+      "mitigation": "the flow is one-way: design law -> binding. Route the requirement back through the component doc; file the divergence as an open question"
+    },
+    {
+      "id": "trap-7",
+      "trap": "assuming React has Flutter's API",
+      "example": "writing <AsmButton>, or assuming Button's 8 variants and 4 sizes exist in React",
+      "mitigation": "React uses a different prefix or plain names, and parity is not guaranteed. Verify names, props, variants, and sizes from the React source"
+    }
+  ],
+  "validation_gates": [
+    {
+      "group": "G1",
+      "name": "token gates",
+      "checks": 12,
+      "severity": "BLOCKER"
+    },
+    {
+      "group": "G2",
+      "name": "accessibility gates",
+      "checks": 18,
+      "severity": "BLOCKER"
+    },
+    {
+      "group": "G3",
+      "name": "layout gates",
+      "checks": 17,
+      "severity": "DEFECT (some BLOCKER)"
+    },
+    {
+      "group": "G4",
+      "name": "component-integrity gates",
+      "checks": 43,
+      "severity": "DEFECT"
+    },
+    {
+      "group": "G5",
+      "name": "Flutter binding gates",
+      "checks": 15,
+      "severity": "DEFECT",
+      "run_when": "target is Flutter",
+      "otherwise": "report as — , never ✓"
+    },
+    {
+      "group": "G6",
+      "name": "output-hygiene gates",
+      "checks": 12,
+      "severity": "BLOCKER"
+    },
+    {
+      "group": "G7",
+      "name": "React binding gates",
+      "checks": 16,
+      "severity": "DEFECT (several BLOCKER)",
+      "run_when": "target is React or Figma Make",
+      "otherwise": "report as — , never ✓"
+    }
+  ],
+  "validation_gate_total": 133,
+  "validation_binding_groups_are_exclusive": "run G5 for Flutter or G7 for React, never both; a translation target runs neither and reports both as —",
+  "precedence_ladder": [
+    {
+      "tier": 1,
+      "source": "accessibility floors"
+    },
+    {
+      "tier": 2,
+      "source": "the component's banner Rule: line"
+    },
+    {
+      "tier": 3,
+      "source": "the component's ## Rules list"
+    },
+    {
+      "tier": 4,
+      "source": "foundation ## Rules"
+    },
+    {
+      "tier": 5,
+      "source": "the component's ## Decision Tree"
+    },
+    {
+      "tier": 6,
+      "source": "component body prose"
+    },
+    {
+      "tier": 7,
+      "source": "## Anti-Patterns"
+    },
+    {
+      "tier": 8,
+      "source": "## Flutter Usage",
+      "note": "the production binding — documented and reconciled; no authority for any other target"
+    },
+    {
+      "tier": 9,
+      "source": "the React source",
+      "note": "the prototyping binding — authoritative about what React does, because it is code; undocumented and unreconciled, so no authority about what the system means"
+    },
+    {
+      "tier": 10,
+      "source": "Figma component sets and measured geometry"
+    },
+    {
+      "tier": 11,
+      "source": "shipped defaults — Asm* widget defaults and React prop defaults",
+      "note": "actively distrusted"
+    },
+    {
+      "tier": 12,
+      "source": "legacy docs and your own inference",
+      "note": "no authority"
+    }
+  ],
+  "precedence_ladder_tiers": 12,
+  "doc_authoring_contract": {
+    "template": "../Components/_component-doc-template.md",
+    "banner_lines": [
+      "Role",
+      "Scope",
+      "Rule",
+      "Source"
+    ],
+    "section_order": [
+      "Banner",
+      "Overview",
+      "Anatomy",
+      "Sizes",
+      "Variants",
+      "Modifiers",
+      "States",
+      "Behaviors",
+      "Content",
+      "Decision Tree",
+      "Accessibility",
+      "Anti-Patterns",
+      "Flutter Usage",
+      "Rules",
+      "Open Items"
+    ],
+    "hard_rules": [
+      "never state a value you have not verified",
+      "never mention web, HTML, CSS, React, or web components — this system targets Flutter only",
+      "route away before routing within",
+      "delegate to foundations rather than restating them",
+      "Rules are extracted, not invented",
+      "Open Items are conflicts, not wishes",
+      "cross-links are reciprocal",
+      "Open Items are numbered lists so they can be cited"
+    ],
+    "hard_rules_note_on_the_web_prohibition": "The 'never mention web, HTML, CSS, React, or web components' rule is quoted above AS WRITTEN IN THE TEMPLATE, and it is outstanding. It was correct when Flutter was the only binding. React is now a sanctioned prototyping binding, so the prohibition should be narrowed to the design-law sections only, and a '## React Usage' section added alongside '## Flutter Usage'. See standing_gaps[0] and AI/react-binding.md section 8. Until the template is amended: keep design law platform-agnostic, and read validation gate G6.8 as applying above '## Flutter Usage' only.",
+    "outstanding_amendment": {
+      "file": "../Components/_component-doc-template.md",
+      "change": "add a '## React Usage' section after '## Flutter Usage', under the same layer rule (design law above, bindings below), and narrow the web prohibition to design-law sections",
+      "reason": "a real sanctioned implementation currently has no home in the docs"
+    }
+  }
+}

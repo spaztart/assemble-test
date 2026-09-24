@@ -1,0 +1,120 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Navigation Rail - Design System
+description: Navigation Rail component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import HeroPreview from '../../components/HeroPreview.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Navigation Rail
+
+A vertical (or horizontal) navigation rail surface with 52×52 icon slots. Supports a brand slot, status indicators, peek labels on hover, and full keyboard navigation.
+
+<HeroPreview>
+  <asm-navigation-rail brand brand-interactive style="height: 400px;">
+    <asm-navigation-rail-item slot="top" label="Dashboard" icon="dashboard" active></asm-navigation-rail-item>
+    <asm-navigation-rail-item slot="top" label="Protection" icon="shield"></asm-navigation-rail-item>
+    <asm-navigation-rail-item slot="top" label="Settings" icon="settings"></asm-navigation-rail-item>
+    <asm-navigation-rail-item slot="bottom" label="Help" icon="help"></asm-navigation-rail-item>
+  </asm-navigation-rail>
+</HeroPreview>
+
+## Installation
+
+<InstallSteps
+  componentImport={`@assemble/components/navigation-rail`}
+  componentUsage={`<asm-navigation-rail brand>
+  <asm-navigation-rail-item slot="top" label="Dashboard" icon="dashboard" active></asm-navigation-rail-item>
+  <asm-navigation-rail-item slot="top" label="Settings" icon="settings"></asm-navigation-rail-item>
+</asm-navigation-rail>`}
+  flutterUsage={`AsmNavigationRail(\n  brand: true,\n  topChildren: [\n    AsmNavigationRailItem(label: 'Dashboard', icon: (s, c) => Icon(Icons.dashboard, size: s, color: c), active: true),\n    AsmNavigationRailItem(label: 'Settings', icon: (s, c) => Icon(Icons.settings, size: s, color: c)),\n  ],\n)`}
+/>
+
+## Vertical Rail
+
+The default rail orientation. Items are slotted into `top`, default, or `bottom` positions.
+
+<PreviewCard
+  webCode={`<asm-navigation-rail brand brand-interactive style="height: 400px;">\n  <asm-navigation-rail-item slot="top" label="Dashboard" icon="dashboard" active></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="Protection" icon="shield"></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="Settings" icon="settings"></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="bottom" label="Help" icon="help"></asm-navigation-rail-item>\n</asm-navigation-rail>`}
+  flutterCode={`AsmNavigationRail(\n  brand: true,\n  onBrandPressed: () {},\n  topChildren: [\n    AsmNavigationRailItem(label: 'Dashboard', icon: ..., active: true),\n    AsmNavigationRailItem(label: 'Protection', icon: ...),\n    AsmNavigationRailItem(label: 'Settings', icon: ...),\n  ],\n  bottomChildren: [\n    AsmNavigationRailItem(label: 'Help', icon: ...),\n  ],\n)`}
+/>
+
+## Status Indicators
+
+Items can display a status dot overlay when not active.
+
+<PreviewCard
+  webCode={`<asm-navigation-rail style="height: 300px;">\n  <asm-navigation-rail-item slot="top" label="Dashboard" icon="dashboard" active></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="Alerts" icon="notifications" status="critical"></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="Updates" icon="update" status="info"></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="Offline" icon="cloud_off" status="muted"></asm-navigation-rail-item>\n</asm-navigation-rail>`}
+  flutterCode={`AsmNavigationRail(\n  topChildren: [\n    AsmNavigationRailItem(label: 'Dashboard', icon: ..., active: true),\n    AsmNavigationRailItem(label: 'Alerts', icon: ..., status: AsmStatusIndicatorStatus.critical),\n    AsmNavigationRailItem(label: 'Updates', icon: ..., status: AsmStatusIndicatorStatus.info),\n    AsmNavigationRailItem(label: 'Offline', icon: ..., status: AsmStatusIndicatorStatus.muted),\n  ],\n)`}
+/>
+
+## Disabled Items
+
+Disabled items render at 38% opacity and are not focusable or clickable.
+
+<PreviewCard
+  webCode={`<asm-navigation-rail style="height: 250px;">\n  <asm-navigation-rail-item slot="top" label="Home" icon="home" active></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="Locked Feature" icon="lock" disabled></asm-navigation-rail-item>\n</asm-navigation-rail>`}
+  flutterCode={`AsmNavigationRail(\n  topChildren: [\n    AsmNavigationRailItem(label: 'Home', icon: ..., active: true),\n    AsmNavigationRailItem(label: 'Locked Feature', icon: ..., disabled: true),\n  ],\n)`}
+/>
+
+## Horizontal (Bottom Nav)
+
+Set `orientation="horizontal"` for a compact bottom navigation bar.
+
+<PreviewCard
+  webCode={`<asm-navigation-rail orientation="horizontal" brand brand-interactive>\n  <asm-navigation-rail-item label="Dashboard" icon="dashboard" active peek-position="top"></asm-navigation-rail-item>\n  <asm-navigation-rail-item label="Settings" icon="settings" peek-position="top"></asm-navigation-rail-item>\n</asm-navigation-rail>`}
+  flutterCode={`AsmNavigationRail.bottom(\n  brand: true,\n  children: [\n    AsmNavigationRailItem(label: 'Dashboard', icon: ..., active: true),\n    AsmNavigationRailItem(label: 'Settings', icon: ...),\n  ],\n)`}
+/>
+
+## Toggle Enablement
+
+Items with `toggle` handle their own on/off cycle when clicked: offline (muted dot) → loading spinner → active (info dot). Click again to reverse. Try clicking the VPN item below.
+
+<PreviewCard
+  webCode={`<asm-navigation-rail brand style="height: 350px;">\n  <asm-navigation-rail-item slot="top" label="Dashboard" icon="dashboard"></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="VPN" icon="vpn_lock" toggle></asm-navigation-rail-item>\n  <asm-navigation-rail-item slot="top" label="Firewall" icon="local_fire_department" toggle active></asm-navigation-rail-item>\n</asm-navigation-rail>`}
+  flutterCode={`AsmNavigationRail(\n  brand: true,\n  topChildren: [\n    AsmNavigationRailItem(label: 'Dashboard', icon: ...),\n    AsmNavigationRailItem(label: 'VPN', icon: ..., toggle: true),\n    AsmNavigationRailItem(label: 'Firewall', icon: ..., toggle: true, active: true),\n  ],\n)`}
+/>
+
+## Navigation Rail Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Rail layout direction |
+| `brand` | `boolean` | `false` | Show McAfee brand slot |
+| `brand-interactive` | `boolean` | `false` | Make brand slot a button |
+| `brand-active` | `boolean` | `false` | Brand slot is active destination |
+| `brand-label` | `string` | `'McAfee'` | Accessible label for brand slot |
+
+## Rail Item Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Visible label and accessible name |
+| `semantic-label` | `string` | `''` | Override accessible name |
+| `icon` | `string` | `''` | Material Symbols icon name |
+| `active` | `boolean` | `false` | Selected/active state |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `status` | `string` | `''` | Status indicator dot (`critical`, `info`, `muted`, etc.) |
+| `toggle` | `boolean` | `false` | Toggle on/off behaviour (self-managed cycle on click) |
+| `toggle-duration` | `number` | `1500` | Loading duration in ms for toggle cycle |
+| `loading` | `boolean` | `false` | Loading state (shows spinner badge) |
+| `show-peek` | `boolean` | `true` | Show peek label on hover |
+| `peek-position` | `'right' \| 'top'` | `'right'` | Peek label direction (right for vertical, top for horizontal) |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `brand-click` | — | Fired when interactive brand slot is clicked |
+| `item-click` | `{ label: string }` | Fired when a non-toggle rail item is clicked |
+| `toggle-start` | `{ label, turning }` | Fired when a toggle item begins its loading cycle |
+| `toggle-end` | `{ label, active }` | Fired when a toggle item completes its cycle |
+
+## Accessibility
+
+- The rail renders as `<nav role="navigation">` with `aria-label`
+- Each item is a `<button>` with `aria-label`, `aria-current="page"` when active
+- Disabled items have `aria-disabled="true"` and `tabindex="-1"`
+- Enter and Space keys activate items
+- Focus is indicated with a 2px primary-color outline

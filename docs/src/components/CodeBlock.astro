@@ -1,0 +1,43 @@
+---
+/**
+ * CodeBlock — Collapsible code block with Web/Flutter tabs and copy button.
+ * Props:
+ *   webCode: string    — HTML code for the Web tab
+ *   flutterCode: string — Dart code for the Flutter tab
+ *   webLang?: string   — Language for web code block (default: "html")
+ *   flutterPrimary?: boolean — Show Flutter tab first and active (default: false)
+ */
+interface Props {
+  webCode: string;
+  flutterCode: string;
+  webLang?: string;
+  flutterPrimary?: boolean;
+}
+
+const { webCode, flutterCode, webLang = 'html', flutterPrimary = false } = Astro.props;
+---
+<div class="code-block-wrapper collapsed">
+  <div class="code-tabs">
+    {flutterPrimary ? (
+      <>
+        <button class="code-tab active" onclick="switchCodeTab(this, 'flutter')"><img class="tab-icon" src="/flutter-logo.svg" width="16" height="16" alt="Flutter">Flutter</button>
+        <button class="code-tab" onclick="switchCodeTab(this, 'web')"><asm-icon class="tab-icon" name="code"></asm-icon>Web</button>
+      </>
+    ) : (
+      <>
+        <button class="code-tab active" onclick="switchCodeTab(this, 'web')"><asm-icon class="tab-icon" name="code"></asm-icon>Web</button>
+        <button class="code-tab" onclick="switchCodeTab(this, 'flutter')"><img class="tab-icon" src="/flutter-logo.svg" width="16" height="16" alt="Flutter">Flutter</button>
+      </>
+    )}
+    <button class="code-copy-tab-btn" onclick="copyActiveCode(this)" aria-label="Copy code"><asm-icon class="tab-icon" name="content_copy"></asm-icon><span>Copy</span></button>
+  </div>
+  <div class={`code-block-inner code-panel-web${flutterPrimary ? '' : ' active'}`}>
+    <pre><code class={`language-${webLang}`} set:text={webCode} /></pre>
+  </div>
+  <div class={`code-block-inner code-panel-flutter${flutterPrimary ? ' active' : ''}`}>
+    <pre><code class="language-dart" set:text={flutterCode} /></pre>
+  </div>
+  <div class="code-block-fade"></div>
+  <asm-button class="view-code-btn" label="View Code" variant="tonal" size="compact" onclick="toggleCode(this)"></asm-button>
+  <button class="collapse-code-btn" onclick="toggleCode(this)" aria-label="Collapse code"><asm-icon class="tab-icon" name="keyboard_arrow_up"></asm-icon></button>
+</div>

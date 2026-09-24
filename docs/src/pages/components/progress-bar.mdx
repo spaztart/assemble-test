@@ -1,0 +1,107 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Progress Bar - Design System
+description: Progress bar component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Progress Bar
+
+A determinate horizontal progress bar with status-based color variants. Use to show completion of downloads, scans, or multi-step workflows.
+
+<div class="hero-preview">
+  <div class="preview-row" style="flex-direction: column; gap: 16px; width: 100%; max-width: 400px;">
+    <asm-progress-bar value="0.75" status="brand"></asm-progress-bar>
+    <asm-progress-bar value="0.5" status="moderate"></asm-progress-bar>
+    <asm-progress-bar value="0.3" status="critical"></asm-progress-bar>
+    <asm-progress-bar value="0.9" status="low"></asm-progress-bar>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/progress-bar"
+  componentUsage='<asm-progress-bar value="0.75" status="brand"></asm-progress-bar>'
+  flutterUsage={`AsmProgressBar(\n  value: 0.75,\n  status: AsmProgressBarStatus.brand,\n)`}
+/>
+
+## Brand (Default)
+
+Red-to-purple brand gradient fill.
+
+<PreviewCard
+  webCode='<asm-progress-bar value="0.75" status="brand"></asm-progress-bar>'
+  flutterCode={`AsmProgressBar(\n  value: 0.75,\n  status: AsmProgressBarStatus.brand,\n)`}
+/>
+
+## Moderate
+
+Blue fill for informational progress.
+
+<PreviewCard
+  webCode='<asm-progress-bar value="0.5" status="moderate"></asm-progress-bar>'
+  flutterCode={`AsmProgressBar(\n  value: 0.5,\n  status: AsmProgressBarStatus.moderate,\n)`}
+/>
+
+## Critical
+
+Orange fill for warnings or low-health states.
+
+<PreviewCard
+  webCode='<asm-progress-bar value="0.3" status="critical"></asm-progress-bar>'
+  flutterCode={`AsmProgressBar(\n  value: 0.3,\n  status: AsmProgressBarStatus.critical,\n)`}
+/>
+
+## Low (Positive)
+
+Green fill for healthy or complete states.
+
+<PreviewCard
+  webCode='<asm-progress-bar value="0.9" status="low"></asm-progress-bar>'
+  flutterCode={`AsmProgressBar(\n  value: 0.9,\n  status: AsmProgressBarStatus.low,\n)`}
+/>
+
+## Thin Size
+
+8px tall variant for compact UI areas.
+
+<PreviewCard
+  webCode='<asm-progress-bar value="0.6" status="brand" size="thin"></asm-progress-bar>'
+  flutterCode={`AsmProgressBar(\n  value: 0.6,\n  status: AsmProgressBarStatus.brand,\n  size: AsmProgressBarSize.thin,\n)`}
+/>
+
+## Guidelines
+
+- Value is always between 0 and 1 (clamped)
+- Use brand status for general progress
+- Use moderate (blue) for informational state
+- Use critical (orange) for warnings
+- Use low (green) for healthy/positive completion
+- The bar is pill-shaped (border-radius 999px)
+- Thick (14px) is the default; use thin (8px) for compact layouts
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `number` | `0` | Progress value (0–1) |
+| `status` | `'brand' \| 'moderate' \| 'critical' \| 'low'` | `'brand'` | Color variant |
+| `size` | `'thick' \| 'thin'` | `'thick'` | Height: thick=14px, thin=8px |
+| `aria-label` | `string` | `'Progress, {status}'` | Accessible label |
+
+### Flutter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `double` | required | Fill fraction 0.0–1.0 |
+| `status` | `AsmProgressBarStatus` | `.brand` | Colour ramp |
+| `size` | `AsmProgressBarSize` | `.thick` | 14px or 8px tall |
+| `width` | `double?` | `null` | Fixed width (null = fill parent) |
+| `foregroundColor` | `Color?` | `null` | Override fill color |
+| `foregroundGradient` | `Gradient?` | `null` | Override with gradient |
+| `trackColor` | `Color?` | `null` | Override track color |

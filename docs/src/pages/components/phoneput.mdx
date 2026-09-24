@@ -1,0 +1,103 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Phone Input - Design System
+description: Phone input component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Phone Input
+
+A composite phone number input with a searchable country code dropdown and numeric input field. Supports keyboard navigation, type-ahead search, and E.164 digit validation.
+
+<div class="hero-preview">
+  <div class="preview-row" style="width: 100%; max-width: 420px;">
+    <asm-phoneput label="Phone Number" placeholder="(555) 123-4567"></asm-phoneput>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/phoneput"
+  componentUsage='<asm-phoneput label="Phone Number"></asm-phoneput>'
+  flutterUsage={`AsmPhoneput(\n  automationIdentifier: 'phone-input',\n  label: 'Phone Number',\n  onChanged: (value) => print(value.value),\n)`}
+/>
+
+## Default
+
+<PreviewCard
+  webCode='<asm-phoneput label="Phone Number" placeholder="(555) 123-4567"></asm-phoneput>'
+  flutterCode={`AsmPhoneput(\n  automationIdentifier: 'phone',\n  label: 'Phone Number',\n  placeholder: '(555) 123-4567',\n  onChanged: (v) => setState(() => _phone = v),\n)`}
+/>
+
+## With Different Default Country
+
+<PreviewCard
+  webCode='<asm-phoneput label="Mobile" default-country="GB" placeholder="7911 123456"></asm-phoneput>'
+  flutterCode={`AsmPhoneput(\n  automationIdentifier: 'mobile',\n  label: 'Mobile',\n  defaultCountryCode: 'GB',\n  placeholder: '7911 123456',\n)`}
+/>
+
+## With Error
+
+<PreviewCard
+  webCode='<asm-phoneput label="Phone" error-text="Please enter a valid phone number"></asm-phoneput>'
+  flutterCode={`AsmPhoneput(\n  automationIdentifier: 'phone-err',\n  label: 'Phone',\n  errorText: 'Please enter a valid phone number',\n)`}
+/>
+
+## With Supporting Text
+
+<PreviewCard
+  webCode='<asm-phoneput label="Phone" supporting-text="We will send a verification code"></asm-phoneput>'
+  flutterCode={`AsmPhoneput(\n  automationIdentifier: 'phone-helper',\n  label: 'Phone',\n  supportingText: 'We will send a verification code',\n)`}
+/>
+
+## Sizes
+
+<CodeBlock
+  webCode={`<!-- Small -->\n<asm-phoneput label="Small" size="small"></asm-phoneput>\n\n<!-- Medium (default) -->\n<asm-phoneput label="Medium"></asm-phoneput>\n\n<!-- Large -->\n<asm-phoneput label="Large" size="large"></asm-phoneput>`}
+  flutterCode={`Column(\n  children: [\n    AsmPhoneput(size: AsmPhoneputSize.small, label: 'Small'),\n    AsmPhoneput(size: AsmPhoneputSize.medium, label: 'Medium'),\n    AsmPhoneput(size: AsmPhoneputSize.large, label: 'Large'),\n  ],\n)`}
+/>
+
+## Guidelines
+
+- Always include a label for accessibility
+- The dropdown filters by country name, dial code, or ISO code
+- Max 15 digits (E.164 standard) — non-digit characters are stripped
+- Arrow keys navigate the dropdown; Enter selects; Escape closes
+- Use error-text for validation feedback
+- The component fires `change` with full value details on every edit
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Label above the input |
+| `default-country` | `string` | `'US'` | Initial ISO country code |
+| `value` | `string` | `''` | Phone digits (no formatting) |
+| `placeholder` | `string` | `'Phone number'` | Placeholder text |
+| `error-text` | `string` | `''` | Error message below |
+| `supporting-text` | `string` | `''` | Helper text below |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Density variant |
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `change` | `{ value, countryCode, dialCode, countryName }` | Fired on any value change |
+
+### Flutter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `automationIdentifier` | `String` | required | Test automation ID |
+| `label` | `String?` | `null` | Label above input |
+| `defaultCountryCode` | `String` | `'US'` | Initial country |
+| `defaultNumber` | `String` | `''` | Initial phone digits |
+| `onChanged` | `ValueChanged<AsmPhoneputValue>?` | `null` | Value change callback |
+| `size` | `AsmPhoneputSize` | `.medium` | Density |
+| `enabled` | `bool` | `true` | Enabled state |
+| `errorText` | `String?` | `null` | Error text |
+| `supportingText` | `String?` | `null` | Helper text |

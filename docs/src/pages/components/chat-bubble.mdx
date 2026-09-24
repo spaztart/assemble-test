@@ -1,0 +1,79 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Chat Bubble - Design System
+description: Chat Bubble component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Chat Bubble
+
+A chat message bubble with asymmetric border radius. The notched top-right corner reads as the bubble's "tail" and identifies the sender. Pass `text` for a simple message, or use the default slot for custom content.
+
+<div class="hero-preview">
+  <div class="preview-row" style="flex-direction: column; gap: 12px; align-items: flex-start;">
+    <asm-chat-bubble text="Hello! How can I help you today?"></asm-chat-bubble>
+    <asm-chat-bubble text="I need help with my account."></asm-chat-bubble>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/chat-bubble"
+  componentUsage='<asm-chat-bubble text="Hello!"></asm-chat-bubble>'
+  flutterUsage={`AsmChatBubble(\n  text: 'Hello!',\n)`}
+/>
+
+## Text Message
+
+Simple text bubble using `bodyLarge` typography in `on-secondary-fixed` color.
+
+<PreviewCard
+  webCode={`<asm-chat-bubble text="Hello! How can I help you today?"></asm-chat-bubble>\n<asm-chat-bubble text="Sure, let me look into that for you."></asm-chat-bubble>`}
+  flutterCode={`AsmChatBubble(\n  text: 'Hello! How can I help you today?',\n)\n\nAsmChatBubble(\n  text: 'Sure, let me look into that for you.',\n)`}
+/>
+
+## With Custom Content
+
+Use the default slot for composing icons, images, or rich content. Children are laid out in a horizontal row with 10px gap.
+
+<PreviewCard
+  webCode={`<asm-chat-bubble>\n  <asm-icon name="smart_toy" style="font-size: 20px;"></asm-icon>\n  <span>I'm your AI assistant</span>\n</asm-chat-bubble>\n\n<asm-chat-bubble>\n  <asm-icon name="attachment" style="font-size: 20px;"></asm-icon>\n  <span>document.pdf</span>\n</asm-chat-bubble>`}
+  flutterCode={`AsmChatBubble(\n  children: [\n    Icon(Icons.smart_toy, size: 20),\n    Text('I\\'m your AI assistant'),\n  ],\n)\n\nAsmChatBubble(\n  children: [\n    Icon(Icons.attachment, size: 20),\n    Text('document.pdf'),\n  ],\n)`}
+/>
+
+## Conversation Example
+
+<PreviewCard
+  webCode={`<div style="display: flex; flex-direction: column; gap: 12px; max-width: 360px;">\n  <asm-chat-bubble text="Hi there! Welcome to McAfee support."></asm-chat-bubble>\n  <asm-chat-bubble text="How can I help you today?"></asm-chat-bubble>\n  <asm-chat-bubble text="I need to reset my password."></asm-chat-bubble>\n  <asm-chat-bubble text="No problem! I'll send a reset link to your email."></asm-chat-bubble>\n</div>`}
+  flutterCode={`Column(\n  crossAxisAlignment: CrossAxisAlignment.start,\n  children: [\n    AsmChatBubble(text: 'Hi there! Welcome to McAfee support.'),\n    SizedBox(height: 12),\n    AsmChatBubble(text: 'How can I help you today?'),\n    SizedBox(height: 12),\n    AsmChatBubble(text: 'I need to reset my password.'),\n    SizedBox(height: 12),\n    AsmChatBubble(text: 'No problem! I\\'ll send a reset link to your email.'),\n  ],\n)`}
+/>
+
+## Guidelines
+
+- Use chat bubbles for conversational UI (chatbots, support, messaging)
+- Keep messages concise for readability
+- The asymmetric radius (16px / 4px) provides visual direction — the 4px "tail" corner identifies the sender
+- Use the slot for richer content like file attachments, images, or icons
+- Don't use both `text` and slot content — they are mutually exclusive
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `text` | `string` | `''` | Simple text message content |
+
+**Slots:**
+| Slot | Description |
+|------|-------------|
+| default | Custom content (icons, text, images). Used when `text` is empty |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `String?` | `null` | Simple text message |
+| `children` | `List<Widget>?` | `null` | Custom content widgets (mutually exclusive with text) |

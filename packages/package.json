@@ -1,0 +1,76 @@
+{
+  "name": "@mcafee-eng/assemble",
+  "version": "0.1.4",
+  "description": "Assemble Design System — Web Components built with Lit",
+  "type": "module",
+  "main": "./dist/components.js",
+  "module": "./dist/components.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "development": "./src/index.ts",
+      "import": "./dist/components.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "development": "./src/react.ts",
+      "import": "./dist/react.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./fonts/*": "./dist/fonts/*"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "generate:react": "node scripts/generate-react-wrappers.mjs",
+    "build": "npm run generate:react && npm run build:lib && npm run build:types && npm run build:assets",
+    "build:lib": "vite build",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "build:assets": "cp src/styles/tokens.css dist/tokens.css && cp -r src/styles/fonts dist/fonts",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "web-components",
+    "lit",
+    "design-system",
+    "assemble",
+    "custom-elements"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcafee-eng/assemble.git",
+    "directory": "packages"
+  },
+  "sideEffects": true,
+  "customElements": "custom-elements.json",
+  "dependencies": {
+    "@lit/react": "^1.0.0",
+    "lit": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.3.0"
+  }
+}

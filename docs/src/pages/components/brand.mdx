@@ -1,0 +1,106 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Brand - Design System
+description: Brand component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Brand
+
+The `asm-brand` component renders McAfee brand assets (logo, wordmark, or combined) as inline SVGs controlled via CSS color tokens. This ensures brand marks always match the current theme.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-brand variant="logo-wordmark" size="md"></asm-brand>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/brand"
+  componentUsage='<asm-brand variant="logo-wordmark" color="brand" size="md"></asm-brand>'
+  flutterUsage={`AsmBrand(\n  variant: AsmBrandVariant.logoWordmark,\n  color: AsmBrandColor.brand,\n  size: AsmBrandSize.md,\n)`}
+/>
+
+## Variants
+
+### Logo
+
+The shield icon only.
+
+<PreviewCard
+  webCode={`<asm-brand variant="logo" size="lg"></asm-brand>`}
+  flutterCode={`AsmBrand(variant: AsmBrandVariant.logo, size: AsmBrandSize.lg)`}
+/>
+
+### Wordmark
+
+The "McAfee" text only.
+
+<PreviewCard
+  webCode={`<asm-brand variant="wordmark" size="lg"></asm-brand>`}
+  flutterCode={`AsmBrand(variant: AsmBrandVariant.wordmark, size: AsmBrandSize.lg)`}
+/>
+
+### Logo + Wordmark
+
+Shield and text combined.
+
+<PreviewCard
+  webCode={`<asm-brand variant="logo-wordmark" size="lg"></asm-brand>`}
+  flutterCode={`AsmBrand(variant: AsmBrandVariant.logoWordmark, size: AsmBrandSize.lg)`}
+/>
+
+## Colors
+
+| Color | Token | Value |
+|-------|-------|-------|
+| `primary` | `--md-sys-color-primary` | Black |
+| `brand` | `--mcafee-color-extended-brand` | Red (#c8102e) |
+| `brand-orange` | `--mcafee-color-extended-brand-orange` | Orange (#e87722) |
+
+<PreviewCard
+  webCode={`<asm-brand variant="logo-wordmark" color="primary" size="md"></asm-brand>\n<asm-brand variant="logo-wordmark" color="brand" size="md"></asm-brand>\n<asm-brand variant="logo-wordmark" color="brand-orange" size="md"></asm-brand>`}
+  flutterCode={`AsmBrand(variant: AsmBrandVariant.logoWordmark, color: AsmBrandColor.primary, size: AsmBrandSize.md)\nAsmBrand(variant: AsmBrandVariant.logoWordmark, color: AsmBrandColor.brand, size: AsmBrandSize.md)\nAsmBrand(variant: AsmBrandVariant.logoWordmark, color: AsmBrandColor.brandOrange, size: AsmBrandSize.md)`}
+/>
+
+## Sizes
+
+| Size | Height |
+|------|--------|
+| `sm` | 16px |
+| `md` | 32px |
+| `lg` | 48px |
+| `xl` | 64px |
+
+<PreviewCard
+  align="flex-end"
+  webCode={`<asm-brand variant="logo" color="brand" size="sm"></asm-brand>\n<asm-brand variant="logo" color="brand" size="md"></asm-brand>\n<asm-brand variant="logo" color="brand" size="lg"></asm-brand>\n<asm-brand variant="logo" color="brand" size="xl"></asm-brand>`}
+  flutterCode={`AsmBrand(variant: AsmBrandVariant.logo, color: AsmBrandColor.brand, size: AsmBrandSize.sm)\nAsmBrand(variant: AsmBrandVariant.logo, color: AsmBrandColor.brand, size: AsmBrandSize.md)\nAsmBrand(variant: AsmBrandVariant.logo, color: AsmBrandColor.brand, size: AsmBrandSize.lg)\nAsmBrand(variant: AsmBrandVariant.logo, color: AsmBrandColor.brand, size: AsmBrandSize.xl)`}
+/>
+
+## Custom Height
+
+Use the `height` property to set any custom height in pixels.
+
+<PreviewCard
+  webCode={`<asm-brand variant="logo-wordmark" color="brand" height="24"></asm-brand>\n<asm-brand variant="logo-wordmark" color="brand" height="40"></asm-brand>`}
+  flutterCode={`AsmBrand(variant: AsmBrandVariant.logoWordmark, color: AsmBrandColor.brand, height: 24)\nAsmBrand(variant: AsmBrandVariant.logoWordmark, color: AsmBrandColor.brand, height: 40)`}
+/>
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `variant` | `'logo' \| 'wordmark' \| 'logo-wordmark'` | `'logo'` | Which brand asset to render |
+| `color` | `'primary' \| 'brand' \| 'brand-orange'` | `'primary'` | Color variant mapped to design tokens |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'custom'` | `'sm'` | Preset height |
+| `height` | `number \| null` | `null` | Custom height in px (overrides size) |
+
+## CSS Custom Properties
+
+| Property | Description |
+|----------|-------------|
+| `--asm-brand-height` | Override height for custom sizing |

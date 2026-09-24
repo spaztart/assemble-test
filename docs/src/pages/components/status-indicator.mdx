@@ -1,0 +1,101 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Status Indicator - Design System
+description: Status indicator component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Status Indicator
+
+Status indicators are compact visual signals consisting of a colored dot with an optional label. They communicate the current state of an entity at a glance.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-status-indicator status="positive" label="Online"></asm-status-indicator>
+    <asm-status-indicator status="attention" label="Busy"></asm-status-indicator>
+    <asm-status-indicator status="critical" label="Error"></asm-status-indicator>
+    <asm-status-indicator status="offline" label="Offline"></asm-status-indicator>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/status-indicator"
+  componentUsage='<asm-status-indicator status="positive" label="Online"></asm-status-indicator>'
+  flutterUsage={`AsmStatusIndicator(\n  status: AsmStatusIndicatorStatus.positive,\n  label: 'Online',\n)`}
+/>
+
+## Statuses
+
+<PreviewCard
+  webCode={`<asm-status-indicator status="critical" label="Critical"></asm-status-indicator>\n<asm-status-indicator status="attention" label="Attention"></asm-status-indicator>\n<asm-status-indicator status="info" label="Info"></asm-status-indicator>\n<asm-status-indicator status="positive" label="Positive"></asm-status-indicator>\n<asm-status-indicator status="muted" label="Muted"></asm-status-indicator>\n<asm-status-indicator status="offline" label="Offline"></asm-status-indicator>`}
+  flutterCode={`AsmStatusIndicator(status: AsmStatusIndicatorStatus.critical, label: 'Critical')\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.attention, label: 'Attention')\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.info, label: 'Info')\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.positive, label: 'Positive')\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.muted, label: 'Muted')\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.offline, label: 'Offline')`}
+/>
+
+
+## Styles
+
+### Colored (Default)
+
+Each status has its own color.
+
+<PreviewCard
+  webCode={`<asm-status-indicator status="positive" indicator-style="colored" label="Active"></asm-status-indicator>`}
+  flutterCode={`AsmStatusIndicator(\n  status: AsmStatusIndicatorStatus.positive,\n  style: AsmStatusIndicatorStyle.colored,\n  label: 'Active',\n)`}
+/>
+
+
+### Neutral
+
+A single neutral color for all statuses.
+
+<PreviewCard
+  webCode={`<asm-status-indicator status="positive" indicator-style="neutral" label="Active"></asm-status-indicator>\n<asm-status-indicator status="critical" indicator-style="neutral" label="Error"></asm-status-indicator>`}
+  flutterCode={`AsmStatusIndicator(\n  status: AsmStatusIndicatorStatus.positive,\n  style: AsmStatusIndicatorStyle.neutral,\n  label: 'Active',\n)\n\nAsmStatusIndicator(\n  status: AsmStatusIndicatorStatus.critical,\n  style: AsmStatusIndicatorStyle.neutral,\n  label: 'Error',\n)`}
+/>
+
+
+## Sizes
+
+<PreviewCard
+  webCode={`<asm-status-indicator status="positive" size="small" label="Small"></asm-status-indicator>\n<asm-status-indicator status="positive" size="medium" label="Medium"></asm-status-indicator>\n<asm-status-indicator status="positive" size="large" label="Large"></asm-status-indicator>`}
+  flutterCode={`AsmStatusIndicator(status: AsmStatusIndicatorStatus.positive, size: AsmStatusIndicatorSize.small, label: 'Small')\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.positive, size: AsmStatusIndicatorSize.medium, label: 'Medium')\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.positive, size: AsmStatusIndicatorSize.large, label: 'Large')`}
+/>
+
+
+## Dot Only (No Label)
+
+<PreviewCard
+  webCode={`<asm-status-indicator status="positive"></asm-status-indicator>\n<asm-status-indicator status="critical"></asm-status-indicator>\n<asm-status-indicator status="offline"></asm-status-indicator>`}
+  flutterCode={`AsmStatusIndicator(status: AsmStatusIndicatorStatus.positive)\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.critical)\nAsmStatusIndicator(status: AsmStatusIndicatorStatus.offline)`}
+/>
+
+
+## Guidelines
+
+- Use consistent status colors throughout the application
+- Provide labels for accessibility when the dot alone is ambiguous
+- Use alongside other content (e.g., in table rows or cards)
+- Don't overload a view with too many status indicators
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `status` | `critical` \| `attention` \| `info` \| `muted` \| `offline` \| `positive` | `info` | Status type |
+| `indicator-style` | `neutral` \| `colored` \| `inverse` | `colored` | Visual style |
+| `label` | `string` | `''` | Optional label text |
+| `size` | `small` \| `medium` \| `large` | `medium` | Dot size |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `status` | `AsmStatusIndicatorStatus` | required | Status type |
+| `style` | `AsmStatusIndicatorStyle` | `.colored` | Visual style |
+| `label` | `String?` | `null` | Optional label |
+| `size` | `AsmStatusIndicatorSize` | `.medium` | Dot size |

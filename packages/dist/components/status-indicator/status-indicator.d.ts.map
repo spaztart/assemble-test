@@ -1,0 +1,1 @@
+{"version":3,"file":"status-indicator.d.ts","sourceRoot":"","sources":["../../../src/components/status-indicator/status-indicator.ts"],"names":[],"mappings":"AAAA,OAAO,kBAAkB,MAAM,iCAAiC,CAAC;AAEjE,cAAc,iCAAiC,CAAC;AAChD,eAAe,kBAAkB,CAAC;AAIlC,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,sBAAsB,EAAE,kBAAkB,CAAC;KAC5C;CACF"}

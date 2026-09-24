@@ -1,0 +1,98 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Checkbox - Design System
+description: Checkbox component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Checkbox
+
+Checkboxes allow users to select one or more items from a set, or toggle a single option on/off. Supports tristate (indeterminate) for parent-child selection patterns.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-checkbox label="Unchecked"></asm-checkbox>
+    <asm-checkbox label="Checked" checked></asm-checkbox>
+    <asm-checkbox label="Indeterminate" checked="null" tristate></asm-checkbox>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/checkbox"
+  componentUsage='<asm-checkbox label="Accept terms"></asm-checkbox>'
+  flutterUsage={`AsmCheckbox(\n  value: false,\n  label: 'Accept terms',\n  onChanged: (value) {},\n)`}
+/>
+
+## States
+
+### Checked / Unchecked
+
+The basic checked and unchecked states.
+
+<PreviewCard
+  webCode={`<asm-checkbox label="Unchecked"></asm-checkbox>\n<asm-checkbox label="Checked" checked></asm-checkbox>`}
+  flutterCode={`AsmCheckbox(\n  value: false,\n  label: 'Unchecked',\n  onChanged: (value) {},\n)\n\nAsmCheckbox(\n  value: true,\n  label: 'Checked',\n  onChanged: (value) {},\n)`}
+/>
+
+
+### Tristate (Indeterminate)
+
+When `tristate` is enabled, the checkbox cycles through three states: unchecked → checked → indeterminate.
+
+<PreviewCard
+  webCode={`<asm-checkbox label="Select all" tristate></asm-checkbox>`}
+  flutterCode={`AsmCheckbox(\n  value: null,\n  tristate: true,\n  label: 'Select all',\n  onChanged: (value) {},\n)`}
+/>
+
+
+### Error
+
+Displays the checkbox in an error state for form validation.
+
+<PreviewCard
+  webCode={`<asm-checkbox label="Required field" error></asm-checkbox>`}
+  flutterCode={`AsmCheckbox(\n  value: false,\n  label: 'Required field',\n  isError: true,\n  onChanged: (value) {},\n)`}
+/>
+
+
+### Disabled
+
+Disables the checkbox, preventing interaction.
+
+<PreviewCard
+  webCode={`<asm-checkbox label="Disabled" disabled></asm-checkbox>\n<asm-checkbox label="Disabled checked" checked disabled></asm-checkbox>`}
+  flutterCode={`AsmCheckbox(\n  value: false,\n  label: 'Disabled',\n  onChanged: null,\n)\n\nAsmCheckbox(\n  value: true,\n  label: 'Disabled checked',\n  onChanged: null,\n)`}
+/>
+
+
+## Guidelines
+
+- Use checkboxes when users can select multiple options from a list
+- Use a single checkbox for a binary choice (e.g., "Accept terms")
+- Use tristate for "select all" patterns with partial selection
+- Labels should be clear and positive (avoid double negatives)
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `checked` | `boolean \| null` | `false` | Checked state. `null` = indeterminate |
+| `tristate` | `boolean` | `false` | Enable three-state cycling |
+| `label` | `string` | `''` | Label text |
+| `error` | `boolean` | `false` | Error state |
+| `disabled` | `boolean` | `false` | Disabled state |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | `bool?` | required | Checked state. `null` = indeterminate |
+| `tristate` | `bool` | `false` | Enable three-state cycling |
+| `label` | `String?` | `null` | Label text |
+| `isError` | `bool` | `false` | Error state |
+| `onChanged` | `ValueChanged<bool?>?` | required | Change handler. `null` disables |

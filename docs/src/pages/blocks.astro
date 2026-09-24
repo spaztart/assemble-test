@@ -1,0 +1,1079 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const components = [
+  'App Bar',
+  'Badge',
+  'Blur Bar',
+  'Bottom Navbar',
+  'Button',
+  'Card',
+  'Carousel',
+  'Chat Bubble',
+  'Chat Card',
+  'Chip',
+  'Connection Details',
+  'Divider',
+  'Featured List Item',
+  'Feedback',
+  'Filter Chip',
+  'Icons',
+  'List Chip',
+  'List',
+  'Loader',
+  'Modal',
+  'Menu',
+  'Multi Feature List',
+  'NBA Widget',
+  'Progress Indicator',
+  'Quick Action Tile',
+  'Search Bar',
+  'Side Sheet',
+  'Skeleton Loading',
+  'Stat Card',
+  'Text Field',
+  'Tint Background',
+  'Typography',
+  'Scaffold'
+];
+---
+
+<BaseLayout title="Blocks - Design System" description="Explore reusable UI blocks">
+  <div class="components-page">
+    <div class="components-container">
+      <header class="components-header">
+        <h1>Blocks</h1>
+        <p class="components-subtitle">A comprehensive library of reusable UI components for building consistent, accessible interfaces.</p>
+      </header>
+
+      <nav class="components-links-nav" aria-label="Component quick links">
+        <ul class="components-links-list">
+          {components.map((component) => (
+            <li>
+              <a href={`#${component.toLowerCase().replace(/\s+/g, '-')}`} class="component-link">
+                {component}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="components-grid" id="componentsGrid">
+        {components.map((component, index) => (
+          <article class="component-card" data-index={index}>
+            <div class="component-preview">
+              <div class="component-placeholder">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                  <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                  <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                  <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                </svg>
+              </div>
+            </div>
+            <div class="component-info">
+              <h3 class="component-name">{component}</h3>
+              <div class="component-platforms">
+                <span class="platform-badge">Android</span>
+                <span class="platform-badge">iOS</span>
+                <span class="platform-badge">Web</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="load-more-container" id="loadMoreContainer">
+        <button type="button" class="load-more-btn" id="loadMoreBtn">
+          <span>See more components</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Component Preview Lightbox -->
+    <div class="lightbox-overlay" id="componentLightbox">
+      <div class="lightbox-container">
+        <div class="lightbox-header">
+          <div class="lightbox-title-section">
+            <h2 class="lightbox-title" id="lightboxTitle"></h2>
+            <p class="lightbox-subtitle" id="lightboxSubtitle"></p>
+          </div>
+          <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close preview">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="lightbox-content">
+          <div class="lightbox-sidebar">
+            <div class="info-section">
+              <h3>Pegasus Component</h3>
+              <p class="pegasus-name" id="pegasusName"></p>
+            </div>
+
+            <div class="info-section">
+              <h3>Platforms</h3>
+              <div class="platform-tags" id="platformTags"></div>
+            </div>
+
+            <div class="info-section" id="typesSection">
+              <h3>Types</h3>
+              <ul class="info-list" id="typesList"></ul>
+            </div>
+
+            <div class="info-section" id="stylesSection">
+              <h3>Styles</h3>
+              <ul class="info-list" id="stylesList"></ul>
+            </div>
+
+            <div class="info-section" id="kindsSection">
+              <h3>Kinds</h3>
+              <ul class="info-list" id="kindsList"></ul>
+            </div>
+
+            <div class="info-section" id="useCasesSection">
+              <h3>Use Cases</h3>
+              <ul class="info-list" id="useCasesList"></ul>
+            </div>
+          </div>
+
+          <div class="lightbox-main">
+            <div class="preview-tabs">
+              <button class="tab-btn active" data-tab="live">Live Preview</button>
+              <button class="tab-btn" data-tab="examples">Code Examples</button>
+              <button class="tab-btn" data-tab="installation">Installation</button>
+            </div>
+
+            <div class="tab-content active" id="liveTab">
+              <div class="flutter-preview-container">
+                <iframe
+                  id="flutterPreviewFrame"
+                  title="Flutter Component Preview"
+                  sandbox="allow-scripts allow-same-origin"
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tab-content" id="examplesTab">
+              <div class="examples-container" id="examplesContainer"></div>
+            </div>
+
+            <div class="tab-content" id="installationTab">
+              <div class="installation-steps">
+                <h3>Add to pubspec.yaml</h3>
+                <pre class="code-block"><code id="installationCode"></code></pre>
+
+                <h3>Import in your Dart file</h3>
+                <pre class="code-block"><code id="importsCode"></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .components-page {
+    flex: 1;
+    background: var(--md-sys-color-surface);
+    min-height: calc(100vh - 52px);
+  }
+
+  .components-container {
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  .components-header {
+    margin-bottom: 48px;
+  }
+
+  .components-header h1 {
+    font-family: 'McAfee Sans', system-ui, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .components-subtitle {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 720px;
+  }
+
+  .components-links-nav {
+    margin: 40px 0;
+    padding: 32px 0;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .components-links-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, auto);
+    gap: 4px 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .component-link {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .component-link:hover {
+    color: var(--md-sys-color-on-surface);
+  }
+
+    .component-link:active {
+    color: var(--md-sys-color-secondary);
+    font-weight:600;
+  }
+
+  .component-link:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .component-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--md-sys-color-surface-container);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .component-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    border-color: var(--md-sys-color-primary);
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .component-card[data-index="0"] { animation-delay: 0.05s; }
+  .component-card[data-index="1"] { animation-delay: 0.1s; }
+  .component-card[data-index="2"] { animation-delay: 0.15s; }
+  .component-card[data-index="3"] { animation-delay: 0.2s; }
+  .component-card[data-index="4"] { animation-delay: 0.25s; }
+  .component-card[data-index="5"] { animation-delay: 0.3s; }
+  .component-card[data-index="6"] { animation-delay: 0.35s; }
+  .component-card[data-index="7"] { animation-delay: 0.4s; }
+
+  .component-card.hidden {
+    display: none;
+  }
+
+  .component-preview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--md-sys-color-surface-container-high);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .component-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    background: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .component-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .component-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .component-platforms {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .platform-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    background: var(--md-sys-color-surface-container-highest);
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .load-more-container {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    opacity: 0;
+    animation: fadeIn 0.5s 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .load-more-container.hidden {
+    display: none;
+  }
+
+  .load-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-primary);
+    background: var(--md-sys-color-primary);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .load-more-btn:hover {
+    background: color-mix(in srgb, var(--md-sys-color-primary) 90%, black);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .load-more-btn:active {
+    transform: translateY(0);
+  }
+
+  .load-more-btn svg {
+    transition: transform 0.2s;
+  }
+
+  .load-more-btn:hover svg {
+    transform: translateY(2px);
+  }
+
+  @media (max-width: 1024px) {
+    .components-links-nav {
+      display: none;
+    }
+
+    .components-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .components-container {
+      padding: 32px 24px 64px;
+    }
+
+    .components-header h1 {
+      font-size: 36px;
+    }
+
+    .components-subtitle {
+      font-size: 16px;
+    }
+
+    .components-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .components-container {
+      padding: 24px 16px 48px;
+    }
+
+    .components-header {
+      margin-bottom: 32px;
+    }
+
+    .components-header h1 {
+      font-size: 28px;
+    }
+
+    .components-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+
+  /* Lightbox Styles */
+  .lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 24px;
+  }
+
+  .lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .lightbox-container {
+    background: var(--md-sys-color-surface-container);
+    border-radius: 28px;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .lightbox-overlay.active .lightbox-container {
+    transform: scale(1);
+  }
+
+  .lightbox-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 32px 32px 24px;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .lightbox-title-section {
+    flex: 1;
+  }
+
+  .lightbox-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .lightbox-subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0;
+    max-width: 700px;
+  }
+
+  .lightbox-close {
+    background: var(--md-sys-color-surface-container-highest);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--md-sys-color-on-surface);
+    transition: all 0.2s;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  .lightbox-close:hover {
+    background: var(--md-sys-color-surface-container-high);
+    transform: scale(1.05);
+  }
+
+  .lightbox-content {
+    display: flex;
+    gap: 32px;
+    flex: 1;
+    overflow: hidden;
+    padding: 32px;
+  }
+
+  .lightbox-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    overflow-y: auto;
+    padding-right: 16px;
+  }
+
+  .info-section {
+    margin-bottom: 32px;
+  }
+
+  .info-section h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0 0 12px;
+  }
+
+  .pegasus-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--md-sys-color-primary);
+    font-family: 'Monaco', 'Courier New', monospace;
+    margin: 0;
+  }
+
+  .platform-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .platform-tag {
+    padding: 6px 12px;
+    background: var(--md-sys-color-surface-container-highest);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .info-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .info-list li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .info-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--md-sys-color-primary);
+  }
+
+  .lightbox-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .preview-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    padding-bottom: 0;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .tab-btn:hover {
+    color: var(--md-sys-color-on-surface);
+    background: var(--md-sys-color-surface-container-highest);
+  }
+
+  .tab-btn.active {
+    color: var(--md-sys-color-primary);
+    border-bottom-color: var(--md-sys-color-primary);
+  }
+
+  .tab-content {
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .examples-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .example-card {
+    background: var(--md-sys-color-surface-container-high);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .example-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    margin: 0 0 16px;
+  }
+
+  .code-block {
+    background: var(--md-sys-color-surface-container-highest);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  .code-block code {
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--md-sys-color-on-surface);
+    white-space: pre;
+  }
+
+  .installation-steps h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    margin: 0 0 16px;
+  }
+
+  .installation-steps h3:not(:first-child) {
+    margin-top: 32px;
+  }
+
+  .flutter-preview-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--md-sys-color-surface-container-highest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+  }
+
+  #flutterPreviewFrame {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border: none;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 1024px) {
+    .lightbox-content {
+      flex-direction: column;
+    }
+
+    .lightbox-sidebar {
+      width: 100%;
+      padding-right: 0;
+      max-height: 200px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .lightbox-overlay {
+      padding: 0;
+    }
+
+    .lightbox-container {
+      max-height: 100vh;
+      border-radius: 0;
+    }
+
+    .lightbox-header {
+      padding: 24px 20px 16px;
+    }
+
+    .lightbox-title {
+      font-size: 24px;
+    }
+
+    .lightbox-subtitle {
+      font-size: 14px;
+    }
+
+    .lightbox-content {
+      padding: 20px;
+      gap: 24px;
+    }
+
+    .lightbox-sidebar {
+      max-height: none;
+    }
+  }
+</style>
+
+<script>
+  const INITIAL_DISPLAY_COUNT = 8;
+  const LOAD_MORE_COUNT = 8;
+
+  let currentDisplayCount = INITIAL_DISPLAY_COUNT;
+  let totalComponents = 0;
+
+  // Flutter preview base URL (update this to your Flutter server URL)
+  const FLUTTER_BASE_URL = 'http://localhost:8080';
+
+  // Component data
+  const componentData = {
+    'chip': {
+      name: 'McChip',
+      description: 'Status tags and labels with various styles and types. Use for tags, filters, status indicators, and removable items.',
+      pegasusName: 'McChip',
+      platforms: ['Android', 'iOS', 'Web'],
+      flutterRoute: '/chip',
+      types: [
+        { name: 'Input', description: 'Removable chip with delete icon' },
+        { name: 'Display', description: 'Non-removable status chip' }
+      ],
+      styles: [
+        { name: 'Filled', description: 'Solid background' },
+        { name: 'Outlined', description: 'Border only' }
+      ],
+      kinds: [
+        { name: 'Default', description: 'Primary brand color' },
+        { name: 'Success', description: 'Green for positive states' },
+        { name: 'Warning', description: 'Yellow for caution' },
+        { name: 'Error', description: 'Red for errors' },
+        { name: 'Info', description: 'Blue for information' }
+      ],
+      examples: [
+        {
+          title: 'Input Chip (Removable)',
+          code: `McChip(
+  type: ChipType.input,
+  label: 'Tag Name',
+  style: ChipStyle.filled,
+  kind: ChipKind.warning,
+  onDeleted: () {
+    // Handle removal
+  },
+)`
+        },
+        {
+          title: 'Display Chip (Status)',
+          code: `McChip(
+  type: ChipType.display,
+  label: 'Active',
+  style: ChipStyle.outlined,
+  kind: ChipKind.success,
+)`
+        },
+        {
+          title: 'Error Chip',
+          code: `McChip(
+  type: ChipType.display,
+  label: 'Disconnected',
+  style: ChipStyle.filled,
+  kind: ChipKind.error,
+)`
+        }
+      ],
+      installation: `dependencies:
+  pegasus_flutter:
+    git:
+      url: https://github.com/mcafee-eng/pegasus-flutter.git
+      ref: v0.9.2`,
+      imports: `import 'package:flutter/material.dart';
+import 'package:pegasus_flutter/pegasus_flutter.dart';`,
+      useCases: [
+        'Status indicators (Active, Protected, Error)',
+        'Removable tags and filters',
+        'Category labels',
+        'User-generated tags',
+        'Feature toggles'
+      ]
+    }
+  };
+
+  function openComponentLightbox(componentKey) {
+    const data = componentData[componentKey];
+    if (!data) {
+      console.warn(`No data found for component: ${componentKey}`);
+      return;
+    }
+
+    const lightbox = document.getElementById('componentLightbox');
+
+    // Populate header
+    document.getElementById('lightboxTitle').textContent = data.name;
+    document.getElementById('lightboxSubtitle').textContent = data.description;
+    document.getElementById('pegasusName').textContent = data.pegasusName;
+
+    // Populate platforms
+    const platformTags = document.getElementById('platformTags');
+    platformTags.innerHTML = data.platforms
+      .map(platform => `<span class="platform-tag">${platform}</span>`)
+      .join('');
+
+    // Populate types
+    if (data.types) {
+      const typesList = document.getElementById('typesList');
+      typesList.innerHTML = data.types
+        .map(type => `<li><strong>${type.name}:</strong> ${type.description}</li>`)
+        .join('');
+      document.getElementById('typesSection').style.display = 'block';
+    } else {
+      document.getElementById('typesSection').style.display = 'none';
+    }
+
+    // Populate styles
+    if (data.styles) {
+      const stylesList = document.getElementById('stylesList');
+      stylesList.innerHTML = data.styles
+        .map(style => `<li><strong>${style.name}:</strong> ${style.description}</li>`)
+        .join('');
+      document.getElementById('stylesSection').style.display = 'block';
+    } else {
+      document.getElementById('stylesSection').style.display = 'none';
+    }
+
+    // Populate kinds
+    if (data.kinds) {
+      const kindsList = document.getElementById('kindsList');
+      kindsList.innerHTML = data.kinds
+        .map(kind => `<li><strong>${kind.name}:</strong> ${kind.description}</li>`)
+        .join('');
+      document.getElementById('kindsSection').style.display = 'block';
+    } else {
+      document.getElementById('kindsSection').style.display = 'none';
+    }
+
+    // Populate use cases
+    if (data.useCases) {
+      const useCasesList = document.getElementById('useCasesList');
+      useCasesList.innerHTML = data.useCases
+        .map(useCase => `<li>${useCase}</li>`)
+        .join('');
+      document.getElementById('useCasesSection').style.display = 'block';
+    } else {
+      document.getElementById('useCasesSection').style.display = 'none';
+    }
+
+    // Populate examples
+    const examplesContainer = document.getElementById('examplesContainer');
+    examplesContainer.innerHTML = data.examples
+      .map(example => `
+        <div class="example-card">
+          <h4>${example.title}</h4>
+          <pre class="code-block"><code>${escapeHtml(example.code)}</code></pre>
+        </div>
+      `)
+      .join('');
+
+    // Populate installation
+    document.getElementById('installationCode').textContent = data.installation;
+    document.getElementById('importsCode').textContent = data.imports;
+
+    // Load Flutter preview if route exists
+    const flutterFrame = document.getElementById('flutterPreviewFrame');
+    if (data.flutterRoute) {
+      flutterFrame.src = `${FLUTTER_BASE_URL}/#${data.flutterRoute}`;
+    } else {
+      flutterFrame.src = '';
+    }
+
+    // Show lightbox
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('componentLightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function escapeHtml(text) {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, m => map[m]);
+  }
+
+  function initializeComponentGallery() {
+    const grid = document.getElementById('componentsGrid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const loadMoreContainer = document.getElementById('loadMoreContainer');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightbox = document.getElementById('componentLightbox');
+
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll('.component-card'));
+    totalComponents = cards.length;
+
+    // Add click handlers to cards
+    cards.forEach((card, index) => {
+      if (index >= currentDisplayCount) {
+        card.classList.add('hidden');
+      }
+
+      // Get component name and create key
+      const componentName = card.querySelector('.component-name').textContent.trim();
+      const componentKey = componentName.toLowerCase().replace(/\s+/g, '-');
+
+      card.addEventListener('click', () => {
+        openComponentLightbox(componentKey);
+      });
+    });
+
+    // Add click handlers to component links
+    const componentLinks = document.querySelectorAll('.component-link');
+    componentLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const componentName = link.textContent.trim();
+        const componentKey = componentName.toLowerCase().replace(/\s+/g, '-');
+        openComponentLightbox(componentKey);
+      });
+    });
+
+    if (currentDisplayCount >= totalComponents) {
+      loadMoreContainer?.classList.add('hidden');
+    }
+
+    loadMoreBtn?.addEventListener('click', () => {
+      const hiddenCards = cards.filter(card => card.classList.contains('hidden'));
+      const cardsToShow = hiddenCards.slice(0, LOAD_MORE_COUNT);
+
+      cardsToShow.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.remove('hidden');
+          card.style.animation = 'none';
+          requestAnimationFrame(() => {
+            card.style.animation = '';
+            card.style.animationDelay = `${index * 0.05}s`;
+          });
+        }, index * 50);
+      });
+
+      currentDisplayCount += LOAD_MORE_COUNT;
+
+      if (currentDisplayCount >= totalComponents) {
+        loadMoreContainer?.classList.add('hidden');
+      }
+    });
+
+    // Close lightbox handlers
+    lightboxClose?.addEventListener('click', closeLightbox);
+
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Tab switching
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabName = btn.dataset.tab;
+
+        // Update active tab button
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update active tab content
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`${tabName}Tab`).classList.add('active');
+      });
+    });
+
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox?.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeComponentGallery);
+
+  document.addEventListener('astro:after-swap', initializeComponentGallery);
+</script>

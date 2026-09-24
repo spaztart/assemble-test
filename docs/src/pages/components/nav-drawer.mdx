@@ -1,0 +1,141 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Nav Drawer - Design System
+description: Nav Drawer component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import HeroPreview from '../../components/HeroPreview.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Nav Drawer
+
+A full side-panel navigation drawer with a brand header, categorized sections, and an optional pinned footer. Uses the surfaceBright surface with elevation-5 shadow and rounded trailing corners.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-button label="Open Nav Drawer" variant="filled" id="drawer-trigger"></asm-button>
+  </div>
+</div>
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    const trigger = document.getElementById('drawer-trigger');
+    if (!trigger) return;
+
+    let overlay = document.getElementById('drawer-overlay');
+    if (overlay) overlay.remove();
+
+    overlay = document.createElement('div');
+    overlay.id = 'drawer-overlay';
+    overlay.style.cssText = 'display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.32);';
+
+    const panel = document.createElement('div');
+    panel.id = 'drawer-panel';
+    panel.style.cssText = 'position:absolute; left:0; top:0; height:100%; transition:transform 0.25s ease; transform:translateX(-100%);';
+
+    panel.innerHTML = '<asm-nav-drawer style="height:100%;"><asm-nav-section title="Security"><asm-nav-list-item label="Dashboard" icon="dashboard"></asm-nav-list-item><asm-nav-list-item label="Protection Score" icon="shield"></asm-nav-list-item><asm-nav-list-item label="Threats Blocked" icon="block"></asm-nav-list-item></asm-nav-section><asm-nav-section title="Account"><asm-nav-list-item label="My Account" icon="person"></asm-nav-list-item><asm-nav-list-item label="Subscription" icon="credit_card"></asm-nav-list-item><asm-nav-list-item label="Settings" icon="settings"></asm-nav-list-item></asm-nav-section><asm-nav-list-item slot="footer" label="Sign Out" icon="logout" show-trailing="false"></asm-nav-list-item></asm-nav-drawer>';
+
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+
+    function openDrawer() {
+      overlay.style.display = 'block';
+      requestAnimationFrame(() => { panel.style.transform = 'translateX(0)'; });
+    }
+    function closeDrawer() {
+      panel.style.transform = 'translateX(-100%)';
+      setTimeout(() => { overlay.style.display = 'none'; }, 250);
+    }
+    trigger.addEventListener('click', openDrawer);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeDrawer(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.style.display !== 'none') closeDrawer(); });
+  });
+`}</script>
+
+## Installation
+
+<InstallSteps
+  componentImport={`@assemble/components/nav-drawer`}
+  componentUsage={`<asm-nav-drawer>
+  <asm-nav-section title="Section">
+    <asm-nav-list-item label="Dashboard" icon="dashboard"></asm-nav-list-item>
+  </asm-nav-section>
+</asm-nav-drawer>`}
+  flutterUsage={`AsmNavDrawer(\n  sections: [\n    AsmNavSection(\n      title: 'Section',\n      items: [\n        AsmNavListItem(label: 'Dashboard', icon: Icons.dashboard, onPressed: () {}),\n      ],\n    ),\n  ],\n)`}
+/>
+
+## Sections with Category Headers
+
+Use `asm-nav-section` with a `title` to group items under uppercase mono category headers separated by a hairline divider.
+
+<PreviewCard
+  webCode={`<asm-nav-drawer style="height: 420px;">\n  <asm-nav-section title="Security">\n    <asm-nav-list-item label="Dashboard" icon="dashboard"></asm-nav-list-item>\n    <asm-nav-list-item label="Protection Score" icon="shield"></asm-nav-list-item>\n    <asm-nav-list-item label="Threats Blocked" icon="block"></asm-nav-list-item>\n  </asm-nav-section>\n  <asm-nav-section title="Account">\n    <asm-nav-list-item label="My Account" icon="person"></asm-nav-list-item>\n    <asm-nav-list-item label="Subscription" icon="credit_card"></asm-nav-list-item>\n  </asm-nav-section>\n</asm-nav-drawer>`}
+  flutterCode={`AsmNavDrawer(\n  sections: [\n    AsmNavSection(\n      title: 'Security',\n      items: [\n        AsmNavListItem(label: 'Dashboard', icon: Icons.dashboard, onPressed: () {}),\n        AsmNavListItem(label: 'Protection Score', icon: Icons.shield, onPressed: () {}),\n        AsmNavListItem(label: 'Threats Blocked', icon: Icons.block, onPressed: () {}),\n      ],\n    ),\n    AsmNavSection(\n      title: 'Account',\n      items: [\n        AsmNavListItem(label: 'My Account', icon: Icons.person, onPressed: () {}),\n        AsmNavListItem(label: 'Subscription', icon: Icons.credit_card, onPressed: () {}),\n      ],\n    ),\n  ],\n)`}
+/>
+
+## Pinned Footer
+
+Slot content into `footer` for a pinned bottom section, separated by a divider. Useful for sign-out or support links.
+
+<PreviewCard
+  webCode={`<asm-nav-drawer style="height: 350px;">\n  <asm-nav-section title="Main">\n    <asm-nav-list-item label="Home" icon="home"></asm-nav-list-item>\n    <asm-nav-list-item label="Settings" icon="settings"></asm-nav-list-item>\n  </asm-nav-section>\n  <asm-nav-list-item slot="footer" label="Sign Out" icon="logout" show-trailing="false"></asm-nav-list-item>\n</asm-nav-drawer>`}
+  flutterCode={`AsmNavDrawer(\n  sections: [\n    AsmNavSection(\n      title: 'Main',\n      items: [\n        AsmNavListItem(label: 'Home', icon: Icons.home, onPressed: () {}),\n        AsmNavListItem(label: 'Settings', icon: Icons.settings, onPressed: () {}),\n      ],\n    ),\n  ],\n  footer: AsmNavListItem(label: 'Sign Out', icon: Icons.logout, onPressed: () {}, showTrailingIcon: false),\n)`}
+/>
+
+## Disabled Items
+
+Disabled items render at 38% opacity and cannot be clicked or focused.
+
+<PreviewCard
+  webCode={`<asm-nav-drawer style="height: 250px;">\n  <asm-nav-section>\n    <asm-nav-list-item label="Available" icon="check_circle"></asm-nav-list-item>\n    <asm-nav-list-item label="Unavailable" icon="cancel" disabled></asm-nav-list-item>\n  </asm-nav-section>\n</asm-nav-drawer>`}
+  flutterCode={`AsmNavDrawer(\n  sections: [\n    AsmNavSection(\n      items: [\n        AsmNavListItem(label: 'Available', icon: Icons.check_circle, onPressed: () {}),\n        AsmNavListItem(label: 'Unavailable', icon: Icons.cancel, onPressed: null),\n      ],\n    ),\n  ],\n)`}
+/>
+
+## Without Brand Header
+
+Set `brand="false"` to hide the McAfee wordmark header.
+
+<PreviewCard
+  webCode={`<asm-nav-drawer style="height: 250px;">\n  <asm-nav-section title="Navigation">\n    <asm-nav-list-item label="Page One" icon="article"></asm-nav-list-item>\n    <asm-nav-list-item label="Page Two" icon="description"></asm-nav-list-item>\n  </asm-nav-section>\n</asm-nav-drawer>`}
+  flutterCode={`AsmNavDrawer(\n  brand: false,\n  sections: [\n    AsmNavSection(\n      title: 'Navigation',\n      items: [\n        AsmNavListItem(label: 'Page One', onPressed: () {}),\n        AsmNavListItem(label: 'Page Two', onPressed: () {}),\n      ],\n    ),\n  ],\n)`}
+/>
+
+## Nav Drawer Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `brand` | `boolean` | `true` | Show McAfee wordmark header |
+| `nav-label` | `string` | `'Main navigation'` | Accessible label for the nav landmark |
+
+## Nav Section Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `title` | `string` | `''` | Category header text (rendered uppercase mono) |
+
+## Nav List Item Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Row text (required) |
+| `icon` | `string` | `''` | Optional leading Material icon |
+| `trailing-icon` | `string` | `'arrow_forward'` | Trailing icon name |
+| `show-trailing` | `boolean` | `true` | Show/hide trailing icon |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `semantic-label` | `string` | `''` | Override accessible label |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `item-click` | `{ label: string }` | Fired when a nav list item is clicked |
+
+## Accessibility
+
+- The drawer renders as `<nav role="navigation">` with `aria-label`
+- Category headers have `role="heading"` with `aria-level="2"`
+- Sections have `role="group"` with `aria-label` matching the title
+- Each list item is a `<button>` with `aria-label`
+- Disabled items have `aria-disabled="true"` and `tabindex="-1"`
+- Enter and Space keys activate items
+- Focus is indicated with a 2px primary-color outline

@@ -1,0 +1,289 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Button - Design System
+description: Button component usage and guidelines
+tabs: true
+---
+import FlutterPreviewCard from '../../components/FlutterPreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import FlutterView from '../../components/FlutterView.astro';
+
+# Button
+
+Buttons allow users to take actions and make choices with a single tap. Use buttons to communicate actions users can take throughout the UI in dialogs, forms, cards, and toolbars.
+
+A live Flutter build of the button, rendered with `AsmButton` from `pegasus_flutter`. Each preview below is a live Flutter demo; switch the code tab to **Web** to see the web component equivalent.
+
+<FlutterView height={520} />
+
+## Usage
+
+Use a button whenever the user needs to trigger an action or make a choice — submit a form, confirm a dialog, apply a filter. To navigate to a new URL, use a link instead of a button.
+
+<InstallSteps
+  componentImport="@assemble/components/button"
+  componentUsage='<asm-button label="Click me"></asm-button>'
+  flutterUsage={`AsmButton(\n  label: 'Click me',\n  onPressed: () {},\n  automationIdentifier: 'click_me',\n)`}
+/>
+
+## Variants
+
+### Filled
+
+The default high-emphasis button for primary actions. Use sparingly to highlight the most important action on the page.
+
+<FlutterPreviewCard
+  demo="filled"
+  webCode={`<asm-button label="Label"></asm-button>\n<asm-button label="Label" start-icon="download"></asm-button>\n<asm-button label="Disabled" disabled></asm-button>`}
+  flutterCode={`AsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.filled,\n  onPressed: () {},\n  automationIdentifier: 'filled_label',\n)\n\nAsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.filled,\n  startIcon: Icon(Icons.download),\n  onPressed: () {},\n  automationIdentifier: 'filled_icon',\n)\n\nAsmButton(\n  label: 'Disabled',\n  variant: AsmButtonVariant.filled,\n  automationIdentifier: 'filled_disabled',\n)`}
+/>
+
+
+### Tonal
+
+A softer emphasis button for secondary actions. Uses the surface container color with on-surface text.
+
+<FlutterPreviewCard
+  demo="tonal"
+  webCode={`<asm-button label="Label" variant="tonal"></asm-button>\n<asm-button label="Label" variant="tonal" start-icon="settings"></asm-button>\n<asm-button label="Disabled" variant="tonal" disabled></asm-button>`}
+  flutterCode={`AsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.tonal,\n  onPressed: () {},\n  automationIdentifier: 'tonal_label',\n)\n\nAsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.tonal,\n  startIcon: Icon(Icons.settings),\n  onPressed: () {},\n  automationIdentifier: 'tonal_icon',\n)\n\nAsmButton(\n  label: 'Disabled',\n  variant: AsmButtonVariant.tonal,\n  automationIdentifier: 'tonal_disabled',\n)`}
+/>
+
+
+### Text
+
+A low-emphasis button for less prominent actions. No background, just label text.
+
+<FlutterPreviewCard
+  demo="text"
+  webCode={`<asm-button label="Label" variant="text"></asm-button>\n<asm-button label="Label" variant="text" end-icon="arrow_forward"></asm-button>\n<asm-button label="Disabled" variant="text" disabled></asm-button>`}
+  flutterCode={`AsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.text,\n  onPressed: () {},\n  automationIdentifier: 'text_label',\n)\n\nAsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.text,\n  endIcon: Icon(Icons.arrow_forward),\n  onPressed: () {},\n  automationIdentifier: 'text_icon',\n)\n\nAsmButton(\n  label: 'Disabled',\n  variant: AsmButtonVariant.text,\n  automationIdentifier: 'text_disabled',\n)`}
+/>
+
+
+### Outline
+
+A medium-emphasis button with a border. Use for secondary actions alongside a filled button.
+
+<FlutterPreviewCard
+  demo="outline"
+  webCode={`<asm-button label="Label" variant="outline"></asm-button>\n<asm-button label="Label" variant="outline" start-icon="share"></asm-button>\n<asm-button label="Disabled" variant="outline" disabled></asm-button>`}
+  flutterCode={`AsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.outline,\n  onPressed: () {},\n  automationIdentifier: 'outline_label',\n)\n\nAsmButton(\n  label: 'Label',\n  variant: AsmButtonVariant.outline,\n  startIcon: Icon(Icons.share),\n  onPressed: () {},\n  automationIdentifier: 'outline_icon',\n)\n\nAsmButton(\n  label: 'Disabled',\n  variant: AsmButtonVariant.outline,\n  automationIdentifier: 'outline_disabled',\n)`}
+/>
+
+
+### Sizes
+
+Buttons come in four sizes. Use **large** as the standard size.
+
+<FlutterPreviewCard
+  demo="sizes"
+  webCode={`<asm-button label="Huge" size="huge"></asm-button>\n<asm-button label="Spacious" size="spacious"></asm-button>\n<asm-button label="Default" size="default"></asm-button>\n<asm-button label="Compact" size="compact"></asm-button>`}
+  flutterCode={`AsmButton(\n  label: 'Large',\n  variant: AsmButtonVariant.filled,\n  size: AsmButtonSize.large,\n  onPressed: () {},\n  automationIdentifier: 'size_large',\n)\n\nAsmButton(\n  label: 'Medium',\n  variant: AsmButtonVariant.filled,\n  size: AsmButtonSize.medium,\n  onPressed: () {},\n  automationIdentifier: 'size_medium',\n)\n\nAsmButton(\n  label: 'Small',\n  variant: AsmButtonVariant.filled,\n  size: AsmButtonSize.small,\n  onPressed: () {},\n  automationIdentifier: 'size_small',\n)\n\nAsmButton(\n  label: 'XSmall',\n  variant: AsmButtonVariant.filled,\n  size: AsmButtonSize.xsmall,\n  onPressed: () {},\n  automationIdentifier: 'size_xsmall',\n)`}
+/>
+
+
+### Destructive
+
+Add `destructive` for dangerous or irreversible actions. Supported on filled, tonal, and text variants.
+
+<FlutterPreviewCard
+  demo="destructive"
+  webCode={`<asm-button label="Remove" destructive></asm-button>\n<asm-button label="Remove" variant="tonal" destructive></asm-button>\n<asm-button label="Remove" variant="text" destructive></asm-button>`}
+  flutterCode={`AsmButton(\n  label: 'Remove',\n  variant: AsmButtonVariant.filled,\n  destructive: true,\n  onPressed: () {},\n  automationIdentifier: 'destructive_filled',\n)\n\nAsmButton(\n  label: 'Remove',\n  variant: AsmButtonVariant.tonal,\n  destructive: true,\n  onPressed: () {},\n  automationIdentifier: 'destructive_tonal',\n)\n\nAsmButton(\n  label: 'Remove',\n  variant: AsmButtonVariant.text,\n  destructive: true,\n  onPressed: () {},\n  automationIdentifier: 'destructive_text',\n)`}
+/>
+
+
+### With icons
+
+Use `start-icon` and `end-icon` attributes with any Material Symbols icon name.
+
+<FlutterPreviewCard
+  demo="icons"
+  webCode={`<asm-button label="Download" start-icon="download"></asm-button>\n<asm-button label="Next" end-icon="arrow_forward"></asm-button>\n<asm-button label="Share" start-icon="share" end-icon="open_in_new"></asm-button>`}
+  flutterCode={`AsmButton(\n  label: 'Download',\n  variant: AsmButtonVariant.filled,\n  startIcon: Icon(Icons.download),\n  onPressed: () {},\n  automationIdentifier: 'icon_start',\n)\n\nAsmButton(\n  label: 'Next',\n  variant: AsmButtonVariant.filled,\n  endIcon: Icon(Icons.arrow_forward),\n  onPressed: () {},\n  automationIdentifier: 'icon_end',\n)\n\nAsmButton(\n  label: 'Share',\n  variant: AsmButtonVariant.outline,\n  startIcon: Icon(Icons.share),\n  endIcon: Icon(Icons.open_in_new),\n  onPressed: () {},\n  automationIdentifier: 'icon_both',\n)`}
+/>
+
+
+## Anatomy
+
+```
+┌───────────────────────────────────┐
+│   [start-icon]   Label   [end-icon]    │
+└───────────────────────────────────┘
+        ↑            ↑           ↑
+    Optional     Required     Optional
+```
+
+| Part | Description | Required |
+|------|-------------|----------|
+| Container | Background, border and radius resolved from the `variant`; padding resolved from the `size` | Yes |
+| Label | The `label` text, rendered semibold | Yes |
+| Leading icon | Material Symbols glyph set via `start-icon` (web) / `startIcon` (Flutter) | No |
+| Trailing icon | Material Symbols glyph set via `end-icon` (web) / `endIcon` (Flutter) | No |
+| State layer | Hover / pressed overlay tinted per variant | On interaction |
+| Focus ring | 2px outline shown on `:focus-visible` | On focus |
+
+## Behavior & States
+
+Every variant responds to the same interaction states. Disabled buttons are removed from the tab order and suppress all pointer and keyboard activation.
+
+| Variant | Default | Hover | Pressed | Focus | Disabled |
+|---------|---------|-------|---------|-------|----------|
+| `filled` | Primary background, on-primary label | + hover overlay | + pressed overlay | Focus ring | Reduced opacity, no pointer events |
+| `tonal` | Surface-container background | + hover overlay | + pressed overlay | Focus ring | Reduced opacity, no pointer events |
+| `text` | Transparent, primary label | Subtle overlay | Stronger overlay | Focus ring | Reduced opacity, no pointer events |
+| `outline` | Transparent, 1px outline | + hover overlay | + pressed overlay | Focus ring | Reduced opacity, no pointer events |
+
+Adding `destructive` swaps the color role to the error palette while keeping the same state behavior.
+
+### Keyboard
+
+| Key | Action |
+|-----|--------|
+| Enter | Activate the button |
+| Space | Activate the button |
+| Tab | Move focus to the next focusable element |
+| Shift + Tab | Move focus to the previous focusable element |
+
+## Accessibility
+
+| Requirement | Implementation |
+|-------------|----------------|
+| Accessible name | `label` (web) — or `semanticLabel` on Flutter to override the spoken name |
+| Element | Native `button` semantics on both platforms — never a `div` with a click handler |
+| Keyboard | Enter and Space activate the button |
+| Focus | Visible focus ring via `:focus-visible` |
+| Disabled | `disabled` (web) / `onPressed: null` (Flutter) removes the button from the tab order |
+| Touch target | Minimum 44×44px hit area |
+| Icon-only usage | Provide `semanticLabel` / `aria-label` and a `tooltip` describing the action |
+| Destructive | Pair with a confirmation step for irreversible actions |
+
+## Guidelines
+
+- Use clear, concise labels that describe the action
+- Place the primary action button on the right in dialogs
+- Avoid using too many buttons in one view
+- Use filled buttons sparingly to emphasize the most important action
+- Use the destructive option only for irreversible actions like delete
+
+### Choosing a variant
+
+```
+Need a clickable action?
+├─ Navigates to a URL?          → use a link, not a button
+├─ Main / primary action?       → variant: filled (max one per view)
+├─ Secondary action beside it?  → variant: tonal or outline
+├─ Low-emphasis / inline?       → variant: text
+└─ Destructive?                 → add destructive (+ confirm if irreversible)
+
+Choosing a size
+├─ Dense context (table, toolbar)? → size: compact
+├─ Hero / marketing CTA?           → size: spacious or huge
+└─ Otherwise                       → size: default
+```
+
+### Anti-patterns
+
+- **Don't** place two `filled` buttons side by side — pair `filled` with `tonal` or `outline`.
+- **Don't** ship a button with no accessible name — always supply `label` (or `semanticLabel` for icon-only).
+- **Don't** run a destructive action without confirmation when it can't be undone.
+- **Don't** invent variants — only `filled`, `tonal`, `text`, and `outline` exist on the web component.
+- **Don't** build a button from a `div` — use `asm-button` / `AsmButton` for correct semantics.
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | The button label text |
+| `variant` | `filled` \| `tonal` \| `text` \| `outline` | `filled` | The visual style |
+| `size` | `huge` \| `spacious` \| `default` \| `compact` | `default` | The button size |
+| `disabled` | `boolean` | `false` | Whether the button is disabled |
+| `destructive` | `boolean` | `false` | Destructive/danger mode |
+| `start-icon` | `string` | `''` | Material Symbols icon name before label |
+| `end-icon` | `string` | `''` | Material Symbols icon name after label |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `label` | `String` | required | The button label text |
+| `automationIdentifier` | `String` | required | Stable id used for test automation |
+| `onPressed` | `VoidCallback?` | `null` | Tap handler. `null` disables the button |
+| `startIcon` | `Widget?` | `null` | Leading icon widget |
+| `endIcon` | `Widget?` | `null` | Trailing icon widget |
+| `variant` | `AsmButtonVariant` | `.text` | The visual style (`filled`, `tonal`, `text`, `textNoPadding`, `ghost`, `outline`, `strictBlack`, `strictWhite`) |
+| `size` | `AsmButtonSize` | `.large` | The button size (`large`, `medium`, `small`, `xsmall`) |
+| `destructive` | `bool` | `false` | Destructive/danger mode |
+| `semanticLabel` | `String?` | `null` | Overrides the accessible label |
+| `tooltip` | `String?` | `null` | Optional tooltip text |
+
+## Contract
+
+Machine-readable contract for AI agents and the component registry. This mirrors the real `asm-button` / `AsmButton` surface documented above — keep it in sync when the API changes.
+
+```yaml
+name: button
+web_tag: asm-button
+flutter_widget: AsmButton
+type: interactive
+category: action
+
+props:
+  label:
+    type: string
+    required: true
+  variant:
+    type: enum
+    web_values: [filled, tonal, text, outline]
+    flutter_values: [filled, tonal, text, textNoPadding, ghost, outline, strictBlack, strictWhite]
+    web_default: filled
+    flutter_default: text
+  size:
+    type: enum
+    web_values: [huge, spacious, default, compact]
+    flutter_values: [large, medium, small, xsmall]
+    web_default: default
+    flutter_default: large
+  disabled:
+    type: boolean
+    default: false
+    note: "Web only. On Flutter, pass onPressed: null to disable."
+  destructive:
+    type: boolean
+    default: false
+  start_icon:
+    type: icon
+    web_attr: start-icon
+    flutter_prop: startIcon
+    required: false
+  end_icon:
+    type: icon
+    web_attr: end-icon
+    flutter_prop: endIcon
+    required: false
+  automationIdentifier:
+    type: string
+    required: true
+    platform: flutter
+  semanticLabel:
+    type: string
+    required: false
+    platform: flutter
+  tooltip:
+    type: string
+    required: false
+    platform: flutter
+
+events:
+  click: fired on activation (click, Enter, or Space)
+
+constraints:
+  - MUST have a visible label OR an accessible name (semanticLabel / aria-label)
+  - Flutter AsmButton requires BOTH label AND automationIdentifier
+  - Maximum ONE filled button per viewport
+  - Destructive actions SHOULD trigger confirmation when irreversible
+  - MUST NOT nest interactive elements inside a button
+```

@@ -1,0 +1,65 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Carousel Indicator - Design System
+description: Carousel indicator component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Carousel Indicator
+
+A row of dots indicating the current page in a carousel or onboarding flow. Purely presentational — the caller controls the active index.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-carousel-indicator count="5" active-index="2"></asm-carousel-indicator>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/carousel-indicator"
+  componentUsage='<asm-carousel-indicator count="5" active-index="0"></asm-carousel-indicator>'
+  flutterUsage={`AsmCarouselIndicator(\n  count: 5,\n  activeIndex: 0,\n)`}
+/>
+
+## Default
+
+<PreviewCard
+  webCode='<asm-carousel-indicator count="5" active-index="2"></asm-carousel-indicator>'
+  flutterCode={`AsmCarouselIndicator(\n  count: 5,\n  activeIndex: 2,\n)`}
+/>
+
+## Various Counts
+
+<PreviewCard
+  webCode={`<asm-carousel-indicator count="3" active-index="0"></asm-carousel-indicator>\n<asm-carousel-indicator count="7" active-index="4"></asm-carousel-indicator>\n<asm-carousel-indicator count="10" active-index="7"></asm-carousel-indicator>`}
+  flutterCode={`Column(\n  children: [\n    AsmCarouselIndicator(count: 3, activeIndex: 0),\n    AsmCarouselIndicator(count: 7, activeIndex: 4),\n    AsmCarouselIndicator(count: 10, activeIndex: 7),\n  ],\n)`}
+/>
+
+## Guidelines
+
+- Use below carousel or paged content to indicate position
+- Keep the page count reasonable (3–10 dots)
+- The indicator is decorative — it doesn't handle tap/swipe
+- Active dot uses the primary color; inactive dots use the ghost token
+- Announced as "Page X of N" for screen readers
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `count` | `number` | `1` | Total number of pages |
+| `active-index` | `number` | `0` | Active page index (0-based) |
+
+### Flutter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `count` | `int` | required | Number of pages (must be > 0) |
+| `activeIndex` | `int` | required | Index of active page [0, count) |
+| `semanticLabel` | `String?` | `null` | Override "Page X of N" |

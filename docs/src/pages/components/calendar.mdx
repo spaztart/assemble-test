@@ -1,0 +1,144 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Calendar - Design System
+description: Calendar component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Calendar
+
+An inline date/date-range picker following the Figma Calendar design. Supports single-date and range selection modes, with optional action buttons and full/grid-only chrome variants.
+
+<div class="hero-preview">
+  <div class="preview-row" style="align-items: flex-start;">
+    <asm-calendar mode="single" chrome="full" header-title="Select date" actions="cancel-ok"></asm-calendar>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/calendar"
+  componentUsage='<asm-calendar mode="single" chrome="full" header-title="Select date"></asm-calendar>'
+  flutterUsage={`AsmCalendar(\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  automationIdentifier: 'my-calendar',\n  onChanged: (date) {},\n)`}
+/>
+
+## Single Date
+
+Picks one date. The selected day uses `primary` background with `on-primary` text.
+
+<PreviewCard
+  webCode={`<asm-calendar mode="single" chrome="full" header-title="Select date" actions="cancel-ok"></asm-calendar>`}
+  flutterCode={`AsmCalendar(\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  automationIdentifier: 'single-calendar',\n  mode: AsmCalendarMode.single,\n  actions: AsmCalendarActions.cancelOk,\n  onChanged: (date) {\n    // Handle selected date\n  },\n  onConfirm: () {},\n  onCancel: () {},\n)`}
+/>
+
+## Range Selection
+
+Picks a start + end date pair. Endpoints use `secondary` fill, and the span between is highlighted at 30% opacity.
+
+<PreviewCard
+  webCode={`<asm-calendar mode="range" chrome="full" header-title="Select range" actions="clear-cancel-ok"></asm-calendar>`}
+  flutterCode={`AsmCalendar(\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  automationIdentifier: 'range-calendar',\n  mode: AsmCalendarMode.range,\n  actions: AsmCalendarActions.clearCancelOk,\n  onRangeChanged: (start, end) {\n    // Handle selected range\n  },\n  onConfirm: () {},\n  onCancel: () {},\n  onClear: () {},\n)`}
+/>
+
+## Chrome Variants
+
+### Full Chrome
+
+Renders with card background, title, rounded corners (12px), and shadow.
+
+<PreviewCard
+  webCode={`<asm-calendar mode="single" chrome="full" header-title="Departure date"></asm-calendar>`}
+  flutterCode={`AsmCalendar(\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  automationIdentifier: 'full-chrome',\n  chrome: AsmCalendarChrome.full,\n  title: 'Departure date',\n  onChanged: (date) {},\n)`}
+/>
+
+### Grid Only
+
+Bare date grid for embedding inside a parent surface (e.g. inside a date input dropdown).
+
+<PreviewCard
+  webCode={`<asm-calendar mode="single" chrome="grid-only"></asm-calendar>`}
+  flutterCode={`AsmCalendar(\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  automationIdentifier: 'grid-only',\n  chrome: AsmCalendarChrome.gridOnly,\n  onChanged: (date) {},\n)`}
+/>
+
+## Action Buttons
+
+### Cancel / OK
+
+<PreviewCard
+  webCode={`<asm-calendar mode="single" chrome="full" header-title="Select date" actions="cancel-ok"></asm-calendar>`}
+  flutterCode={`AsmCalendar(\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  automationIdentifier: 'actions-cancel-ok',\n  actions: AsmCalendarActions.cancelOk,\n  onChanged: (date) {},\n  onConfirm: () {},\n  onCancel: () {},\n)`}
+/>
+
+### Clear / Cancel / OK
+
+<PreviewCard
+  webCode={`<asm-calendar mode="range" chrome="full" header-title="Date range" actions="clear-cancel-ok"></asm-calendar>`}
+  flutterCode={`AsmCalendar(\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  automationIdentifier: 'actions-clear-cancel-ok',\n  mode: AsmCalendarMode.range,\n  actions: AsmCalendarActions.clearCancelOk,\n  onRangeChanged: (start, end) {},\n  onConfirm: () {},\n  onCancel: () {},\n  onClear: () {},\n)`}
+/>
+
+## With Min/Max Constraints
+
+Disable dates outside a specific range.
+
+<PreviewCard
+  webCode={`<asm-calendar mode="single" chrome="full" header-title="Available dates" min-date="2026-06-10" max-date="2026-07-20"></asm-calendar>`}
+  flutterCode={`AsmCalendar(\n  firstDate: DateTime(2026, 6, 10),\n  lastDate: DateTime(2026, 7, 20),\n  automationIdentifier: 'constrained',\n  title: 'Available dates',\n  onChanged: (date) {},\n)`}
+/>
+
+## Guidelines
+
+- Use the calendar for date selection where visual context matters (booking, scheduling)
+- Pair with `asm-date-input` for inline editing with a dropdown picker
+- Use `grid-only` chrome when embedding inside another surface
+- Provide `min-date` / `max-date` to prevent invalid selections
+- Use `range` mode for booking flows requiring start and end dates
+- Today's date always shows a primary-colored border ring
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `mode` | `single` \| `range` | `single` | Selection mode |
+| `actions` | `none` \| `cancel-ok` \| `clear-cancel-ok` | `none` | Action button row |
+| `chrome` | `full` \| `grid-only` | `full` | Card chrome variant |
+| `header-title` | `string` | `Select date` | Title text |
+| `value` | `string` | `''` | Selected date (ISO YYYY-MM-DD) |
+| `range-start` | `string` | `''` | Range start (ISO) |
+| `range-end` | `string` | `''` | Range end (ISO) |
+| `min-date` | `string` | `''` | Earliest selectable (ISO) |
+| `max-date` | `string` | `''` | Latest selectable (ISO) |
+| `confirm-label` | `string` | `OK` | Confirm button text |
+| `cancel-label` | `string` | `Cancel` | Cancel button text |
+| `clear-label` | `string` | `Clear` | Clear button text |
+
+**Events:**
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `change` | `{ value: string }` | Single date selected |
+| `range-change` | `{ start: string, end: string }` | Range selected |
+| `confirm` | — | OK clicked |
+| `cancel` | — | Cancel clicked |
+| `clear` | — | Clear clicked |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `firstDate` | `DateTime` | required | Earliest selectable date |
+| `lastDate` | `DateTime` | required | Latest selectable date |
+| `automationIdentifier` | `String` | required | Test automation ID |
+| `mode` | `AsmCalendarMode` | `.single` | Selection mode |
+| `actions` | `AsmCalendarActions` | `.none` | Action buttons |
+| `chrome` | `AsmCalendarChrome` | `.full` | Chrome variant |
+| `initialDate` | `DateTime?` | `null` | Pre-selected date |
+| `initialRange` | `DateTimeRange?` | `null` | Pre-selected range |
+| `onChanged` | `ValueChanged<DateTime>?` | `null` | Date selected callback |
+| `onRangeChanged` | `Function(DateTime, DateTime)?` | `null` | Range callback |
+| `onConfirm` | `VoidCallback?` | `null` | OK pressed |
+| `onCancel` | `VoidCallback?` | `null` | Cancel pressed |
+| `onClear` | `VoidCallback?` | `null` | Clear pressed |
+| `title` | `String` | `'Select date'` | Header title |

@@ -1,0 +1,124 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Menu - Design System
+description: Menu component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Menu
+
+Menus display a list of choices on a temporary surface. They appear when users interact with a button, action, or other control.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-menu>
+      <asm-menu-item label="Edit" start-icon="edit"></asm-menu-item>
+      <asm-menu-item label="Duplicate" start-icon="content_copy"></asm-menu-item>
+      <asm-menu-item label="Share" start-icon="share"></asm-menu-item>
+      <asm-menu-item label="Delete" start-icon="delete"></asm-menu-item>
+    </asm-menu>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/menu"
+  componentUsage={`<asm-menu>\n  <asm-menu-item label="Option 1"></asm-menu-item>\n  <asm-menu-item label="Option 2"></asm-menu-item>\n</asm-menu>`}
+  flutterUsage={`AsmMenu(\n  items: [\n    AsmMenuItem(\n      label: 'Option 1',\n      automationIdentifier: 'opt-1',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Option 2',\n      automationIdentifier: 'opt-2',\n      onPressed: () {},\n    ),\n  ],\n)`}
+/>
+
+## Examples
+
+### Basic Menu
+
+A simple menu with text-only items.
+
+<PreviewCard
+  webCode={`<asm-menu>\n  <asm-menu-item label="Cut"></asm-menu-item>\n  <asm-menu-item label="Copy"></asm-menu-item>\n  <asm-menu-item label="Paste"></asm-menu-item>\n</asm-menu>`}
+  flutterCode={`AsmMenu(\n  items: [\n    AsmMenuItem(\n      label: 'Cut',\n      automationIdentifier: 'cut',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Copy',\n      automationIdentifier: 'copy',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Paste',\n      automationIdentifier: 'paste',\n      onPressed: () {},\n    ),\n  ],\n)`}
+/>
+
+
+### With Icons
+
+Add `start-icon` and `end-icon` for leading/trailing visual cues.
+
+<PreviewCard
+  webCode={`<asm-menu>\n  <asm-menu-item label="Edit" start-icon="edit"></asm-menu-item>\n  <asm-menu-item label="Duplicate" start-icon="content_copy"></asm-menu-item>\n  <asm-menu-item label="Share" start-icon="share" end-icon="arrow_forward"></asm-menu-item>\n  <asm-menu-item label="Delete" start-icon="delete"></asm-menu-item>\n</asm-menu>`}
+  flutterCode={`AsmMenu(\n  items: [\n    AsmMenuItem(\n      label: 'Edit',\n      leading: Icon(Icons.edit),\n      automationIdentifier: 'edit',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Duplicate',\n      leading: Icon(Icons.content_copy),\n      automationIdentifier: 'duplicate',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Share',\n      leading: Icon(Icons.share),\n      trailing: Icon(Icons.arrow_forward),\n      automationIdentifier: 'share',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Delete',\n      leading: Icon(Icons.delete),\n      automationIdentifier: 'delete',\n      onPressed: () {},\n    ),\n  ],\n)`}
+/>
+
+
+### With Supporting Text
+
+Use `supporting-text` for additional context below the label.
+
+<PreviewCard
+  webCode={`<asm-menu>\n  <asm-menu-item label="Profile" supporting-text="View your profile" start-icon="person"></asm-menu-item>\n  <asm-menu-item label="Settings" supporting-text="App preferences" start-icon="settings"></asm-menu-item>\n  <asm-menu-item label="Sign out" supporting-text="Log out of your account" start-icon="logout"></asm-menu-item>\n</asm-menu>`}
+  flutterCode={`AsmMenu(\n  items: [\n    AsmMenuItem(\n      label: 'Profile',\n      supportingText: 'View your profile',\n      leading: Icon(Icons.person),\n      automationIdentifier: 'profile',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Settings',\n      supportingText: 'App preferences',\n      leading: Icon(Icons.settings),\n      automationIdentifier: 'settings',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Sign out',\n      supportingText: 'Log out of your account',\n      leading: Icon(Icons.logout),\n      automationIdentifier: 'sign-out',\n      onPressed: () {},\n    ),\n  ],\n)`}
+/>
+
+
+### Selected State
+
+Use the `selected` attribute to highlight the current selection.
+
+<PreviewCard
+  webCode={`<asm-menu>\n  <asm-menu-item label="List view" start-icon="view_list"></asm-menu-item>\n  <asm-menu-item label="Grid view" start-icon="grid_view" selected></asm-menu-item>\n  <asm-menu-item label="Compact view" start-icon="view_compact"></asm-menu-item>\n</asm-menu>`}
+  flutterCode={`AsmMenu(\n  items: [\n    AsmMenuItem(\n      label: 'List view',\n      leading: Icon(Icons.view_list),\n      automationIdentifier: 'list-view',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Grid view',\n      leading: Icon(Icons.grid_view),\n      selected: true,\n      automationIdentifier: 'grid-view',\n      onPressed: () {},\n    ),\n    AsmMenuItem(\n      label: 'Compact view',\n      leading: Icon(Icons.view_compact),\n      automationIdentifier: 'compact-view',\n      onPressed: () {},\n    ),\n  ],\n)`}
+/>
+
+
+## Density
+
+Menus support three density levels. The menu propagates density to all child items automatically.
+
+<PreviewCard
+  webCode={`<!-- Default density -->\n<asm-menu>\n  <asm-menu-item label="Default density" start-icon="format_size"></asm-menu-item>\n  <asm-menu-item label="56px row height"></asm-menu-item>\n</asm-menu>\n\n<!-- Compact density -->\n<asm-menu density="compact">\n  <asm-menu-item label="Compact density" start-icon="compress"></asm-menu-item>\n  <asm-menu-item label="40px row height"></asm-menu-item>\n</asm-menu>`}
+  flutterCode={`// Default density (56px rows)\nAsmMenu(\n  items: [\n    AsmMenuItem(\n      label: 'Default density',\n      leading: Icon(Icons.format_size),\n      automationIdentifier: 'default',\n      onPressed: () {},\n    ),\n  ],\n)\n\n// Compact density (40px rows)\nAsmMenu(\n  items: [\n    AsmMenuItem(\n      label: 'Compact density',\n      leading: Icon(Icons.compress),\n      density: AsmMenuItemDensity.compact,\n      automationIdentifier: 'compact',\n      onPressed: () {},\n    ),\n  ],\n)`}
+/>
+
+
+## Guidelines
+
+- Keep menu items concise — use short labels that describe the action
+- Use icons consistently — if one item has an icon, all items should
+- Use `selected` to indicate current state in single-select menus
+- Use supporting text sparingly for additional context
+- Disable items rather than hiding them to maintain spatial consistency
+
+## API
+
+### asm-menu (Web)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `density` | `default` \| `low` \| `compact` | `default` | Row density for all child items |
+
+### asm-menu-item (Web)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | The menu item label |
+| `supporting-text` | `string` | `''` | Supporting text below label |
+| `start-icon` | `string` | `''` | Material Symbols icon name (leading) |
+| `end-icon` | `string` | `''` | Material Symbols icon name (trailing) |
+| `selected` | `boolean` | `false` | Whether the item is selected |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `density` | `default` \| `low` \| `compact` | `default` | Row density |
+
+### AsmMenuItem (Flutter)
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `label` | `String` | required | Primary text label |
+| `onPressed` | `VoidCallback?` | required | Tap handler. `null` disables the item |
+| `automationIdentifier` | `String` | required | Stable ID for UI automation |
+| `supportingText` | `String?` | `null` | Supporting text below label |
+| `leading` | `Widget?` | `null` | Leading widget (icon) |
+| `trailing` | `Widget?` | `null` | Trailing widget (icon) |
+| `density` | `AsmMenuItemDensity` | `.defaultDensity` | Row density |
+| `selected` | `bool` | `false` | Whether the item is selected |
+| `semanticLabel` | `String?` | `null` | Override announced label |

@@ -1,0 +1,94 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Accordion - Design System
+description: Accordion component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Accordion
+
+Accordions display collapsible content panels for organizing and revealing information progressively. They reduce visual clutter by hiding secondary content until needed.
+
+<div class="hero-preview">
+  <div class="preview-row" style="flex-direction:column;gap:8px;width:100%;max-width:500px">
+    <asm-accordion-item title="What is Assemble?" expanded>
+      <p>Assemble is a cross-platform design system built for web and Flutter applications.</p>
+    </asm-accordion-item>
+    <asm-accordion-item title="How do I install it?">
+      <p>Install via npm for web or pub for Flutter.</p>
+    </asm-accordion-item>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/accordion"
+  componentUsage={`<asm-accordion-item title="Section title">\n  <p>Content here</p>\n</asm-accordion-item>`}
+  flutterUsage={`AsmAccordion(\n  items: [\n    AsmAccordionItem(\n      title: 'Section title',\n      child: Text('Content here'),\n    ),\n  ],\n)`}
+/>
+
+## Types
+
+### White (Default)
+
+<PreviewCard
+  webCode={`<asm-accordion-item title="FAQ Question" type="white">\n  <p>Answer to the question goes here.</p>\n</asm-accordion-item>`}
+  flutterCode={`AsmAccordionItem(\n  title: 'FAQ Question',\n  type: AsmAccordionType.white,\n  child: Text('Answer to the question goes here.'),\n)`}
+/>
+
+
+### Gray
+
+<PreviewCard
+  webCode={`<asm-accordion-item title="FAQ Question" type="gray">\n  <p>Answer to the question goes here.</p>\n</asm-accordion-item>`}
+  flutterCode={`AsmAccordionItem(\n  title: 'FAQ Question',\n  type: AsmAccordionType.gray,\n  child: Text('Answer to the question goes here.'),\n)`}
+/>
+
+
+## With Leading Icon
+
+<PreviewCard
+  webCode={`<asm-accordion-item title="Security settings" leading-icon="security">\n  <p>Configure your security preferences here.</p>\n</asm-accordion-item>`}
+  flutterCode={`AsmAccordionItem(\n  title: 'Security settings',\n  leadingIcon: Icons.security,\n  child: Text('Configure your security preferences here.'),\n)`}
+/>
+
+
+## Disabled
+
+<PreviewCard
+  webCode={`<asm-accordion-item title="Unavailable section" disabled>\n  <p>This content is not available.</p>\n</asm-accordion-item>`}
+  flutterCode={`AsmAccordionItem(\n  title: 'Unavailable section',\n  enabled: false,\n  child: Text('This content is not available.'),\n)`}
+/>
+
+
+## Guidelines
+
+- Use clear, descriptive titles that indicate what content is hidden
+- Don't nest accordions more than one level deep
+- Consider keeping the most important section expanded by default
+- Use when you have 3+ sections of content that don't all need to be visible at once
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `title` | `string` | `''` | Header title text |
+| `expanded` | `boolean` | `false` | Whether expanded |
+| `type` | `white` \| `gray` | `white` | Background style |
+| `leading-icon` | `string` | `''` | Material Symbols icon name |
+| `disabled` | `boolean` | `false` | Disabled state |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `title` | `String` | required | Header title text |
+| `expanded` | `bool` | `false` | Whether expanded |
+| `type` | `AsmAccordionType` | `.white` | Background style |
+| `leadingIcon` | `IconData?` | `null` | Leading icon |
+| `child` | `Widget` | required | Expandable content |
+| `onExpansionChanged` | `ValueChanged<bool>?` | `null` | Expansion handler |

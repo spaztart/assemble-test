@@ -1,0 +1,163 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Split Button - Design System
+description: Split button component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Split Button
+
+Split buttons let users take a primary action or choose from a dropdown of related actions. The left side performs the default action, and the right side opens a menu.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-split-button label="Save" start-icon="save">
+      <asm-menu density="compact">
+        <asm-menu-item label="Save as draft" start-icon="draft"></asm-menu-item>
+        <asm-menu-item label="Save and publish" start-icon="publish"></asm-menu-item>
+      </asm-menu>
+    </asm-split-button>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/split-button"
+  componentUsage={`<asm-split-button label="Save">\n  <asm-menu>\n    <asm-menu-item label="Save as draft"></asm-menu-item>\n  </asm-menu>\n</asm-split-button>`}
+  flutterUsage="// Split button is currently a web-only component.\n// Flutter implementation coming soon."
+/>
+
+## Variants
+
+### Filled
+
+The default high-emphasis split button for primary actions.
+
+<PreviewCard
+  webCode={`
+  <asm-split-button label="Save" start-icon="save">\n 
+  <asm-menu density="compact">\n    
+  <asm-menu-item label="Save as draft" start-icon="draft"></asm-menu-item>\n    <asm-menu-item label="Save and publish" start-icon="publish"></asm-menu-item>\n  </asm-menu>\n</asm-split-button>\n\n<asm-split-button label="Disabled" disabled>\n  <asm-menu density="compact">\n    
+  <asm-menu-item label="Option"></asm-menu-item>\n  </asm-menu>\n</asm-split-button>
+  `}
+  flutterCode="// Split button is currently a web-only component."
+>
+  <asm-split-button label="Save" start-icon="save">
+    <asm-menu density="compact">
+      <asm-menu-item label="Save as draft" start-icon="draft"></asm-menu-item>
+      <asm-menu-item label="Save and publish" start-icon="publish"></asm-menu-item>
+    </asm-menu>
+  </asm-split-button>
+  <asm-split-button label="Muted" disabled>
+    <asm-menu density="compact">
+      <asm-menu-item label="Option"></asm-menu-item>
+    </asm-menu>
+  </asm-split-button>
+</PreviewCard>
+
+### Tonal
+
+A softer emphasis split button for secondary actions.
+
+<PreviewCard
+  webCode={`<asm-split-button label="Export" variant="tonal" start-icon="download">\n  <asm-menu density="compact">\n    <asm-menu-item label="Export as PDF" start-icon="picture_as_pdf"></asm-menu-item>\n    <asm-menu-item label="Export as CSV" start-icon="table_chart"></asm-menu-item>\n  </asm-menu>\n</asm-split-button>`}
+  flutterCode="// Split button is currently a web-only component."
+>
+  <asm-split-button label="Export" variant="tonal" start-icon="download">
+    <asm-menu density="compact">
+      <asm-menu-item label="Export as PDF" start-icon="picture_as_pdf"></asm-menu-item>
+      <asm-menu-item label="Export as CSV" start-icon="table_chart"></asm-menu-item>
+    </asm-menu>
+  </asm-split-button>
+</PreviewCard>
+
+### Outline
+
+A medium-emphasis split button with a border.
+
+<PreviewCard
+  webCode={`<asm-split-button label="Copy button" variant="outline" start-icon="content_copy">\n  <asm-menu density="compact">\n    <asm-menu-item label="Copy link" start-icon="link"></asm-menu-item>\n    <asm-menu-item label="Copy text" start-icon="content_copy"></asm-menu-item>\n  </asm-menu>\n</asm-split-button>`}
+  flutterCode="// Split button is currently a web-only component."
+>
+  <asm-split-button label="Copy" variant="outline" start-icon="content_copy">
+    <asm-menu density="compact">
+      <asm-menu-item label="Copy link" start-icon="link"></asm-menu-item>
+      <asm-menu-item label="Copy text" start-icon="content_copy"></asm-menu-item>
+    </asm-menu>
+  </asm-split-button>
+</PreviewCard>
+
+## Sizes
+
+Split buttons come in four sizes.
+
+<PreviewCard
+  align="center"
+  webCode={`<asm-split-button label="Huge" size="huge">\n  <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>\n</asm-split-button>\n\n<asm-split-button label="Spacious" size="spacious">\n  <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>\n</asm-split-button>\n\n<asm-split-button label="Default" size="default">\n  <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>\n</asm-split-button>\n\n<asm-split-button label="Compact" size="compact">\n  <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>\n</asm-split-button>`}
+  flutterCode="// Split button is currently a web-only component."
+>
+  <asm-split-button label="Huge" size="huge">
+    <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>
+  </asm-split-button>
+  <asm-split-button label="Spacious" size="spacious">
+    <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>
+  </asm-split-button>
+  <asm-split-button label="Default" size="default">
+    <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>
+  </asm-split-button>
+  <asm-split-button label="Compact" size="compact">
+    <asm-menu><asm-menu-item label="Option"></asm-menu-item></asm-menu>
+  </asm-split-button>
+</PreviewCard>
+
+## Destructive
+
+Add `destructive` for dangerous or irreversible actions. Supported on filled and tonal variants.
+
+<PreviewCard
+  webCode={`<asm-split-button label="Delete" destructive start-icon="delete">\n  <asm-menu density="compact">\n    <asm-menu-item label="Delete selected" start-icon="delete"></asm-menu-item>\n    <asm-menu-item label="Delete all" start-icon="delete_forever"></asm-menu-item>\n  </asm-menu>\n</asm-split-button>\n\n<asm-split-button label="Remove" variant="tonal" destructive start-icon="remove_circle">\n  <asm-menu density="compact">\n    <asm-menu-item label="Remove from list" start-icon="playlist_remove"></asm-menu-item>\n  </asm-menu>\n</asm-split-button>`}
+  flutterCode="// Split button is currently a web-only component."
+>
+  <asm-split-button label="Delete" destructive start-icon="delete">
+    <asm-menu density="compact">
+      <asm-menu-item label="Delete selected" start-icon="delete"></asm-menu-item>
+      <asm-menu-item label="Delete all" start-icon="delete_forever"></asm-menu-item>
+    </asm-menu>
+  </asm-split-button>
+  <asm-split-button label="Remove" variant="tonal" destructive start-icon="remove_circle">
+    <asm-menu density="compact">
+      <asm-menu-item label="Remove from list" start-icon="playlist_remove"></asm-menu-item>
+    </asm-menu>
+  </asm-split-button>
+</PreviewCard>
+
+## Guidelines
+
+- Use the primary (left) action for the most common choice
+- Keep dropdown options related to the primary action
+- Pair with `asm-menu` and `asm-menu-item` for the dropdown content
+- Listen to the `action` event for the primary button click
+- Listen to the `toggle` event to track dropdown open/close state
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | The primary button label |
+| `variant` | `filled` \| `tonal` \| `outline` | `filled` | The visual style |
+| `size` | `huge` \| `spacious` \| `default` \| `compact` | `default` | The button size |
+| `disabled` | `boolean` | `false` | Whether the button is disabled |
+| `destructive` | `boolean` | `false` | Destructive/danger mode |
+| `start-icon` | `string` | `''` | Material Symbols icon name before label |
+| `open` | `boolean` | `false` | Whether the dropdown is open |
+
+### Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `action` | — | Fired when the primary button is clicked |
+| `toggle` | `{ open: boolean }` | Fired when the dropdown is opened or closed |

@@ -1,0 +1,1 @@
+{"version":3,"file":"divider.d.ts","sourceRoot":"","sources":["../../../src/components/divider/divider.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,wBAAwB,CAAC;AAEhD,cAAc,wBAAwB,CAAC;AACvC,eAAe,UAAU,CAAC;AAI1B,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,aAAa,EAAE,UAAU,CAAC;KAC3B;CACF"}

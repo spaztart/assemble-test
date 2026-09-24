@@ -1,0 +1,19 @@
+{
+  "name": "assemble",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages",
+    "docs"
+  ],
+  "scripts": {
+    "asm-docs": "npm run dev -w docs",
+    "asm-docs:build": "npm run build -w docs",
+    "asm-tokens": "node build-tokens.js",
+    "asm-components": "npm run dev -w packages",
+    "asm-components:build": "npm run build -w packages",
+    "asm-publish": "npm run build -w packages && npm publish -w packages",
+    "asm-publish:public": "npm run build -w packages && npm publish -w packages --@mcafee-eng:registry=https://registry.npmjs.org --access public",
+    "asm-publish:figma": "sh packages/scripts/publish-figma.sh"
+  }
+}

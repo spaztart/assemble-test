@@ -1,0 +1,87 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Peek Label - Design System
+description: Peek label component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Peek Label
+
+A small floating chip that surfaces the name of an adjacent affordance on hover or focus — commonly used alongside navigation rails or icon-only toolbars. Purely presentational; the caller handles positioning.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-peek-label text="Dashboard"></asm-peek-label>
+    <asm-peek-label text="Settings" trailing-icon="settings"></asm-peek-label>
+    <asm-peek-label text="Offline" offline trailing-icon="cloud_off"></asm-peek-label>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/peek-label"
+  componentUsage='<asm-peek-label text="Dashboard"></asm-peek-label>'
+  flutterUsage={`AsmPeekLabel(\n  text: 'Dashboard',\n)`}
+/>
+
+## Default
+
+<PreviewCard
+  webCode='<asm-peek-label text="Dashboard"></asm-peek-label>'
+  flutterCode={`AsmPeekLabel(\n  text: 'Dashboard',\n)`}
+/>
+
+## With Trailing Icon
+
+<PreviewCard
+  webCode='<asm-peek-label text="Settings" trailing-icon="settings"></asm-peek-label>'
+  flutterCode={`AsmPeekLabel(\n  text: 'Settings',\n  trailingIcon: Icons.settings,\n)`}
+/>
+
+## Small Size
+
+<PreviewCard
+  webCode='<asm-peek-label text="Home" size="small"></asm-peek-label>'
+  flutterCode={`AsmPeekLabel(\n  text: 'Home',\n  size: AsmPeekLabelSize.small,\n)`}
+/>
+
+## Offline State
+
+Muted appearance for inactive or unavailable items.
+
+<PreviewCard
+  webCode='<asm-peek-label text="Offline Mode" offline trailing-icon="cloud_off"></asm-peek-label>'
+  flutterCode={`AsmPeekLabel(\n  text: 'Offline Mode',\n  offline: true,\n  trailingIcon: Icons.cloud_off,\n)`}
+/>
+
+## Guidelines
+
+- Use alongside icon-only navigation or toolbar items
+- Appears on hover/focus of the parent element — caller controls visibility
+- The label is non-interactive (`pointer-events: none`)
+- Keep text short (1–2 words)
+- Default size is 32px tall; small is 28px
+- Elevation-5 shadow makes it float above content
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `text` | `string` | `''` | Text content |
+| `size` | `'default' \| 'small'` | `'default'` | Height: 32px or 28px |
+| `trailing-icon` | `string` | `''` | Optional Material icon name |
+| `offline` | `boolean` | `false` | Muted/outline color |
+
+### Flutter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `text` | `String` | required | Chip text |
+| `size` | `AsmPeekLabelSize` | `.defaultSize` | 32px or 28px |
+| `trailingIcon` | `IconData?` | `null` | Optional trailing icon |
+| `offline` | `bool` | `false` | Muted outline color |

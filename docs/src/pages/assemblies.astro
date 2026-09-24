@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const components = [
+  'Chip',
+];
+---
+
+<BaseLayout title="Assemblies - Design System" description="Explore reusable UI assemblies">
+  <div class="assemblies-page">
+    <div class="assemblies-container">
+      <header class="assemblies-header">
+        <h1>Assemblies</h1>
+        <p class="assemblies-subtitle">A comprehensive library of reusable UI components for building consistent, accessible interfaces.</p>
+      </header>
+
+      <div class="assemblies-grid" id="assembliesGrid">
+        {components.map((component) => (
+          <asm-card variant="surface" elevation="1" clickable data-component={component.toLowerCase().replace(/\s+/g, '-')}>
+            <div class="card-content">
+              <div class="card-preview">
+                <asm-icon name="widgets" style="font-size: 32px; color: var(--md-sys-color-on-surface-variant);"></asm-icon>
+              </div>
+              <div class="card-info">
+                <h3 class="card-name">{component}</h3>
+                <div class="card-platforms">
+                  <asm-tag variant="neutral">Android</asm-tag>
+                  <asm-tag variant="neutral">iOS</asm-tag>
+                  <asm-tag variant="neutral">Web</asm-tag>
+                </div>
+              </div>
+            </div>
+          </asm-card>
+        ))}
+      </div>
+    </div>
+
+    <!-- Component Detail Modal -->
+    <asm-modal id="componentModal" show-close barrier-dismiss>
+      <div class="modal-body" id="modalBody">
+        <!-- Content will be rebuilt here -->
+      </div>
+    </asm-modal>
+  </div>
+</BaseLayout>
+
+<style>
+  .assemblies-page {
+    flex: 1;
+    background: var(--md-sys-color-surface);
+    min-height: calc(100vh - 52px);
+  }
+
+  .assemblies-container {
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  .assemblies-header {
+    margin-bottom: 48px;
+  }
+
+  .assemblies-header h1 {
+    font-family: 'McAfee Sans', system-ui, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .assemblies-subtitle {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 720px;
+  }
+
+  .assemblies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .assemblies-grid asm-card {
+    --asm-card-padding: 0;
+    --asm-card-radius: 16px;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-preview {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--md-sys-color-surface-container-high);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .card-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .card-platforms {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .modal-body {
+    min-width: 400px;
+    min-height: 200px;
+  }
+
+  @media (max-width: 768px) {
+    .assemblies-container {
+      padding: 32px 24px 64px;
+    }
+
+    .assemblies-header h1 {
+      font-size: 36px;
+    }
+
+    .assemblies-subtitle {
+      font-size: 16px;
+    }
+
+    .assemblies-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .modal-body {
+      min-width: unset;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .assemblies-container {
+      padding: 24px 16px 48px;
+    }
+
+    .assemblies-header {
+      margin-bottom: 32px;
+    }
+
+    .assemblies-header h1 {
+      font-size: 28px;
+    }
+
+    .assemblies-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+</style>
+
+<script>
+  function initAssemblies() {
+    const grid = document.getElementById('assembliesGrid');
+    const modal = document.getElementById('componentModal') as any;
+
+    if (!grid || !modal) return;
+
+    // Listen for card clicks via the asm-card's card-click event
+    grid.addEventListener('card-click', (e: Event) => {
+      const card = (e.target as HTMLElement).closest('asm-card');
+      if (!card) return;
+
+      const componentKey = card.getAttribute('data-component');
+      if (componentKey) {
+        openModal(componentKey);
+      }
+    });
+
+    // Close modal handler
+    modal.addEventListener('close', () => {
+      modal.open = false;
+    });
+  }
+
+  function openModal(componentKey: string) {
+    const modal = document.getElementById('componentModal') as any;
+    if (!modal) return;
+
+    // Empty content — ready to be rebuilt
+    const modalBody = document.getElementById('modalBody');
+    if (modalBody) {
+      modalBody.innerHTML = '';
+    }
+
+    modal.open = true;
+  }
+
+  document.addEventListener('DOMContentLoaded', initAssemblies);
+  document.addEventListener('astro:after-swap', initAssemblies);
+</script>

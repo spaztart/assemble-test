@@ -1,0 +1,128 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Skeleton Loader - Design System
+description: Skeleton loader component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Skeleton Loader
+
+Skeleton loaders provide placeholder UI that mimics the shape of content while data is loading. They reduce perceived wait time and prevent layout shifts.
+
+<div class="hero-preview">
+  <div class="preview-row" style="gap:16px;align-items:start">
+    <asm-skeleton-loader shape="icon"></asm-skeleton-loader>
+    <div style="display:flex;flex-direction:column;gap:8px;flex:1;max-width:300px">
+      <asm-skeleton-loader shape="standalone-text" width="60%"></asm-skeleton-loader>
+      <asm-skeleton-loader shape="standalone-text"></asm-skeleton-loader>
+      <asm-skeleton-loader shape="standalone-text" width="80%"></asm-skeleton-loader>
+    </div>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/skeleton-loader"
+  componentUsage='<asm-skeleton-loader shape="card"></asm-skeleton-loader>'
+  flutterUsage={`AsmSkeletonLoader(\n  shape: AsmSkeletonShape.card,\n)`}
+/>
+
+## Shapes
+
+### Card
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader shape="card"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(shape: AsmSkeletonShape.card)`}
+/>
+
+
+### Standalone Text
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader shape="standalone-text"></asm-skeleton-loader>\n<asm-skeleton-loader shape="standalone-text" width="75%"></asm-skeleton-loader>\n<asm-skeleton-loader shape="standalone-text" width="50%"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(shape: AsmSkeletonShape.standaloneText)\nAsmSkeletonLoader(shape: AsmSkeletonShape.standaloneText, width: 0.75)\nAsmSkeletonLoader(shape: AsmSkeletonShape.standaloneText, width: 0.5)`}
+/>
+
+
+### Icon
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader shape="icon"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(shape: AsmSkeletonShape.icon)`}
+/>
+
+
+### List Item
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader shape="list-item"></asm-skeleton-loader>\n<asm-skeleton-loader shape="list-item"></asm-skeleton-loader>\n<asm-skeleton-loader shape="list-item"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(shape: AsmSkeletonShape.listItem)\nAsmSkeletonLoader(shape: AsmSkeletonShape.listItem)\nAsmSkeletonLoader(shape: AsmSkeletonShape.listItem)`}
+/>
+
+
+### Tile
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader shape="tile"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(shape: AsmSkeletonShape.tile)`}
+/>
+
+
+### Button
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader shape="button"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(shape: AsmSkeletonShape.button)`}
+/>
+
+
+### Neutral Shape
+
+A generic rectangle for custom layouts.
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader shape="neutral-shape"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(shape: AsmSkeletonShape.neutralShape)`}
+/>
+
+
+## Custom Dimensions
+
+Override width, height, and border-radius for custom shapes.
+
+<PreviewCard
+  webCode={`<asm-skeleton-loader width="200px" height="200px" border-radius="50%"></asm-skeleton-loader>\n<asm-skeleton-loader width="100%" height="32px" border-radius="4px"></asm-skeleton-loader>`}
+  flutterCode={`AsmSkeletonLoader(width: 200, height: 200, borderRadius: 100)\nAsmSkeletonLoader(width: double.infinity, height: 32, borderRadius: 4)`}
+/>
+
+
+## Guidelines
+
+- Match skeleton shapes to the content they replace
+- Use multiple skeletons to approximate the real layout
+- Animate with a shimmer to indicate loading progress
+- Remove skeletons immediately when content loads — avoid artificial delays
+- Use for initial page loads and lazy-loaded sections
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `shape` | `card` \| `standalone-text` \| `icon` \| `list-item` \| `neutral-shape` \| `tile` \| `button` | `neutral-shape` | Shape preset |
+| `width` | `string` | — | Custom width (CSS value) |
+| `height` | `string` | — | Custom height (CSS value) |
+| `border-radius` | `string` | — | Custom border radius (CSS value) |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `shape` | `AsmSkeletonShape` | `.neutralShape` | Shape preset |
+| `width` | `double?` | `null` | Custom width |
+| `height` | `double?` | `null` | Custom height |
+| `borderRadius` | `double?` | `null` | Custom border radius |

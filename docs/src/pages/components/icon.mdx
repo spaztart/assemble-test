@@ -1,0 +1,117 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Icon - Design System
+description: Icon component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Icon
+
+Icons communicate meaning at a glance. The icon component renders Material Symbols by name with configurable weight, fill, grade, and optical size.
+
+<div class="hero-preview">
+  <div class="preview-row" style="gap: 24px; font-size: 32px; color: var(--md-sys-color-on-surface);">
+    <asm-icon name="home"></asm-icon>
+    <asm-icon name="favorite"></asm-icon>
+    <asm-icon name="settings"></asm-icon>
+    <asm-icon name="search"></asm-icon>
+    <asm-icon name="notifications"></asm-icon>
+    <asm-icon name="person"></asm-icon>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/icon"
+  componentUsage='<asm-icon name="home"></asm-icon>'
+  flutterUsage={`// Flutter uses the built-in Icon widget\n// with Material Symbols.\nIcon(Icons.home)`}
+/>
+
+## Examples
+
+### Basic Usage
+
+Render any Material Symbols icon by name.
+
+<PreviewCard
+  webCode={`<asm-icon name="home"></asm-icon>\n<asm-icon name="favorite"></asm-icon>\n<asm-icon name="settings"></asm-icon>\n<asm-icon name="search"></asm-icon>\n<asm-icon name="delete"></asm-icon>`}
+  flutterCode={`Icon(Icons.home)\nIcon(Icons.favorite)\nIcon(Icons.settings)\nIcon(Icons.search)\nIcon(Icons.delete)`}
+/>
+
+
+### Sizing
+
+Control size with the CSS `font-size` property. The icon inherits its size from the parent.
+
+<PreviewCard
+  webCode={`<asm-icon name="star" style="font-size: 16px;"></asm-icon>\n<asm-icon name="star" style="font-size: 24px;"></asm-icon>\n<asm-icon name="star" style="font-size: 32px;"></asm-icon>\n<asm-icon name="star" style="font-size: 48px;"></asm-icon>`}
+  flutterCode={`Icon(Icons.star, size: 16)\nIcon(Icons.star, size: 24)\nIcon(Icons.star, size: 32)\nIcon(Icons.star, size: 48)`}
+/>
+
+
+### Color
+
+Icons inherit their color from the CSS `color` property.
+
+<PreviewCard
+  webCode={`<asm-icon name="circle" style="color: var(--md-sys-color-primary);"></asm-icon>\n<asm-icon name="circle" style="color: var(--md-sys-color-secondary);"></asm-icon>\n<asm-icon name="circle" style="color: var(--md-sys-color-tertiary);"></asm-icon>\n<asm-icon name="circle" style="color: var(--md-sys-color-error);"></asm-icon>`}
+  flutterCode={`Icon(Icons.circle, color: colorScheme.primary)\nIcon(Icons.circle, color: colorScheme.secondary)\nIcon(Icons.circle, color: colorScheme.tertiary)\nIcon(Icons.circle, color: colorScheme.error)`}
+/>
+
+
+### Filled Style
+
+Use the `--asm-icon-fill` CSS custom property to toggle between outlined and filled icons.
+
+<PreviewCard
+  webCode={`<!-- Outlined (default) -->\n<asm-icon name="favorite"></asm-icon>\n<asm-icon name="bookmark"></asm-icon>\n<asm-icon name="star"></asm-icon>\n\n<!-- Filled -->\n<asm-icon name="favorite" style="--asm-icon-fill: 1;"></asm-icon>\n<asm-icon name="bookmark" style="--asm-icon-fill: 1;"></asm-icon>\n<asm-icon name="star" style="--asm-icon-fill: 1;"></asm-icon>`}
+  flutterCode={`// Outlined\nIcon(Icons.favorite_outline)\nIcon(Icons.bookmark_outline)\nIcon(Icons.star_outline)\n\n// Filled\nIcon(Icons.favorite)\nIcon(Icons.bookmark)\nIcon(Icons.star)`}
+/>
+
+
+### Weight
+
+Use the `--asm-icon-weight` CSS custom property to adjust stroke weight (100–700).
+
+<PreviewCard
+  webCode={`<asm-icon name="settings" style="--asm-icon-weight: 100;"></asm-icon>\n<asm-icon name="settings" style="--asm-icon-weight: 300;"></asm-icon>\n<asm-icon name="settings" style="--asm-icon-weight: 400;"></asm-icon>\n<asm-icon name="settings" style="--asm-icon-weight: 600;"></asm-icon>\n<asm-icon name="settings" style="--asm-icon-weight: 700;"></asm-icon>`}
+  flutterCode={`// Flutter uses Icon widget with\n// fontWeight via TextStyle when\n// using variable font icons.`}
+/>
+
+
+## Guidelines
+
+- Use Material Symbols icon names — browse available icons at [fonts.google.com/icons](https://fonts.google.com/icons)
+- Always set `aria-hidden="true"` (handled automatically by the component) — pair with text or a label for accessibility
+- Use consistent sizing within a context (toolbar, card, etc.)
+- Prefer outlined style for UI actions, filled style for state indication (e.g. favorited)
+- Use the `color` CSS property and design tokens for theming
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `name` | `string` | `''` | Material Symbols icon name |
+
+#### CSS Custom Properties
+
+| Property | Range | Default | Description |
+|----------|-------|---------|-------------|
+| `--asm-icon-fill` | `0` \| `1` | `0` | Fill axis (0 = outlined, 1 = filled) |
+| `--asm-icon-weight` | `100`–`700` | `400` | Stroke weight |
+| `--asm-icon-grade` | `-25`–`200` | `0` | Grade axis |
+| `--asm-icon-optical-size` | `20`–`48` | `24` | Optical size |
+
+### Flutter
+
+Flutter uses the built-in `Icon` widget directly with `Icons.*` constants. No custom wrapper is needed.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `icon` | `IconData` | required | The icon to display |
+| `size` | `double?` | `24.0` | Icon size in logical pixels |
+| `color` | `Color?` | `null` | Icon color (inherits from theme) |

@@ -1,0 +1,144 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Snackbar - Design System
+description: Snackbar component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Snackbar
+
+Snackbars provide brief, non-intrusive notifications at the bottom of the screen. They inform users about a process that has been or will be performed, with an optional action.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-button label="Show Snackbar" variant="tonal" id="hero-snackbar-trigger"></asm-button>
+  </div>
+</div>
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('hero-snackbar-trigger')?.addEventListener('click', () => {
+      const sb = document.getElementById('global-snackbar');
+      if (sb) {
+        sb.setAttribute('message', 'Item has been archived');
+        sb.setAttribute('action-label', 'Undo');
+        sb.setAttribute('leading-icon', '');
+        sb.setAttribute('duration', '4000');
+        sb.open = true;
+      }
+    });
+  });
+`}</script>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/snackbar"
+  componentUsage={`<asm-snackbar message="Saved successfully" open></asm-snackbar>`}
+  flutterUsage={`ScaffoldMessenger.of(context).showSnackBar(\n  AsmSnackbar(\n    message: 'Saved successfully',\n  ),\n)`}
+/>
+
+## Basic
+
+<PreviewCard
+  webCode={`<asm-snackbar message="Changes saved" open></asm-snackbar>`}
+  flutterCode={`AsmSnackbar(\n  message: 'Changes saved',\n)`}
+/>
+
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('basic-snackbar-trigger')?.addEventListener('click', () => {
+      const sb = document.getElementById('global-snackbar');
+      if (sb) {
+        sb.setAttribute('message', 'Changes saved');
+        sb.setAttribute('action-label', '');
+        sb.setAttribute('leading-icon', '');
+        sb.setAttribute('duration', '3000');
+        sb.open = true;
+      }
+    });
+  });
+`}</script>
+
+## With Action
+
+<PreviewCard
+  webCode={`<asm-snackbar message="Item deleted" action-label="Undo" open></asm-snackbar>`}
+  flutterCode={`AsmSnackbar(\n  message: 'Item deleted',\n  actionLabel: 'Undo',\n  onActionPressed: () {\n    // Undo delete\n  },\n)`}
+/>
+
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('action-snackbar-trigger')?.addEventListener('click', () => {
+      const sb = document.getElementById('global-snackbar');
+      if (sb) {
+        sb.setAttribute('message', 'Item deleted');
+        sb.setAttribute('action-label', 'Undo');
+        sb.setAttribute('leading-icon', '');
+        sb.setAttribute('duration', '4000');
+        sb.open = true;
+      }
+    });
+  });
+`}</script>
+
+## With Leading Icon
+
+<PreviewCard
+  webCode={`<asm-snackbar message="Copied to clipboard" leading-icon="check" open></asm-snackbar>`}
+  flutterCode={`AsmSnackbar(\n  message: 'Copied to clipboard',\n  leadingIcon: Icons.check,\n)`}
+/>
+
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('icon-snackbar-trigger')?.addEventListener('click', () => {
+      const sb = document.getElementById('global-snackbar');
+      if (sb) {
+        sb.setAttribute('message', 'Copied to clipboard');
+        sb.setAttribute('action-label', '');
+        sb.setAttribute('leading-icon', 'check');
+        sb.setAttribute('duration', '3000');
+        sb.open = true;
+      }
+    });
+  });
+`}</script>
+
+## Guidelines
+
+- Keep messages short and clear (one line preferred)
+- Provide an undo action for destructive operations
+- Snackbars should auto-dismiss after a few seconds
+- Only show one snackbar at a time
+- Don't use snackbars for critical information that requires user acknowledgment
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `message` | `string` | `''` | Notification message |
+| `action-label` | `string` | `''` | Action button text |
+| `leading-icon` | `string` | `''` | Icon before message |
+| `open` | `boolean` | `false` | Visibility state |
+| `duration` | `number` | `0` | Auto-dismiss ms (0 = manual) |
+
+**Events:**
+| Event | Description |
+|-------|-------------|
+| `action` | Fired when action button is clicked |
+| `close` | Fired when close button is clicked |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `message` | `String` | required | Notification message |
+| `actionLabel` | `String?` | `null` | Action button text |
+| `onActionPressed` | `VoidCallback?` | `null` | Action handler |
+| `onClosePressed` | `VoidCallback?` | `null` | Close handler |

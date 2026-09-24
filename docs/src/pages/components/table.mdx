@@ -1,0 +1,103 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Table - Design System
+description: Table component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Table
+
+Tables display structured data in a fixed 4-column layout with optional header, headline, and row icons. Use for presenting tabular information that benefits from alignment and scanning.
+
+<div class="hero-preview">
+  <div style="width:100%;max-width:600px">
+    <asm-table id="hero-table"></asm-table>
+  </div>
+</div>
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    const heroTable = document.getElementById('hero-table');
+    if (heroTable) {
+      heroTable.header = { col1: 'Name', col2: 'Status', col3: 'Role', col4: 'Date' };
+      heroTable.rows = [
+        { col1: 'Alice', col2: 'Active', col3: 'Admin', col4: '2024-01-15' },
+        { col1: 'Bob', col2: 'Pending', col3: 'Editor', col4: '2024-02-20' },
+      ];
+    }
+  });
+`}</script>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/table"
+  componentUsage={`<asm-table id="my-table"></asm-table>\n<script>\n  document.getElementById('my-table').header = { col1: 'Name', col2: 'Value', col3: 'Type', col4: 'Status' };\n  document.getElementById('my-table').rows = [\n    { col1: 'Item 1', col2: '100', col3: 'Type A', col4: 'Active' },\n  ];\n</script>`}
+  flutterUsage={`AsmTable(\n  header: AsmTableHeader(\n    col1: 'Name',\n    col2: 'Value',\n    col3: 'Type',\n    col4: 'Status',\n  ),\n  rows: [\n    AsmTableRowData(col1: 'Item 1', col2: '100', col3: 'Type A', col4: 'Active'),\n  ],\n)`}
+/>
+
+## With Headline
+
+<PreviewCard
+  webCode={`<asm-table id="table-headline"></asm-table>\n<script>\n  const t = document.getElementById('table-headline');\n  t.header = { headline: 'Team Members', col1: 'Name', col2: 'Email', col3: 'Role', col4: 'Status' };\n  t.rows = [\n    { col1: 'Alice', col2: 'alice@co.com', col3: 'Admin', col4: 'Active' },\n    { col1: 'Bob', col2: 'bob@co.com', col3: 'Editor', col4: 'Active' },\n  ];\n</script>`}
+  flutterCode={`AsmTable(\n  header: AsmTableHeader(\n    headline: 'Team Members',\n    col1: 'Name',\n    col2: 'Email',\n    col3: 'Role',\n    col4: 'Status',\n  ),\n  rows: [\n    AsmTableRowData(col1: 'Alice', col2: 'alice@co.com', col3: 'Admin', col4: 'Active'),\n    AsmTableRowData(col1: 'Bob', col2: 'bob@co.com', col3: 'Editor', col4: 'Active'),\n  ],\n)`}
+/>
+
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    const t = document.getElementById('table-demo-1');
+    if (t) {
+      t.header = { headline: 'Team Members', col1: 'Name', col2: 'Email', col3: 'Role', col4: 'Status' };
+      t.rows = [
+        { col1: 'Alice', col2: 'alice@co.com', col3: 'Admin', col4: 'Active' },
+        { col1: 'Bob', col2: 'bob@co.com', col3: 'Editor', col4: 'Active' },
+      ];
+    }
+  });
+`}</script>
+
+## With Leading Icons
+
+<PreviewCard
+  webCode={`<asm-table id="table-icons"></asm-table>\n<script>\n  const t = document.getElementById('table-icons');\n  t.header = { col1: 'Device', col2: 'Type', col3: 'Status', col4: 'Last Seen' };\n  t.rows = [\n    { col1: 'MacBook Pro', col2: 'Laptop', col3: 'Online', col4: 'Now', leadingIcon: 'laptop_mac' },\n    { col1: 'iPhone 15', col2: 'Phone', col3: 'Offline', col4: '2h ago', leadingIcon: 'phone_iphone' },\n  ];\n</script>`}
+  flutterCode={`AsmTable(\n  header: AsmTableHeader(col1: 'Device', col2: 'Type', col3: 'Status', col4: 'Last Seen'),\n  rows: [\n    AsmTableRowData(col1: 'MacBook Pro', col2: 'Laptop', col3: 'Online', col4: 'Now', leadingIcon: Icons.laptop_mac),\n    AsmTableRowData(col1: 'iPhone 15', col2: 'Phone', col3: 'Offline', col4: '2h ago', leadingIcon: Icons.phone_iphone),\n  ],\n)`}
+/>
+
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    const t = document.getElementById('table-demo-2');
+    if (t) {
+      t.header = { col1: 'Device', col2: 'Type', col3: 'Status', col4: 'Last Seen' };
+      t.rows = [
+        { col1: 'MacBook Pro', col2: 'Laptop', col3: 'Online', col4: 'Now', leadingIcon: 'laptop_mac' },
+        { col1: 'iPhone 15', col2: 'Phone', col3: 'Offline', col4: '2h ago', leadingIcon: 'phone_iphone' },
+      ];
+    }
+  });
+`}</script>
+
+## Guidelines
+
+- Use tables for structured, scannable data with consistent columns
+- Always provide column headers for clarity
+- Keep cell content concise — avoid long text in table cells
+- Use leading icons to add visual context to rows
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `header` | `object` | `null` | Header config: `{ col1, col2, col3, col4, headline? }` |
+| `rows` | `array` | `[]` | Row data: `{ col1, col2, col3, col4, leadingIcon? }[]` |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `header` | `AsmTableHeader` | required | Column headers + optional headline |
+| `rows` | `List<AsmTableRowData>` | required | Row data |

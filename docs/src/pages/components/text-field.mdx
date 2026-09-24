@@ -1,0 +1,136 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Text Field - Design System
+description: Text field component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Text Field
+
+Text fields allow users to enter and edit text. They support multiple variants, labels, icons, validation states, and multiline input.
+
+<div class="hero-preview">
+  <div class="preview-row" style="gap:16px;width:100%;max-width:500px">
+    <asm-text-field label="Email" variant="outlined" style="flex:1"></asm-text-field>
+    <asm-text-field label="Name" variant="filled" style="flex:1"></asm-text-field>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/text-field"
+  componentUsage='<asm-text-field label="Email" variant="outlined"></asm-text-field>'
+  flutterUsage={`AsmTextField(\n  label: 'Email',\n  variant: AsmTextFieldVariant.outlined,\n  onChanged: (value) {},\n)`}
+/>
+
+## Variants
+
+### Outlined (Default)
+
+A bordered text field with a floating label.
+
+<PreviewCard
+  webCode={`<asm-text-field label="Username" variant="outlined"></asm-text-field>`}
+  flutterCode={`AsmTextField(\n  label: 'Username',\n  variant: AsmTextFieldVariant.outlined,\n  onChanged: (value) {},\n)`}
+/>
+
+
+### Filled
+
+A filled background text field for denser layouts.
+
+<PreviewCard
+  webCode={`<asm-text-field label="Search" variant="filled"></asm-text-field>`}
+  flutterCode={`AsmTextField(\n  label: 'Search',\n  variant: AsmTextFieldVariant.filled,\n  onChanged: (value) {},\n)`}
+/>
+
+
+## With Icons
+
+<PreviewCard
+  webCode={`<asm-text-field label="Search" leading-icon="search" variant="outlined"></asm-text-field>\n<asm-text-field label="Password" trailing-icon="visibility" variant="outlined"></asm-text-field>`}
+  flutterCode={`AsmTextField(\n  label: 'Search',\n  leadingIcon: Icons.search,\n  onChanged: (value) {},\n)\n\nAsmTextField(\n  label: 'Password',\n  trailingIcon: Icons.visibility,\n  obscureText: true,\n  onChanged: (value) {},\n)`}
+/>
+
+
+## Supporting Text
+
+<PreviewCard
+  webCode={`<asm-text-field label="Email" supporting-text="Enter your work email" variant="outlined"></asm-text-field>`}
+  flutterCode={`AsmTextField(\n  label: 'Email',\n  supportingText: 'Enter your work email',\n  onChanged: (value) {},\n)`}
+/>
+
+
+## Error State
+
+<PreviewCard
+  webCode={`<asm-text-field label="Email" error-text="Invalid email address" variant="outlined"></asm-text-field>`}
+  flutterCode={`AsmTextField(\n  label: 'Email',\n  errorText: 'Invalid email address',\n  onChanged: (value) {},\n)`}
+/>
+
+
+## Disabled & Read Only
+
+<PreviewCard
+  webCode={`<asm-text-field label="Disabled" disabled variant="outlined"></asm-text-field>\n<asm-text-field label="Read only" read-only value="Cannot edit" variant="outlined"></asm-text-field>`}
+  flutterCode={`AsmTextField(\n  label: 'Disabled',\n  enabled: false,\n)\n\nAsmTextField(\n  label: 'Read only',\n  readOnly: true,\n  initialValue: 'Cannot edit',\n)`}
+/>
+
+
+## Multiline (Textarea)
+
+Set `max-lines` greater than 1 to render a textarea.
+
+<PreviewCard
+  webCode={`<asm-text-field label="Description" max-lines="4" variant="outlined"></asm-text-field>`}
+  flutterCode={`AsmTextField(\n  label: 'Description',\n  maxLines: 4,\n  onChanged: (value) {},\n)`}
+/>
+
+
+## Guidelines
+
+- Always provide a label or placeholder
+- Use supporting text for format hints (e.g., "MM/DD/YYYY")
+- Show error messages inline below the field
+- Use outlined variant for forms, filled for search and dense UIs
+- Don't use placeholder text as the only label
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Floating label text |
+| `placeholder` | `string` | `''` | Placeholder text |
+| `value` | `string` | `''` | Field value |
+| `variant` | `outlined` \| `filled` | `outlined` | Visual variant |
+| `supporting-text` | `string` | `''` | Helper text below field |
+| `error-text` | `string` | `''` | Error message (triggers error state) |
+| `leading-icon` | `string` | `''` | Leading icon name |
+| `trailing-icon` | `string` | `''` | Trailing icon name |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `read-only` | `boolean` | `false` | Read-only mode |
+| `obscure-text` | `boolean` | `false` | Password masking |
+| `max-length` | `number` | — | Max character count |
+| `max-lines` | `number` | `1` | Lines (>1 = textarea) |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `label` | `String?` | `null` | Floating label |
+| `placeholder` | `String?` | `null` | Placeholder text |
+| `variant` | `AsmTextFieldVariant` | `.outlined` | Visual variant |
+| `supportingText` | `String?` | `null` | Helper text |
+| `errorText` | `String?` | `null` | Error message |
+| `leadingIcon` | `IconData?` | `null` | Leading icon |
+| `trailingIcon` | `IconData?` | `null` | Trailing icon |
+| `enabled` | `bool` | `true` | Enabled state |
+| `readOnly` | `bool` | `false` | Read-only mode |
+| `obscureText` | `bool` | `false` | Password masking |
+| `maxLength` | `int?` | `null` | Max characters |
+| `maxLines` | `int` | `1` | Lines (>1 = multiline) |
+| `onChanged` | `ValueChanged<String>?` | `null` | Change handler |

@@ -1,0 +1,138 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Pagination - Design System
+description: Pagination component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Pagination
+
+A horizontal row of pill-shaped page controls with smart windowing. When total pages exceed what fits, the middle is collapsed to an ellipsis. The current page is filled with `primary` background; other pages are transparent pills that activate on click.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-pagination page-count="10" current-page="5"></asm-pagination>
+  </div>
+</div>
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('asm-pagination').forEach(p => {
+      p.addEventListener('page-change', (e) => {
+        p.setAttribute('current-page', e.detail.page);
+      });
+    });
+  });
+`}</script>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/pagination"
+  componentUsage='<asm-pagination page-count="10" current-page="1"></asm-pagination>'
+  flutterUsage={`AsmPagination(\n  pageCount: 10,\n  currentPage: 1,\n  onPageSelected: (page) {\n    setState(() => _currentPage = page);\n  },\n  automationIdentifier: 'my-pagination',\n)`}
+/>
+
+## Default
+
+Standard pagination with sibling count of 1 and boundary count of 1.
+
+<PreviewCard
+  webCode={`<asm-pagination page-count="10" current-page="5"></asm-pagination>`}
+  flutterCode={`AsmPagination(\n  pageCount: 10,\n  currentPage: 5,\n  onPageSelected: (page) {\n    setState(() => _currentPage = page);\n  },\n  automationIdentifier: 'default-pagination',\n)`}
+/>
+
+## Few Pages
+
+When total pages are small, all page numbers display without ellipsis.
+
+<PreviewCard
+  webCode={`<asm-pagination page-count="3" current-page="1"></asm-pagination>\n<asm-pagination page-count="5" current-page="3"></asm-pagination>`}
+  flutterCode={`AsmPagination(\n  pageCount: 3,\n  currentPage: 1,\n  onPageSelected: (page) {},\n  automationIdentifier: 'few-pages-3',\n)\n\nAsmPagination(\n  pageCount: 5,\n  currentPage: 3,\n  onPageSelected: (page) {},\n  automationIdentifier: 'few-pages-5',\n)`}
+/>
+
+## Many Pages (Ellipsis)
+
+With many pages, ellipsis collapses ranges between boundary and sibling pages.
+
+<PreviewCard
+  webCode={`<asm-pagination page-count="50" current-page="25" sibling-count="2" boundary-count="1"></asm-pagination>`}
+  flutterCode={`AsmPagination(\n  pageCount: 50,\n  currentPage: 25,\n  siblingCount: 2,\n  boundaryCount: 1,\n  onPageSelected: (page) {},\n  automationIdentifier: 'many-pages',\n)`}
+/>
+
+## Edge Cases
+
+### First Page
+
+Previous button disabled when on page 1.
+
+<PreviewCard
+  webCode={`<asm-pagination page-count="20" current-page="1"></asm-pagination>`}
+  flutterCode={`AsmPagination(\n  pageCount: 20,\n  currentPage: 1,\n  onPageSelected: (page) {},\n  automationIdentifier: 'first-page',\n)`}
+/>
+
+### Last Page
+
+Next button disabled when on the last page.
+
+<PreviewCard
+  webCode={`<asm-pagination page-count="20" current-page="20"></asm-pagination>`}
+  flutterCode={`AsmPagination(\n  pageCount: 20,\n  currentPage: 20,\n  onPageSelected: (page) {},\n  automationIdentifier: 'last-page',\n)`}
+/>
+
+## Disabled
+
+Entire control is non-interactive.
+
+<PreviewCard
+  webCode={`<asm-pagination page-count="10" current-page="3" disabled></asm-pagination>`}
+  flutterCode={`AsmPagination(\n  pageCount: 10,\n  currentPage: 3,\n  onPageSelected: null,\n  automationIdentifier: 'disabled-pagination',\n)`}
+/>
+
+## Custom Sibling/Boundary Count
+
+Control how many pages appear around the current page and at the edges.
+
+<PreviewCard
+  webCode={`<asm-pagination page-count="30" current-page="15" sibling-count="2" boundary-count="2"></asm-pagination>`}
+  flutterCode={`AsmPagination(\n  pageCount: 30,\n  currentPage: 15,\n  siblingCount: 2,\n  boundaryCount: 2,\n  onPageSelected: (page) {},\n  automationIdentifier: 'custom-counts',\n)`}
+/>
+
+## Guidelines
+
+- Use pagination for lists, tables, or feeds split across pages
+- Keep sibling count reasonable (1–2) to avoid overwhelming the user
+- The current page pill is non-interactive but announced as "current" for screen readers
+- Previous/Next arrows disable at first/last page boundaries
+- Disable the entire control when data is loading
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `page-count` | `number` | `1` | Total number of pages |
+| `current-page` | `number` | `1` | Current active page (1-based) |
+| `sibling-count` | `number` | `1` | Pages shown around current |
+| `boundary-count` | `number` | `1` | Pages shown at start/end |
+| `disabled` | `boolean` | `false` | Disable the control |
+| `aria-label` | `string` | `Pagination` | Accessible label |
+
+**Events:**
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `page-change` | `{ page: number }` | Fired when a page is selected |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `pageCount` | `int` | required | Total pages (≥ 1) |
+| `currentPage` | `int` | required | Current page (1-based) |
+| `onPageSelected` | `ValueChanged<int>?` | required | Page selected. `null` disables |
+| `automationIdentifier` | `String` | required | Test automation ID |
+| `siblingCount` | `int` | `1` | Pages around current |
+| `boundaryCount` | `int` | `1` | Pages at edges |
+| `semanticLabel` | `String` | `'Pagination'` | Accessible label |

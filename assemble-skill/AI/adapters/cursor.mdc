@@ -1,0 +1,206 @@
+---
+description: Assemble (McAfee) design system — routing, tokens, and hard constraints for any UI work
+globs: ["**/*.dart", "**/*.tsx", "**/*.ts", "**/*.jsx", "**/*.js", "**/*.css", "**/*.scss"]
+alwaysApply: false
+---
+
+# Assemble Design System — Cursor Rule
+
+Full docs: `Skill DS/AI/SKILL.md` and the 34 component + 8 foundation docs in `Skill DS/Components/`
+and `Skill DS/Foundations/`. This rule is the always-loaded subset. **Open the component's own doc
+before writing that component** — the traps are in the middle of those docs, not next to the variant
+names.
+
+## 0. Establish the binding first
+
+Assemble targets **desktop apps with resizable windows** — no mobile build. It has **two sanctioned
+bindings**, and they are not peers:
+
+| | Flutter | React |
+| --- | --- | --- |
+| For | **production products** | **prototyping** (Figma Make and similar) |
+| Documented | yes, in all 34 docs | **no** |
+| Reconciled | yes, ~600 open items | no |
+| Parity with the other | — | **not guaranteed** |
+
+- **Flutter repo** (`.dart`) → everything below applies directly, including the `Asm*` API.
+- **React repo using the Assemble React library** (`.tsx`/`.jsx`) → sanctioned, so this is **not** a
+  translation. Read `Skill DS/AI/react-binding.md` **before writing a line**. Everything below
+  applies except the `Asm*` API and the Flutter mechanisms. **Verify component names, prop names, and
+  which variants/sizes exist from the React source** — nothing documents them, parity is not
+  guaranteed, and deriving a React name from a Flutter one is a blocker. Tokens come from the **web
+  build of the same token source**: read its naming transform from the web token package, and never
+  inline a value because you couldn't find the variable.
+- **Anything else** (hand-written CSS, Vue, SwiftUI, a bespoke component set) → read
+  `Skill DS/AI/platform-adapters.md` first. You may use the design law (everything above
+  `## Flutter Usage` in any component doc). You may **not** invent an `Asm*` API, borrow React's
+  names, port a snippet from either binding, or present the result as sanctioned Assemble. Label it a
+  translation and declare your token mapping.
+
+**The flow is one-way: design law → binding.** Never derive Flutter code from a React prototype, and
+never cite a React prop as evidence that Assemble has that modifier. Route the *requirement* through
+the component doc instead. Never write `Asm*` in a `.tsx` file — that name is real, in the wrong
+vocabulary, which is what makes it easy to miss.
+
+## 1. Never state an unverified value
+
+If a doc doesn't give you the number, you don't have the number — say so. A plausible-but-wrong
+value is worse than an acknowledged gap, because the reader can't tell the difference. Roughly 600
+numbered open items exist; citing one beats filling it.
+
+## 2. Tokens only
+
+- **No** hex / `rgb()` / `hsl()` / `Color(0x…)`.
+- **No** raw font size, weight, line height, or tracking — type tokens are composite.
+- **No** hardcoded padding, gap, margin, radius, or border width.
+- **No** hand-authored `BoxShadow`.
+- **Semantic layer only:** `md.sys.color.*`, `mcafee.color.extended.*`. Never `md.key.*`,
+  `md.ref.palette.*`, `md.ref.brand.*`, `md.ref.type.font.*`, `md.type.size.*`.
+- **Spacing is a closed 15-step set:** `md.spacing.` 0/50/100/200/250/300/400/500/600/700/800/900/
+  1000/1100/1200 = 0/2/4/8/10/12/16/20/24/28/32/36/40/44/48. `400` (16) is the default. Choose by
+  relationship: 0–8 inside an element, 10–24 between elements, 28–48 between groups.
+- **Radius:** 0,2,4,6,8,12,16,24,32,36,40,48,56,64,**999** (999 *is* the pill).
+  **Border width:** 0,1,2,3,4.
+- **Emphasis** is `-emphasized` (weight 700). Never a bigger size, never a manual weight.
+- **Heavy** weight: `display` and `headline` only, promotional only. **Mono**: data values only.
+- **Dark mode is a theme-mode swap.** Never hardcode a dark value, never branch on brightness at the
+  usage site.
+
+## 3. Accessibility floor — never traded away
+
+1. **48×48** minimum touch target, achieved with **padding**, holding at 200% text scale.
+2. **Visible focus ring:** `md.sys.color.primary`, 2px, 2px offset, **keyboard only**. Never
+   removed, narrowed, or recoloured.
+3. Every interactive element expresses **hover, pressed, focus, disabled**. No partial sets.
+4. **Never meaning by colour alone** — status, severity, destructive, chart segments.
+5. Meaningful icons have accessible names; decorative icons are hidden. Icon-only controls need
+   **both** a label and a tooltip.
+6. Contrast: 4.5:1 normal text, 3:1 large text, 3:1 interactive/non-text.
+7. **Nothing consequential in a transient or hover-only surface** (snackbar, tooltip, scrollbar).
+8. **Disabled leaves the tab order** and receives no other state. 12% container / 38% content.
+
+## 4. States and elevation
+
+State layers: hover **8%** · focus **10%** · pressed **10%** · dragged **16%**. Additive when
+combined. Enabled = the **absence** of a layer. Precedence: disabled → pressed → focus → hover →
+enabled. The layer's **role** (`primary`/`secondary`/`neutral`/`error`) comes from the **action's
+meaning** — a destructive text button still uses `error`. **Selected is a separate axis**, not a
+state.
+
+Elevation is **three shadows**, all zero-offset: `subtle` (blur 4), `light` (blur 20),
+`heavy` (blur 25). **No shadow is the most common correct answer.** One per surface; peers match.
+Elevation is **not tonal** — `surface-container-*` is a container fill, not a lift. Never
+`Material(elevation:)` / `Card(elevation:)`.
+
+## 5. Layout
+
+Decide from the **content region**, never window width:
+
+```
+content = window − 16 (margin) − 60 (rail) − 16 (margin) − 386 (side panel, if present)
+```
+
+**Exactly two thresholds: 500 and 980.** SM (500–979) = 4 columns, overlay drawer, bottom sheet.
+MD / Default / Max = 12 columns, persistent rail, side panel — and they are **structurally
+identical**; never branch among them. 1280 and 1440 are window sizes, not breakpoints.
+
+Grid: gutter and outer margin 16 at every tier; caps at **992** `((12×68)+(11×16))` and centres —
+the surplus margin is intentional, don't fill it. Rail (60) and side panel (386) are fixed and sit
+**outside** the grid, as **siblings** of the content. Vertical rhythm 24 between items, 30 at
+section boundaries. **No nested grid inside a card.**
+
+In Flutter: `LayoutBuilder` / `constraints.maxWidth`. **Never** `MediaQuery.of(context).size.width`
+for a layout decision (`MediaQuery` is still right for safe areas, insets, text scale).
+
+Components are **container-agnostic**: correct beside a 386 panel, inside a bottom sheet, and inside
+a card, without knowing the window size. Never take a breakpoint tier as a parameter.
+
+## 6. Route away before routing within
+
+Every component doc's `## Decision Tree` asks *"is this the right component at all?"* first, and its
+most valuable answer is usually a different component — or none. Start at
+`Skill DS/AI/component-router.md`.
+
+The discriminators that settle most of it:
+
+| Question | Decides |
+| --- | --- |
+| Act, or navigate? | `Button` vs a link |
+| Does anything happen on click, or does it wait for Save? | `Switch` vs `Checkbox` |
+| Would the user be stuck if they missed it? | `Alert Banner` vs `Snackbar` |
+| Must the user respond before anything else can happen? | `Modal` vs everything (usually no) |
+| Do you know the fraction? the layout? | `Progress Bar` vs `Skeleton Loader` vs `Loaders` |
+| Does the unfilled part mean "not yet"? | `Progress Bar` (has a **track**) vs the charts (no track) |
+| Is anything inside it focusable? | `Popover` vs `Tooltip` |
+| Exactly one, or zero-or-more? | `Radio` vs `Checkbox` |
+| A count, a severity, a condition, or a category? | `Status Indicators` vs `Badges` vs `Tags` |
+
+Valid, common terminations: show the content · nothing at all (wait under ~300ms) · no badge (count
+is zero) · no shadow · spacing instead of a divider · a link · a list · a table · pagination · a
+real screen · plain text.
+
+## 7. Variant and size come from the doc's stated input
+
+Not from emphasis or taste.
+
+- `Badges` `type` ← **the surface behind it** (`primary`'s near-white fill is invisible on light).
+- `Accordion` type ← the **page background**.
+- `Text Fields` `filled`/`outlined` ← whether a four-sided stroke competes with a busy surface —
+  then **all** fields on that surface match.
+- `Button` `ghost` ← the button sits on **imagery or a gradient**. `strictBlack`/`strictWhite` ← the
+  surface is **theme-independent**.
+- `Alert Card` layout ← **available width** (≥480 expanded / 375–479 medium / <375 compact).
+- Spacing step ← the **relationship band**. Type style ← what the text is **doing**.
+
+Interlocks: one size per button group · exactly one `filled` button per surface · a standalone
+`text`/`textNoPadding` button **must** carry a directional icon (those two variants have no state
+layer at all) · `xsmall` is for genuinely tight contexts, never to rescue a crowded layout.
+
+## 8. Silent failures — these compile and do nothing
+
+- `destructive` on `outline` / `ghost` / `textNoPadding` / `strict*` → **ignored**.
+- `Peek Label` `inverse` + `offline` → tone **ignored**.
+- `Expanded Card` with both `options` and `expandedContent` → **asserts**.
+- Charts summing to zero → render blank. Check the sum and swap in an `Empty State`.
+- Both chart legends are **not announced** — supply the breakdown yourself.
+- `Carousel` dots are **decorative**: not focusable, not tappable.
+- `Feedback`'s own visual change is **not** acknowledgement — the selected fill is nearly invisible.
+
+## 9. Flutter binding (skip if not a Flutter repo)
+
+- **Pass `variant` and `size` explicitly.** `AsmButton` defaults to `variant: text, size: large`;
+  the guidance is `filled` / `medium`. Treat every `Asm*` default as untrusted.
+- `automationIdentifier` is **required** and asserted non-empty. kebab-case, from purpose.
+- Disable by passing **`null`** to the handler. Never `Opacity` / `IgnorePointer` /
+  `AbsorbPointer` / an invented `disabled` flag.
+- **Never** wrap an `Asm*` widget in `Semantics` or `GestureDetector` — competing or nameless tap
+  targets.
+- No `Padding` wrapper to resize a component — use its size step. No `TextStyle` override. Don't
+  override a button's shape. Pass icons bare (no `size:` on a component slot).
+- Resolve states from `WidgetState`, not local `setState`.
+- Tokens: `asmColorScheme(brightness:)`, `AsmTokens.of(context)`, `context.asmExtendedColors`,
+  `context.asmStateColors`, `context.asmGradients`, `context.asmTokens.shadows`, `AsmSpacing.*`.
+  Package `assemble_flutter_tokens`.
+
+## 10. Does not exist — do not autocomplete these
+
+`AsmIcon` (use the framework `Icon`) · **`AsmPopover`** (`Popover` ships no implementation; the
+nearest is the private popup in `menu.dart`) · **any reusable carousel** (indicator only; the working
+one is private to `Alert Card`) · `AsmTopbar`.
+
+**`AsmGuidedActionPanel` is the opposite case — it ships, but has no doc.** `guided_action_panel.dart`
+is real and cited from three docs. Use it; just don't expect documented guidance, and don't infer its
+API from a neighbour. **Undocumented ≠ nonexistent.**
+
+**`AsmNavigationRail.bottom` ships and is forbidden.** The rail docks **left at every tier**, without
+exception; at SM it hides and returns as a left overlay drawer over a scrim.
+
+**Seven components have no doc** — `brand`, `feature banner`, **`guided action panel`**, `lists`,
+`quick action`, `toggle groups`, **`topbars`**. Name the gap; don't improvise a spec from a
+neighbour.
+
+## 11. Before you hand anything back
+
+Run `Skill DS/AI/validation.md`. Report: the routing decision and why · the variant/size choices and
+the input each came from · every value as a token name · open items touched and anything you could
+not verify. An answer missing the last item is incomplete, not concise.

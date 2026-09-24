@@ -1,0 +1,66 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Components - Design System
+description: A complete overview of all available components and their platform status
+---
+import { components, STATUS_CONFIG } from '../../data/component-inventory';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+export const tableHeader = {
+  col1: 'Component',
+  col2: 'Platforms',
+  col3: 'Web',
+  col4: 'Flutter',
+};
+
+export const tableRows = components.map((c) => {
+  const webCfg = STATUS_CONFIG[c.web];
+  const flutterCfg = STATUS_CONFIG[c.flutter];
+  const hasWeb = c.web !== 'not-available';
+  const hasFlutter = c.flutter !== 'not-available';
+
+  const nameCell = c.href
+    ? `<a href="${base}${c.href}" style="color: var(--md-sys-color-primary); text-decoration: none; font-weight: 500;">${c.name}</a>`
+    : c.name;
+
+  const platformCell = [
+    hasWeb ? `<asm-icon name="language" style="font-size: 18px; color: var(--md-sys-color-primary);"></asm-icon>` : '',
+    hasFlutter ? `<asm-icon name="flutter" style="font-size: 18px; color: var(--md-sys-color-secondary);"></asm-icon>` : '',
+  ].filter(Boolean).join(' ');
+
+  const webCell = `<asm-badge label="${webCfg.label}" status="${webCfg.status}"></asm-badge>`;
+  const flutterCell = `<asm-badge label="${flutterCfg.label}" status="${flutterCfg.status}"></asm-badge>`;
+
+  return { col1: nameCell, col2: platformCell, col3: webCell, col4: flutterCell };
+});
+
+# Components
+
+A complete overview of all available components and their current platform status.
+
+<asm-table id="components-table" html-cells></asm-table>
+
+<script data-astro-rerun>{`
+  (() => {
+    const table = document.getElementById('components-table');
+    if (table) {
+      customElements.whenDefined('asm-table').then(() => {
+        table.header = ${JSON.stringify(tableHeader)};
+        table.rows = ${JSON.stringify(tableRows)};
+      });
+    }
+  })();
+`}</script>
+
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px 0; margin-top: 16px;">
+  <span style="font-size: 12px; font-weight: 600; color: var(--md-sys-color-on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px;">Status:</span>
+  <asm-badge label="Active" status="low"></asm-badge>
+  <asm-badge label="In Progress" status="moderate"></asm-badge>
+  <asm-badge label="Not Available" status="neutral"></asm-badge>
+  <asm-badge label="Beta" status="high"></asm-badge>
+  <span style="width: 1px; height: 16px; background: var(--md-sys-color-outline-variant);"></span>
+  <span style="font-size: 12px; font-weight: 600; color: var(--md-sys-color-on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px;">Platforms:</span>
+  <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--md-sys-color-on-surface-variant);"><asm-icon name="language" style="font-size: 16px; color: var(--md-sys-color-primary);"></asm-icon> Web</span>
+  <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--md-sys-color-on-surface-variant);"><asm-icon name="flutter" style="font-size: 16px; color: var(--md-sys-color-secondary);"></asm-icon> Flutter</span>
+</div>

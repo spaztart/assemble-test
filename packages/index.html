@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assemble Components Dev</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+    <style>
+      @import '/src/styles/tokens.css';
+      body { font-family: 'McAfee Sans', sans-serif; padding: 32px; background: #f5f5f5; }
+      section { margin-bottom: 32px; }
+      h2 { margin-bottom: 12px; }
+      .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Assemble Button</h1>
+
+    <section>
+      <h2>Variants</h2>
+      <div class="row">
+        <asm-button label="Label" variant="filled"></asm-button>
+        <asm-button label="Label" variant="tonal"></asm-button>
+        <asm-button label="Label" variant="text"></asm-button>
+        <asm-button label="Label" variant="outline"></asm-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Destructive</h2>
+      <div class="row">
+        <asm-button label="Remove" variant="filled" destructive></asm-button>
+        <asm-button label="Remove" variant="tonal" destructive></asm-button>
+        <asm-button label="Remove" variant="text" destructive></asm-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sizes</h2>
+      <div class="row">
+        <asm-button label="Label" size="huge"></asm-button>
+        <asm-button label="Label" size="spacious"></asm-button>
+        <asm-button label="Label" size="default"></asm-button>
+        <asm-button label="Label" size="compact"></asm-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>States</h2>
+      <div class="row">
+        <asm-button label="Hover me"></asm-button>
+        <asm-button label="Disabled" disabled></asm-button>
+      </div>
+      <div class="row">
+        <asm-button label="Hover me" variant="tonal"></asm-button>
+        <asm-button label="Disabled" variant="tonal" disabled></asm-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>With Icons</h2>
+      <div class="row">
+        <asm-button label="Download" start-icon="download"></asm-button>
+        <asm-button label="Next" end-icon="arrow_forward"></asm-button>
+        <asm-button label="Share" start-icon="share" end-icon="arrow_forward"></asm-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Icons Standalone</h2>
+      <div class="row" style="font-size: 24px; gap: 16px;">
+        <asm-icon name="home"></asm-icon>
+        <asm-icon name="settings"></asm-icon>
+        <asm-icon name="favorite"></asm-icon>
+        <asm-icon name="search"></asm-icon>
+        <asm-icon name="shield"></asm-icon>
+        <asm-icon name="security"></asm-icon>
+        <asm-icon name="lock"></asm-icon>
+        <asm-icon name="visibility"></asm-icon>
+      </div>
+    </section>
+
+    <h1 style="margin-top: 48px;">Tabs</h1>
+
+    <section>
+      <h2>text_only</h2>
+      <asm-tab-group variant="text">
+        <asm-tab label="Tab" active></asm-tab>
+        <asm-tab label="Tab"></asm-tab>
+        <asm-tab label="Tab"></asm-tab>
+        <asm-tab label="Tab"></asm-tab>
+      </asm-tab-group>
+    </section>
+
+    <section>
+      <h2>iconLabel_horizontal</h2>
+      <asm-tab-group variant="icon-horizontal">
+        <asm-tab label="Tab" icon="star" active></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+      </asm-tab-group>
+    </section>
+
+    <section>
+      <h2>iconLabel_vertical</h2>
+      <asm-tab-group variant="icon-vertical">
+        <asm-tab label="Tab" icon="star" active></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+        <asm-tab label="Tab" icon="star"></asm-tab>
+      </asm-tab-group>
+    </section>
+
+    <section>
+      <h2>icon_only</h2>
+      <asm-tab-group variant="icon">
+        <asm-tab icon="star" active></asm-tab>
+        <asm-tab icon="star"></asm-tab>
+        <asm-tab icon="star"></asm-tab>
+        <asm-tab icon="star"></asm-tab>
+        <asm-tab icon="star"></asm-tab>
+        <asm-tab icon="star"></asm-tab>
+        <asm-tab icon="star"></asm-tab>
+        <asm-tab icon="star"></asm-tab>
+      </asm-tab-group>
+    </section>
+
+    <h1 style="margin-top: 48px;">Menu</h1>
+
+    <section>
+      <h2>Default Density</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-menu>
+          <asm-menu-item label="Menu item" start-icon="content_cut"></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="content_copy"></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="content_paste" selected></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="delete"></asm-menu-item>
+        </asm-menu>
+      </div>
+    </section>
+
+    <section>
+      <h2>Low Density</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-menu density="low">
+          <asm-menu-item label="Menu item" start-icon="content_cut"></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="content_copy"></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="content_paste" selected></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="delete"></asm-menu-item>
+        </asm-menu>
+      </div>
+    </section>
+
+    <section>
+      <h2>Compact Density</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-menu density="compact">
+          <asm-menu-item label="Menu item" start-icon="content_cut"></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="content_copy"></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="content_paste" selected></asm-menu-item>
+          <asm-menu-item label="Menu item" start-icon="delete"></asm-menu-item>
+        </asm-menu>
+      </div>
+    </section>
+
+    <section>
+      <h2>States</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-menu>
+          <asm-menu-item label="Default"></asm-menu-item>
+          <asm-menu-item label="Selected" selected></asm-menu-item>
+          <asm-menu-item label="Disabled" disabled></asm-menu-item>
+          <asm-menu-item label="With supporting text" supporting-text="Supporting text" start-icon="settings"></asm-menu-item>
+        </asm-menu>
+      </div>
+    </section>
+
+    <section>
+      <h2>With Icons (Leading + Trailing)</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-menu>
+          <asm-menu-item label="Cut" start-icon="content_cut" end-icon="keyboard_arrow_right"></asm-menu-item>
+          <asm-menu-item label="Copy" start-icon="content_copy" end-icon="keyboard_arrow_right"></asm-menu-item>
+          <asm-menu-item label="Paste" start-icon="content_paste" end-icon="keyboard_arrow_right" selected></asm-menu-item>
+          <asm-menu-item label="Delete" start-icon="delete" end-icon="keyboard_arrow_right"></asm-menu-item>
+        </asm-menu>
+      </div>
+    </section>
+
+    <h1 style="margin-top: 48px;">Split Button</h1>
+
+    <section>
+      <h2>Sizes (Filled)</h2>
+      <div class="row" style="align-items: center;">
+        <asm-split-button label="Label" start-icon="edit" size="compact"></asm-split-button>
+        <asm-split-button label="Label" start-icon="edit" size="default"></asm-split-button>
+        <asm-split-button label="Label" start-icon="edit" size="spacious"></asm-split-button>
+        <asm-split-button label="Label" start-icon="edit" size="huge"></asm-split-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Variants</h2>
+      <div class="row">
+        <asm-split-button label="Label" start-icon="edit" variant="filled"></asm-split-button>
+        <asm-split-button label="Label" start-icon="edit" variant="tonal"></asm-split-button>
+        <asm-split-button label="Label" start-icon="edit" variant="outline"></asm-split-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Destructive</h2>
+      <div class="row">
+        <asm-split-button label="Remove" start-icon="delete" destructive></asm-split-button>
+        <asm-split-button label="Remove" start-icon="delete" variant="tonal" destructive></asm-split-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>With Menu Dropdown</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-split-button label="Save" start-icon="save">
+          <asm-menu density="compact">
+            <asm-menu-item label="Save as draft" start-icon="draft"></asm-menu-item>
+            <asm-menu-item label="Save & publish" start-icon="publish"></asm-menu-item>
+            <asm-menu-item label="Export" start-icon="download"></asm-menu-item>
+          </asm-menu>
+        </asm-split-button>
+        <asm-split-button label="Download" start-icon="download" variant="tonal">
+          <asm-menu density="compact">
+            <asm-menu-item label="Download PDF" start-icon="picture_as_pdf"></asm-menu-item>
+            <asm-menu-item label="Download CSV" start-icon="csv"></asm-menu-item>
+          </asm-menu>
+        </asm-split-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Disabled</h2>
+      <div class="row">
+        <asm-split-button label="Label" start-icon="edit" disabled></asm-split-button>
+        <asm-split-button label="Label" start-icon="edit" variant="tonal" disabled></asm-split-button>
+        <asm-split-button label="Label" start-icon="edit" variant="outline" disabled></asm-split-button>
+      </div>
+    </section>
+
+    <h1 style="margin-top: 48px;">Icon Button</h1>
+
+    <section>
+      <h2>Variants</h2>
+      <div class="row">
+        <asm-icon-button icon="settings" variant="standard"></asm-icon-button>
+        <asm-icon-button icon="settings" variant="filled"></asm-icon-button>
+        <asm-icon-button icon="settings" variant="tonal"></asm-icon-button>
+        <asm-icon-button icon="settings" variant="outline"></asm-icon-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sizes</h2>
+      <div class="row">
+        <asm-icon-button icon="favorite" variant="outline" size="spacious"></asm-icon-button>
+        <asm-icon-button icon="favorite" variant="outline" size="default"></asm-icon-button>
+        <asm-icon-button icon="favorite" variant="outline" size="compact"></asm-icon-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Selected State</h2>
+      <div class="row">
+        <asm-icon-button icon="favorite" variant="standard"></asm-icon-button>
+        <asm-icon-button icon="favorite" variant="standard" selected></asm-icon-button>
+        <asm-icon-button icon="bookmark" variant="outline"></asm-icon-button>
+        <asm-icon-button icon="bookmark" variant="outline" selected></asm-icon-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Disabled</h2>
+      <div class="row">
+        <asm-icon-button icon="delete" variant="standard" disabled></asm-icon-button>
+        <asm-icon-button icon="delete" variant="filled" disabled></asm-icon-button>
+        <asm-icon-button icon="delete" variant="tonal" disabled></asm-icon-button>
+        <asm-icon-button icon="delete" variant="outline" disabled></asm-icon-button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Common Icons</h2>
+      <div class="row">
+        <asm-icon-button icon="close" variant="standard"></asm-icon-button>
+        <asm-icon-button icon="more_vert" variant="standard"></asm-icon-button>
+        <asm-icon-button icon="share" variant="outline"></asm-icon-button>
+        <asm-icon-button icon="content_copy" variant="outline"></asm-icon-button>
+        <asm-icon-button icon="edit" variant="tonal"></asm-icon-button>
+        <asm-icon-button icon="delete" variant="tonal"></asm-icon-button>
+      </div>
+    </section>
+
+    <!-- ===================================
+         Cards
+         =================================== -->
+    <h1 style="margin-top: 64px;">Cards</h1>
+
+    <section>
+      <h2>All Variants</h2>
+      <div class="row" style="align-items: stretch;">
+        <asm-card variant="surface" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Surface</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Default card with light surface background and elevation shadow.</p>
+        </asm-card>
+
+        <asm-card variant="outlined" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Outlined</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Brand gradient stroke to draw attention without changing the fill.</p>
+        </asm-card>
+
+        <asm-card variant="brand" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Brand</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Brand-red filled card for critical, brand-forward callouts.</p>
+        </asm-card>
+
+        <asm-card variant="secondary" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Secondary</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Secondary-blue filled card for informational highlights.</p>
+        </asm-card>
+
+        <asm-card variant="positive" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Positive</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Positive/teal card for success or confirmed states.</p>
+        </asm-card>
+
+        <asm-card variant="gradient" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Gradient</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Lavender → mint gradient for decorative hero sections.</p>
+        </asm-card>
+      </div>
+    </section>
+
+    <section>
+      <h2>Interactive Cards (clickable)</h2>
+      <div class="row" style="align-items: stretch;">
+        <asm-card variant="surface" clickable style="width: 280px;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <asm-icon name="shield" style="font-size:24px; color:var(--md-sys-color-primary);"></asm-icon>
+            <h3 style="margin:0;">Protection Active</h3>
+          </div>
+          <p style="margin:0 0 16px; font-size:14px; opacity:0.7;">Your device is secured with real-time scanning enabled.</p>
+          <asm-button label="View Details" variant="tonal" size="compact"></asm-button>
+        </asm-card>
+
+        <asm-card variant="outlined" clickable style="width: 280px;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <asm-icon name="trending_up" style="font-size:24px; color:var(--mcafee-color-extended-gradient-brand-stop-2);"></asm-icon>
+            <h3 style="margin:0;">Performance</h3>
+          </div>
+          <p style="margin:0 0 16px; font-size:14px; opacity:0.7;">System health is optimal. Last scan completed 2 hours ago.</p>
+          <div style="display:flex; gap:8px;">
+            <asm-tag variant="positive">Healthy</asm-tag>
+            <asm-tag>12 items scanned</asm-tag>
+          </div>
+        </asm-card>
+
+        <asm-card variant="brand" clickable style="width: 280px;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <asm-icon name="warning" style="font-size:24px;"></asm-icon>
+            <h3 style="margin:0;">Action Required</h3>
+          </div>
+          <p style="margin:0 0 16px; font-size:14px;">3 threats detected that need your immediate attention.</p>
+          <asm-button label="Fix Now" variant="filled" size="compact" start-icon="security"></asm-button>
+        </asm-card>
+      </div>
+    </section>
+
+    <section>
+      <h2>Card with Rich Content</h2>
+      <div class="row" style="align-items: stretch;">
+        <asm-card variant="surface" style="width: 360px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="margin:0;">Subscription</h3>
+            <asm-badge type="pill" status="positive">Active</asm-badge>
+          </div>
+          <asm-divider></asm-divider>
+          <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; justify-content:space-between; font-size:14px;">
+              <span style="opacity:0.7;">Plan</span>
+              <span style="font-weight:600;">McAfee Total Protection</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:14px;">
+              <span style="opacity:0.7;">Devices</span>
+              <span style="font-weight:600;">5 of 10 used</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:14px;">
+              <span style="opacity:0.7;">Renewal</span>
+              <span style="font-weight:600;">Dec 14, 2026</span>
+            </div>
+          </div>
+          <div style="margin-top:20px; display:flex; gap:8px;">
+            <asm-button label="Manage" variant="tonal" size="compact"></asm-button>
+            <asm-button label="Upgrade" variant="filled" size="compact"></asm-button>
+          </div>
+        </asm-card>
+
+        <asm-card variant="gradient" style="width: 360px;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <asm-icon name="auto_awesome" style="font-size:28px;"></asm-icon>
+            <div>
+              <h3 style="margin:0;">AI Security Advisor</h3>
+              <p style="margin:4px 0 0; font-size:13px; opacity:0.7;">Powered by McAfee Smart AI</p>
+            </div>
+          </div>
+          <p style="margin:0 0 20px; font-size:14px; line-height:1.5;">Get personalized security recommendations based on your usage patterns and threat landscape.</p>
+          <div style="display:flex; gap:8px;">
+            <asm-button label="Get Started" variant="filled" size="compact" start-icon="rocket_launch"></asm-button>
+            <asm-button label="Learn More" variant="text" size="compact"></asm-button>
+          </div>
+        </asm-card>
+      </div>
+    </section>
+
+    <section>
+      <h2>Cards with Status Indicators</h2>
+      <div class="row" style="align-items: stretch;">
+        <asm-card variant="surface" style="width: 260px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <asm-status-indicator status="positive" size="medium"></asm-status-indicator>
+            <span style="font-size:13px; font-weight:600;">VPN Connected</span>
+          </div>
+          <p style="margin:0 0 12px; font-size:13px; opacity:0.7;">Connected to US East server. Your IP is masked.</p>
+          <asm-switch size="small" checked></asm-switch>
+        </asm-card>
+
+        <asm-card variant="surface" style="width: 260px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <asm-status-indicator status="warning" size="medium"></asm-status-indicator>
+            <span style="font-size:13px; font-weight:600;">Firewall</span>
+          </div>
+          <p style="margin:0 0 12px; font-size:13px; opacity:0.7;">2 apps requesting network access need your review.</p>
+          <asm-button label="Review" variant="outline" size="compact" start-icon="open_in_new"></asm-button>
+        </asm-card>
+
+        <asm-card variant="surface" style="width: 260px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <asm-status-indicator status="error" size="medium"></asm-status-indicator>
+            <span style="font-size:13px; font-weight:600;">Web Protection</span>
+          </div>
+          <p style="margin:0 0 12px; font-size:13px; opacity:0.7;">Browser extension is disabled. Re-enable for full coverage.</p>
+          <asm-button label="Enable" variant="filled" size="compact" start-icon="extension"></asm-button>
+        </asm-card>
+      </div>
+    </section>
+
+    <section>
+      <h2>Elevation Levels</h2>
+      <div class="row" style="align-items: stretch;">
+        <asm-card variant="surface" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">No Elevation</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Default — no shadow applied.</p>
+        </asm-card>
+        <asm-card variant="surface" elevation="1" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Elevation 1</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Subtle 4px blur shadow.</p>
+        </asm-card>
+        <asm-card variant="surface" elevation="5" style="width: 220px;">
+          <h3 style="margin:0 0 8px;">Elevation 5</h3>
+          <p style="margin:0; font-size:14px; opacity:0.7;">Prominent 20px blur shadow.</p>
+        </asm-card>
+      </div>
+    </section>
+
+    <!-- ====================================
+         Alert Banner
+         ==================================== -->
+    <h1 style="margin-top: 48px;">Alert Banner</h1>
+
+    <section>
+      <h2>Modes</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px;">
+        <asm-alert-banner title="Trial ends in 11 days" mode="neutral" action-label="View plans"></asm-alert-banner>
+        <asm-alert-banner title="New features available" mode="info" action-label="Learn more"></asm-alert-banner>
+        <asm-alert-banner title="Your subscription has expired" mode="critical" action-label="Renew now"></asm-alert-banner>
+        <asm-alert-banner title="Account successfully verified" mode="positive"></asm-alert-banner>
+        <asm-alert-banner title="Maintenance scheduled for tonight" mode="status" action-label="Details"></asm-alert-banner>
+      </div>
+    </section>
+
+    <section>
+      <h2>Without Close Button</h2>
+      <div style="max-width: 600px;">
+        <asm-alert-banner title="This banner cannot be dismissed" mode="info" show-close="false"></asm-alert-banner>
+      </div>
+    </section>
+
+    <section>
+      <h2>Long Title (Wrapping)</h2>
+      <div style="max-width: 400px;">
+        <asm-alert-banner title="This is a much longer alert message that should wrap to multiple lines when the container is narrow enough to trigger wrapping behavior" mode="neutral" action-label="Action"></asm-alert-banner>
+      </div>
+    </section>
+
+    <section>
+      <h2>Custom Icon</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px;">
+        <asm-alert-banner title="Security scan complete" mode="positive" icon="shield"></asm-alert-banner>
+        <asm-alert-banner title="Update available" mode="info" icon="system_update" action-label="Install"></asm-alert-banner>
+      </div>
+    </section>
+
+    <!-- ====================================
+         Chat Bubble
+         ==================================== -->
+    <h1 style="margin-top: 48px;">Chat Bubble</h1>
+
+    <section>
+      <h2>Text Messages</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
+        <asm-chat-bubble text="Hello! How can I help you today?"></asm-chat-bubble>
+        <asm-chat-bubble text="I need help with my account settings."></asm-chat-bubble>
+        <asm-chat-bubble text="Sure! Let me pull up your account information. One moment please."></asm-chat-bubble>
+      </div>
+    </section>
+
+    <section>
+      <h2>With Custom Content (Slot)</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
+        <asm-chat-bubble>
+          <asm-icon name="smart_toy" style="font-size: 20px;"></asm-icon>
+          <span>I'm your AI assistant</span>
+        </asm-chat-bubble>
+        <asm-chat-bubble>
+          <asm-icon name="attachment" style="font-size: 20px;"></asm-icon>
+          <span>document.pdf</span>
+        </asm-chat-bubble>
+      </div>
+    </section>
+
+    <!-- ====================================
+         Calendar
+         ==================================== -->
+    <h1 style="margin-top: 48px;">Calendar</h1>
+
+    <section>
+      <h2>Single Date (Full Chrome)</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-calendar mode="single" chrome="full" header-title="Select date" actions="cancel-ok"></asm-calendar>
+      </div>
+    </section>
+
+    <section>
+      <h2>Range Selection</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-calendar mode="range" chrome="full" header-title="Select range" actions="clear-cancel-ok"></asm-calendar>
+      </div>
+    </section>
+
+    <section>
+      <h2>Grid Only (No Chrome)</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-calendar mode="single" chrome="grid-only"></asm-calendar>
+      </div>
+    </section>
+
+    <section>
+      <h2>With Min/Max Constraints</h2>
+      <div class="row" style="align-items: flex-start;">
+        <asm-calendar mode="single" chrome="full" header-title="Limited range" min-date="2026-06-10" max-date="2026-07-20"></asm-calendar>
+      </div>
+    </section>
+
+    <!-- ====================================
+         Date Input
+         ==================================== -->
+    <h1 style="margin-top: 48px;">Date Input</h1>
+
+    <section>
+      <h2>Single Date</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px;">
+        <asm-date-input label="Start Date" placeholder="MM/DD/YYYY" supporting-text="MM/DD/YYYY"></asm-date-input>
+        <asm-date-input label="End Date" value="2026-06-15"></asm-date-input>
+      </div>
+    </section>
+
+    <section>
+      <h2>Date Range</h2>
+      <div style="max-width: 500px;">
+        <asm-date-input variant="range" label="Date Range" placeholder="Start date" end-placeholder="End date"></asm-date-input>
+      </div>
+    </section>
+
+    <section>
+      <h2>States</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px;">
+        <asm-date-input label="Disabled" disabled></asm-date-input>
+        <asm-date-input label="Error" error error-text="Invalid date format"></asm-date-input>
+      </div>
+    </section>
+
+    <!-- ====================================
+         Modal
+         ==================================== -->
+    <h1 style="margin-top: 48px;">Modal</h1>
+
+    <section>
+      <h2>Standard Text Modal</h2>
+      <div class="row">
+        <asm-button label="Open Modal" variant="filled" onclick="document.getElementById('demo-modal').open = true"></asm-button>
+        <asm-button label="Open Gradient Modal" variant="tonal" onclick="document.getElementById('demo-modal-gradient').open = true"></asm-button>
+      </div>
+
+      <asm-modal id="demo-modal" header="Confirm Action" body="Are you sure you want to proceed with this action? This cannot be undone.">
+        <div slot="actions">
+          <asm-button label="Cancel" variant="text" onclick="document.getElementById('demo-modal').open = false"></asm-button>
+          <asm-button label="Confirm" variant="filled" onclick="document.getElementById('demo-modal').open = false"></asm-button>
+        </div>
+      </asm-modal>
+
+      <asm-modal id="demo-modal-gradient" gradient header="Upgrade to Pro" body="Get unlimited access to all features and priority support.">
+        <div slot="actions">
+          <asm-button label="Maybe Later" variant="text" onclick="document.getElementById('demo-modal-gradient').open = false"></asm-button>
+          <asm-button label="Upgrade" variant="filled" onclick="document.getElementById('demo-modal-gradient').open = false"></asm-button>
+        </div>
+      </asm-modal>
+    </section>
+
+    <section>
+      <h2>Custom Content Modal</h2>
+      <div class="row">
+        <asm-button label="Open Custom Modal" variant="outline" onclick="document.getElementById('demo-modal-custom').open = true"></asm-button>
+      </div>
+
+      <asm-modal id="demo-modal-custom">
+        <div style="width: 360px; text-align: center; padding: 16px;">
+          <asm-icon name="check_circle" style="font-size: 48px; color: var(--mcafee-color-extended-positive);"></asm-icon>
+          <h2 style="margin: 16px 0 8px;">Success!</h2>
+          <p style="margin: 0 0 24px; opacity: 0.7;">Your changes have been saved successfully.</p>
+          <asm-button label="Done" variant="filled" onclick="document.getElementById('demo-modal-custom').open = false"></asm-button>
+        </div>
+      </asm-modal>
+    </section>
+
+    <!-- ====================================
+         Pagination
+         ==================================== -->
+    <h1 style="margin-top: 48px;">Pagination</h1>
+
+    <section>
+      <h2>Default</h2>
+      <div class="row">
+        <asm-pagination page-count="10" current-page="5"></asm-pagination>
+      </div>
+    </section>
+
+    <section>
+      <h2>Few Pages</h2>
+      <div class="row">
+        <asm-pagination page-count="3" current-page="1"></asm-pagination>
+      </div>
+    </section>
+
+    <section>
+      <h2>Many Pages (Ellipsis)</h2>
+      <div class="row">
+        <asm-pagination page-count="50" current-page="25" sibling-count="2" boundary-count="1"></asm-pagination>
+      </div>
+    </section>
+
+    <section>
+      <h2>First / Last Page</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <asm-pagination page-count="20" current-page="1"></asm-pagination>
+        <asm-pagination page-count="20" current-page="20"></asm-pagination>
+      </div>
+    </section>
+
+    <section>
+      <h2>Disabled</h2>
+      <div class="row">
+        <asm-pagination page-count="10" current-page="3" disabled></asm-pagination>
+      </div>
+    </section>
+
+    <!-- ====================================
+         Side Sheet
+         ==================================== -->
+    <h1 style="margin-top: 48px;">Side Sheet</h1>
+
+    <section>
+      <h2>With Header, Content & Footer</h2>
+      <div style="display: flex; gap: 16px; height: 400px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; background: #fafafa;">
+        <div style="flex: 1; padding: 24px;">
+          <h3 style="margin: 0 0 12px;">Main Content Area</h3>
+          <p style="margin: 0; opacity: 0.7;">This simulates the main app area. The side sheet is docked on the right.</p>
+        </div>
+        <asm-side-sheet width="320px">
+          <div slot="header" style="display: flex; justify-content: space-between; align-items: center;">
+            <strong>Details</strong>
+            <asm-icon-button icon="close" variant="text" size="compact"></asm-icon-button>
+          </div>
+          <div style="padding: 8px 0;">
+            <p style="margin: 0 0 12px;">This is the scrollable content area of the side sheet.</p>
+            <p style="margin: 0 0 12px;">It can contain any type of content — forms, lists, details panels, etc.</p>
+            <p style="margin: 0 0 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p style="margin: 0 0 12px;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p style="margin: 0 0 12px;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <p style="margin: 0;">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end; padding-top: 12px; border-top: 1px solid var(--md-sys-color-outline-variant, #e0e0e0);">
+            <asm-button label="Cancel" variant="text" size="compact"></asm-button>
+            <asm-button label="Save" variant="filled" size="compact"></asm-button>
+          </div>
+        </asm-side-sheet>
+      </div>
+    </section>
+
+    <section>
+      <h2>Content Only (No Header/Footer)</h2>
+      <div style="display: flex; gap: 16px; height: 300px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; background: #fafafa;">
+        <div style="flex: 1; padding: 24px;">
+          <h3 style="margin: 0 0 12px;">Main Area</h3>
+          <p style="margin: 0; opacity: 0.7;">Minimal side sheet with content only.</p>
+        </div>
+        <asm-side-sheet width="280px">
+          <asm-badge status="active" type="primary">Active</asm-badge>
+          <p style="margin: 8px 0;">Item details go here.</p>
+          <asm-divider></asm-divider>
+          <p style="margin: 8px 0;">Additional information below the divider.</p>
+        </asm-side-sheet>
+      </div>
+    </section>
+
+    <!-- ===== LOADER ===== -->
+    <h1>Assemble Loader</h1>
+
+    <section>
+      <h2>Bar Style (Default)</h2>
+      <div class="row">
+        <asm-loader></asm-loader>
+        <asm-loader size="24" stroke-width="2"></asm-loader>
+        <asm-loader size="60" stroke-width="4"></asm-loader>
+      </div>
+    </section>
+
+    <!-- ===== NAVIGATION RAIL ===== -->
+    <h1>Assemble Navigation Rail</h1>
+
+    <section>
+      <h2>Vertical Rail with Brand</h2>
+      <div class="row" style="align-items: stretch; height: 500px;">
+        <asm-navigation-rail brand brand-interactive>
+          <asm-navigation-rail-item slot="top" label="Dashboard" icon="dashboard" active></asm-navigation-rail-item>
+          <asm-navigation-rail-item slot="top" label="Protection" icon="shield" status="info"></asm-navigation-rail-item>
+          <asm-navigation-rail-item slot="top" label="Settings" icon="settings"></asm-navigation-rail-item>
+          <asm-navigation-rail-item slot="bottom" label="Help" icon="help"></asm-navigation-rail-item>
+        </asm-navigation-rail>
+      </div>
+    </section>
+
+    <section>
+      <h2>Disabled Items</h2>
+      <div class="row" style="align-items: stretch; height: 300px;">
+        <asm-navigation-rail>
+          <asm-navigation-rail-item slot="top" label="Home" icon="home" active></asm-navigation-rail-item>
+          <asm-navigation-rail-item slot="top" label="Locked" icon="lock" disabled></asm-navigation-rail-item>
+          <asm-navigation-rail-item slot="top" label="Alerts" icon="notifications" status="critical"></asm-navigation-rail-item>
+        </asm-navigation-rail>
+      </div>
+    </section>
+
+    <section>
+      <h2>Horizontal (Bottom Nav)</h2>
+      <div class="row">
+        <asm-navigation-rail orientation="horizontal" brand brand-interactive>
+          <asm-navigation-rail-item label="Dashboard" icon="dashboard" active peek-position="top"></asm-navigation-rail-item>
+          <asm-navigation-rail-item label="Settings" icon="settings" peek-position="top"></asm-navigation-rail-item>
+        </asm-navigation-rail>
+      </div>
+    </section>
+
+    <section>
+      <h2>Toggle Enablement Flow</h2>
+      <p>Click the "VPN" item to see: offline → loading → active</p>
+      <div class="row" style="align-items: stretch; height: 350px;">
+        <asm-navigation-rail brand>
+          <asm-navigation-rail-item slot="top" label="Dashboard" icon="dashboard" active></asm-navigation-rail-item>
+          <asm-navigation-rail-item slot="top" label="VPN" icon="vpn_lock" status="muted" toggle id="vpn-toggle"></asm-navigation-rail-item>
+          <asm-navigation-rail-item slot="top" label="Firewall" icon="local_fire_department" status="info" toggle active></asm-navigation-rail-item>
+        </asm-navigation-rail>
+      </div>
+      <script type="module">
+        const vpn = document.getElementById('vpn-toggle');
+        if (vpn) {
+          vpn.addEventListener('item-click', () => {
+            if (vpn.active) {
+              vpn.active = false;
+              vpn.loading = false;
+              vpn.status = 'muted';
+            } else {
+              vpn.loading = true;
+              vpn.status = '';
+              setTimeout(() => {
+                vpn.loading = false;
+                vpn.active = true;
+                vpn.status = 'info';
+              }, 1500);
+            }
+          });
+        }
+      </script>
+    </section>
+
+    <!-- ===== NAV DRAWER ===== -->
+    <h1>Assemble Nav Drawer</h1>
+
+    <section>
+      <h2>Full Drawer</h2>
+      <div style="height: 500px;">
+        <asm-nav-drawer>
+          <asm-nav-section title="Security">
+            <asm-nav-list-item label="Dashboard" icon="dashboard"></asm-nav-list-item>
+            <asm-nav-list-item label="Protection Score" icon="shield"></asm-nav-list-item>
+            <asm-nav-list-item label="Threats Blocked" icon="block"></asm-nav-list-item>
+          </asm-nav-section>
+          <asm-nav-section title="Account">
+            <asm-nav-list-item label="My Account" icon="person"></asm-nav-list-item>
+            <asm-nav-list-item label="Subscription" icon="credit_card"></asm-nav-list-item>
+            <asm-nav-list-item label="Settings" icon="settings"></asm-nav-list-item>
+          </asm-nav-section>
+          <asm-nav-list-item slot="footer" label="Sign Out" icon="logout" show-trailing="false"></asm-nav-list-item>
+        </asm-nav-drawer>
+      </div>
+    </section>
+
+    <section>
+      <h2>Disabled Items</h2>
+      <div style="height: 300px;">
+        <asm-nav-drawer>
+          <asm-nav-section>
+            <asm-nav-list-item label="Available" icon="check_circle"></asm-nav-list-item>
+            <asm-nav-list-item label="Unavailable" icon="cancel" disabled></asm-nav-list-item>
+          </asm-nav-section>
+        </asm-nav-drawer>
+      </div>
+    </section>
+
+    <!-- ===== BRAND ===== -->
+    <h1>Assemble Brand</h1>
+
+    <section>
+      <h2>Variants (Primary Color)</h2>
+      <div class="row">
+        <asm-brand variant="logo"></asm-brand>
+        <asm-brand variant="wordmark"></asm-brand>
+        <asm-brand variant="logo-wordmark"></asm-brand>
+      </div>
+    </section>
+
+    <section>
+      <h2>Color Variants</h2>
+      <div class="row">
+        <asm-brand variant="logo-wordmark" color="primary"></asm-brand>
+        <asm-brand variant="logo-wordmark" color="brand"></asm-brand>
+        <asm-brand variant="logo-wordmark" color="brand-orange"></asm-brand>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sizes</h2>
+      <div class="row" style="align-items: flex-end;">
+        <asm-brand variant="logo" size="sm" color="brand"></asm-brand>
+        <asm-brand variant="logo" size="md" color="brand"></asm-brand>
+        <asm-brand variant="logo" size="lg" color="brand"></asm-brand>
+        <asm-brand variant="logo" size="xl" color="brand"></asm-brand>
+      </div>
+    </section>
+
+    <section>
+      <h2>Custom Height (24px)</h2>
+      <div class="row">
+        <asm-brand variant="logo-wordmark" color="brand" .height=${24}></asm-brand>
+      </div>
+    </section>
+
+    <!-- ===== LIST ITEM ===== -->
+    <h1>Assemble List Item</h1>
+
+    <section>
+      <h2>Interactive (Default)</h2>
+      <div style="max-width: 480px; display: flex; flex-direction: column; gap: 4px;">
+        <asm-list-item title="Account Settings" supporting-text="Manage your profile and preferences">
+          <asm-icon slot="leading" name="person" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+        </asm-list-item>
+        <asm-list-item title="Notifications" supporting-text="Configure alert preferences" state="unread">
+          <asm-icon slot="leading" name="notifications" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+        </asm-list-item>
+        <asm-list-item title="Messages" supporting-text="View your inbox" state="badge" badge-count="5">
+          <asm-icon slot="leading" name="mail" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+        </asm-list-item>
+      </div>
+    </section>
+
+    <section>
+      <h2>With Overline</h2>
+      <div style="max-width: 480px;">
+        <asm-list-item overline="Security" title="Protection Score" supporting-text="Your device is protected">
+          <asm-icon slot="leading" name="shield" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+        </asm-list-item>
+      </div>
+    </section>
+
+    <section>
+      <h2>Read-Only</h2>
+      <div style="max-width: 480px;">
+        <asm-list-item kind="read-only" title="Last Scan" supporting-text="June 29, 2026 at 10:42 AM">
+          <asm-icon slot="leading" name="schedule" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+        </asm-list-item>
+      </div>
+    </section>
+
+    <section>
+      <h2>Disabled</h2>
+      <div style="max-width: 480px;">
+        <asm-list-item title="Premium Features" supporting-text="Upgrade to unlock" disabled>
+          <asm-icon slot="leading" name="lock" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+        </asm-list-item>
+      </div>
+    </section>
+
+    <!-- ===== FEEDBACK ===== -->
+    <h1>Assemble Feedback</h1>
+
+    <section>
+      <h2>With Label</h2>
+      <div class="row">
+        <asm-feedback label="Was this helpful?"></asm-feedback>
+      </div>
+    </section>
+
+    <section>
+      <h2>Without Label</h2>
+      <div class="row">
+        <asm-feedback></asm-feedback>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pre-selected</h2>
+      <div class="row">
+        <asm-feedback label="Rating" value="thumbs-up"></asm-feedback>
+        <asm-feedback label="Rating" value="thumbs-down"></asm-feedback>
+      </div>
+    </section>
+
+    <!-- ===== CAROUSEL INDICATOR ===== -->
+    <h1>Assemble Carousel Indicator</h1>
+
+    <section>
+      <h2>Default (5 pages)</h2>
+      <div class="row">
+        <asm-carousel-indicator count="5" active-index="0"></asm-carousel-indicator>
+      </div>
+    </section>
+
+    <section>
+      <h2>Various Counts</h2>
+      <div class="row">
+        <asm-carousel-indicator count="3" active-index="1"></asm-carousel-indicator>
+        <asm-carousel-indicator count="7" active-index="3"></asm-carousel-indicator>
+      </div>
+    </section>
+
+    <!-- ===== PROGRESS BAR ===== -->
+    <h1>Assemble Progress Bar</h1>
+
+    <section>
+      <h2>Status Variants</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+        <asm-progress-bar value="0.75" status="brand"></asm-progress-bar>
+        <asm-progress-bar value="0.5" status="moderate"></asm-progress-bar>
+        <asm-progress-bar value="0.3" status="critical"></asm-progress-bar>
+        <asm-progress-bar value="0.9" status="low"></asm-progress-bar>
+      </div>
+    </section>
+
+    <section>
+      <h2>Thin Size</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+        <asm-progress-bar value="0.6" status="brand" size="thin"></asm-progress-bar>
+        <asm-progress-bar value="0.4" status="moderate" size="thin"></asm-progress-bar>
+      </div>
+    </section>
+
+    <!-- ===== PHONEPUT ===== -->
+    <h1>Assemble Phoneput</h1>
+
+    <section>
+      <h2>Default</h2>
+      <div style="max-width: 420px;">
+        <asm-phoneput label="Phone Number" placeholder="(555) 123-4567"></asm-phoneput>
+      </div>
+    </section>
+
+    <section>
+      <h2>With Error</h2>
+      <div style="max-width: 420px;">
+        <asm-phoneput label="Mobile" error-text="Please enter a valid phone number" default-country="GB"></asm-phoneput>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sizes</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 420px;">
+        <asm-phoneput label="Small" size="small" placeholder="Phone"></asm-phoneput>
+        <asm-phoneput label="Medium (default)" placeholder="Phone"></asm-phoneput>
+        <asm-phoneput label="Large" size="large" placeholder="Phone"></asm-phoneput>
+      </div>
+    </section>
+
+    <!-- ===== PEEK LABEL ===== -->
+    <h1>Assemble Peek Label</h1>
+
+    <section>
+      <h2>Default</h2>
+      <div class="row">
+        <asm-peek-label text="Dashboard"></asm-peek-label>
+        <asm-peek-label text="Settings" trailing-icon="settings"></asm-peek-label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Small</h2>
+      <div class="row">
+        <asm-peek-label text="Home" size="small"></asm-peek-label>
+        <asm-peek-label text="Search" size="small" trailing-icon="search"></asm-peek-label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Offline</h2>
+      <div class="row">
+        <asm-peek-label text="Offline Mode" offline trailing-icon="cloud_off"></asm-peek-label>
+      </div>
+    </section>
+
+    <!-- ===== TOPBAR ===== -->
+    <h1>Assemble Topbar</h1>
+
+    <section>
+      <h2>Home</h2>
+      <div style="max-width: 400px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;">
+        <asm-topbar type="home" show-badge>
+          <span slot="brand" style="font-weight: 700; font-size: 18px;">McAfee</span>
+        </asm-topbar>
+      </div>
+    </section>
+
+    <section>
+      <h2>Back</h2>
+      <div style="max-width: 400px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;">
+        <asm-topbar type="back" title="Account" show-title></asm-topbar>
+      </div>
+    </section>
+
+    <section>
+      <h2>Progress</h2>
+      <div style="max-width: 400px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;">
+        <asm-topbar type="progress" progress="0.65"></asm-topbar>
+      </div>
+    </section>
+
+    <section>
+      <h2>Desktop - Full Header</h2>
+      <div style="max-width: 500px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; padding: 8px;">
+        <asm-topbar-desktop title="Protection Score" sub-title="SECURITY" leading-icon="shield"></asm-topbar-desktop>
+      </div>
+    </section>
+
+    <section>
+      <h2>Desktop - Back Only</h2>
+      <div style="max-width: 500px;">
+        <asm-topbar-desktop type="back-only"></asm-topbar-desktop>
+      </div>
+    </section>
+
+    <script type="module" src="/src/index.ts"></script>
+    <script>
+      // Interactive pagination demo
+      document.querySelectorAll('asm-pagination').forEach(p => {
+        p.addEventListener('page-change', (e) => {
+          p.setAttribute('current-page', e.detail.page);
+        });
+      });
+
+      // Alert banner close demo
+      document.querySelectorAll('asm-alert-banner').forEach(b => {
+        b.addEventListener('close', () => { b.style.display = 'none'; });
+        b.addEventListener('action', () => { console.log('Alert action clicked:', b.title); });
+      });
+
+      // Feedback demo
+      document.querySelectorAll('asm-feedback').forEach(f => {
+        f.addEventListener('thumbs-up', (e) => { console.log('Feedback:', e.detail); });
+        f.addEventListener('thumbs-down', (e) => { console.log('Feedback:', e.detail); });
+      });
+
+      // Carousel indicator demo
+      let carouselIdx = 0;
+      setInterval(() => {
+        carouselIdx = (carouselIdx + 1) % 5;
+        document.querySelectorAll('asm-carousel-indicator').forEach(c => {
+          c.setAttribute('active-index', carouselIdx);
+        });
+      }, 2000);
+    </script>
+  </body>
+</html>

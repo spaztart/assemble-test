@@ -1,0 +1,78 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Feedback - Design System
+description: Feedback component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Feedback
+
+A thumbs up/down feedback widget. Use to collect quick binary sentiment on AI responses, help articles, or any content where lightweight user feedback is valuable.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-feedback label="Was this helpful?"></asm-feedback>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/feedback"
+  componentUsage='<asm-feedback label="Was this helpful?"></asm-feedback>'
+  flutterUsage={`AsmFeedback(\n  label: 'Was this helpful?',\n  onThumbsUp: () => print('up'),\n  onThumbsDown: () => print('down'),\n)`}
+/>
+
+## With Label
+
+<PreviewCard
+  webCode='<asm-feedback label="Was this helpful?"></asm-feedback>'
+  flutterCode={`AsmFeedback(\n  label: 'Was this helpful?',\n  value: null,\n  onThumbsUp: () => setState(() => _value = AsmFeedbackValue.thumbsUp),\n  onThumbsDown: () => setState(() => _value = AsmFeedbackValue.thumbsDown),\n)`}
+/>
+
+## Without Label
+
+<PreviewCard
+  webCode='<asm-feedback></asm-feedback>'
+  flutterCode={`AsmFeedback(\n  onThumbsUp: () {},\n  onThumbsDown: () {},\n)`}
+/>
+
+## Pre-selected State
+
+<PreviewCard
+  webCode={`<asm-feedback label="Rating" value="thumbs-up"></asm-feedback>\n<asm-feedback label="Rating" value="thumbs-down"></asm-feedback>`}
+  flutterCode={`Column(\n  children: [\n    AsmFeedback(label: 'Rating', value: AsmFeedbackValue.thumbsUp),\n    AsmFeedback(label: 'Rating', value: AsmFeedbackValue.thumbsDown),\n  ],\n)`}
+/>
+
+## Guidelines
+
+- Place near the content being rated
+- Use a clear, concise label when provided
+- The component is controlled — toggle state is managed internally
+- Toggling the same button again deselects it (returns to null)
+- Selected state uses tonal fill to indicate active choice
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Optional label text |
+| `value` | `'thumbs-up' \| 'thumbs-down' \| null` | `null` | Selected state |
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `thumbs-up` | `{ value }` | Fired when thumbs up is clicked |
+| `thumbs-down` | `{ value }` | Fired when thumbs down is clicked |
+
+### Flutter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `String?` | `null` | Optional question text |
+| `value` | `AsmFeedbackValue?` | `null` | Currently selected thumb |
+| `onThumbsUp` | `VoidCallback?` | `null` | Thumbs up tap handler |
+| `onThumbsDown` | `VoidCallback?` | `null` | Thumbs down tap handler |

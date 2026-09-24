@@ -1,0 +1,112 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Side Sheet - Design System
+description: Side Sheet component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Side Sheet
+
+A vertical side-sheet surface that docks to the right of the main UI. A layout primitive with three optional regions: a sticky header, scrolling content, and a sticky footer. Only the content region scrolls when overflowing.
+
+<div class="hero-preview">
+  <div class="preview-row" style="align-items: stretch; height: 300px; width: 100%; max-width: 600px;">
+    <div style="flex: 1; padding: 24px; background: var(--md-sys-color-surface-container-low, #f5f5f5); border-radius: 12px 0 0 12px;">
+      <strong>Main Content</strong>
+      <p style="margin: 8px 0 0; opacity: 0.7; font-size: 14px;">The side sheet docks on the right.</p>
+    </div>
+    <asm-side-sheet width="260px">
+      <div slot="header"><strong>Details</strong></div>
+      <p style="margin: 0; font-size: 14px;">Scrollable content goes here.</p>
+      <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
+        <asm-button label="Save" variant="filled" size="compact"></asm-button>
+      </div>
+    </asm-side-sheet>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/side-sheet"
+  componentUsage={`<asm-side-sheet width="320px">\n  <div slot="header">Title</div>\n  <p>Content here</p>\n  <div slot="footer">Footer</div>\n</asm-side-sheet>`}
+  flutterUsage={`AsmSideSheet(\n  header: Text('Title'),\n  children: [\n    Text('Content here'),\n  ],\n  footer: Text('Footer'),\n)`}
+/>
+
+## With Header, Content & Footer
+
+All three regions present. Header and footer are sticky; content scrolls.
+
+<PreviewCard
+  webCode={`<div style="display: flex; height: 350px;">\n  <div style="flex: 1; padding: 24px; background: #f5f5f5;">\n    <h3>Main App Area</h3>\n    <p>Primary content lives here.</p>\n  </div>\n  <asm-side-sheet width="300px">\n    <div slot="header" style="display: flex; justify-content: space-between; align-items: center;">\n      <strong>Details Panel</strong>\n      <asm-icon-button icon="close" variant="text" size="compact"></asm-icon-button>\n    </div>\n    <p>Scrollable content area of the side sheet.</p>\n    <p>Can contain forms, lists, or detail views.</p>\n    <p>This region scrolls independently.</p>\n    <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">\n      <asm-button label="Cancel" variant="text" size="compact"></asm-button>\n      <asm-button label="Save" variant="filled" size="compact"></asm-button>\n    </div>\n  </asm-side-sheet>\n</div>`}
+  flutterCode={`Row(\n  children: [\n    Expanded(\n      child: Padding(\n        padding: EdgeInsets.all(24),\n        child: Column(\n          crossAxisAlignment: CrossAxisAlignment.start,\n          children: [\n            Text('Main App Area', style: typography.headlineSmall),\n            Text('Primary content lives here.'),\n          ],\n        ),\n      ),\n    ),\n    SizedBox(\n      width: 300,\n      child: AsmSideSheet(\n        header: Row(\n          mainAxisAlignment: MainAxisAlignment.spaceBetween,\n          children: [\n            Text('Details Panel', style: typography.titleMedium),\n            AsmIconButton(icon: Icons.close, onPressed: () {}),\n          ],\n        ),\n        children: [\n          Text('Scrollable content area of the side sheet.'),\n          Text('Can contain forms, lists, or detail views.'),\n          Text('This region scrolls independently.'),\n        ],\n        footer: Row(\n          mainAxisAlignment: MainAxisAlignment.end,\n          children: [\n            AsmButton(label: 'Cancel', variant: AsmButtonVariant.text, onPressed: () {}),\n            SizedBox(width: 8),\n            AsmButton(label: 'Save', onPressed: () {}),\n          ],\n        ),\n      ),\n    ),\n  ],\n)`}
+/>
+
+## Content Only
+
+Minimal sheet with only the default content slot — no header or footer.
+
+<PreviewCard
+  webCode={`<div style="display: flex; height: 250px;">\n  <div style="flex: 1; padding: 24px; background: #f5f5f5;">\n    <p>Main area</p>\n  </div>\n  <asm-side-sheet width="280px">\n    <asm-badge status="active" type="primary">Active</asm-badge>\n    <p>Item details displayed here.</p>\n    <asm-divider></asm-divider>\n    <p>Additional info below divider.</p>\n  </asm-side-sheet>\n</div>`}
+  flutterCode={`Row(\n  children: [\n    Expanded(\n      child: Padding(\n        padding: EdgeInsets.all(24),\n        child: Text('Main area'),\n      ),\n    ),\n    SizedBox(\n      width: 280,\n      child: AsmSideSheet(\n        children: [\n          AsmBadge(label: 'Active', status: AsmBadgeStatus.low),\n          Text('Item details displayed here.'),\n          AsmDivider(),\n          Text('Additional info below divider.'),\n        ],\n      ),\n    ),\n  ],\n)`}
+/>
+
+## Custom Gap
+
+Control spacing between children.
+
+<PreviewCard
+  webCode={`<asm-side-sheet width="280px" gap="20">\n  <div slot="header"><strong>Spaced Items</strong></div>\n  <p>First item</p>\n  <p>Second item</p>\n  <p>Third item</p>\n</asm-side-sheet>`}
+  flutterCode={`AsmSideSheet(\n  gap: 20,\n  header: Text('Spaced Items', style: typography.titleMedium),\n  children: [\n    Text('First item'),\n    Text('Second item'),\n    Text('Third item'),\n  ],\n)`}
+/>
+
+## Toggle Visibility
+
+Use the `open` attribute to show/hide the sheet.
+
+<PreviewCard
+  webCode={`<asm-side-sheet width="280px" open>\n  <p>This sheet is visible.</p>\n</asm-side-sheet>\n\n<!-- Hidden: -->\n<asm-side-sheet width="280px">\n  <p>This sheet is hidden.</p>\n</asm-side-sheet>`}
+  flutterCode={`// Visibility is controlled by conditionally including\n// AsmSideSheet in the widget tree:\nif (showSideSheet)\n  SizedBox(\n    width: 280,\n    child: AsmSideSheet(\n      children: [Text('Visible content')],\n    ),\n  ),`}
+/>
+
+## Guidelines
+
+- Use side sheets for detail panels, filters, or contextual information
+- The sheet is a layout primitive — it fills its parent's height by default
+- Wrap in `SizedBox` or use the `width` property to set explicit width
+- Only the content region scrolls; header and footer remain sticky
+- Use with `Row` layout to position alongside main content
+- The 20px elevation shadow gives visual separation from the main content
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `open` | `boolean` | `true` | Whether the sheet is visible |
+| `gap` | `number` | `10` | Spacing between children (px) |
+| `width` | `string` | `''` | Explicit width (e.g. "320px") |
+| `height` | `string` | `''` | Explicit height (defaults to 100%) |
+
+**Slots:**
+| Slot | Description |
+|------|-------------|
+| default | Scrolling content region |
+| header | Sticky header (never scrolls) |
+| footer | Sticky footer (never scrolls) |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `header` | `Widget?` | `null` | Sticky header widget |
+| `children` | `List<Widget>` | `[]` | Scrolling content widgets |
+| `footer` | `Widget?` | `null` | Sticky footer widget |
+| `height` | `double?` | `null` | Explicit height |
+| `padding` | `EdgeInsetsGeometry?` | `EdgeInsets.all(16)` | Inner padding |
+| `gap` | `double` | `10` | Spacing between children |
+| `backgroundColor` | `Color?` | `surfaceBright` | Background override |
+| `borderRadius` | `BorderRadiusGeometry?` | `BorderRadius.circular(16)` | Corner radius |
+| `boxShadow` | `List<BoxShadow>?` | elevation-5 | Shadow override |

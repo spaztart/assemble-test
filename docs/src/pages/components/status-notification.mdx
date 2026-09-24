@@ -1,0 +1,80 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Status Notification - Design System
+description: Status notification component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Status Notification
+
+Status notifications are small pill-shaped badges that display a count or loading state. They overlay other elements (e.g., navigation icons) to indicate pending items.
+
+<div class="hero-preview">
+  <div class="preview-row" style="gap:24px">
+    <asm-status-notification status="critical" count="3"></asm-status-notification>
+    <asm-status-notification status="attention" count="12"></asm-status-notification>
+    <asm-status-notification status="info" count="99"></asm-status-notification>
+    <asm-status-notification status="critical" count="150"></asm-status-notification>
+    <asm-status-notification status="loader"></asm-status-notification>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/status-notification"
+  componentUsage='<asm-status-notification status="critical" count="5"></asm-status-notification>'
+  flutterUsage={`AsmStatusNotification(\n  status: AsmStatusNotificationStatus.critical,\n  count: 5,\n)`}
+/>
+
+## Statuses
+
+<PreviewCard
+  webCode={`<asm-status-notification status="critical" count="3"></asm-status-notification>\n<asm-status-notification status="attention" count="7"></asm-status-notification>\n<asm-status-notification status="info" count="12"></asm-status-notification>`}
+  flutterCode={`AsmStatusNotification(status: AsmStatusNotificationStatus.critical, count: 3)\nAsmStatusNotification(status: AsmStatusNotificationStatus.attention, count: 7)\nAsmStatusNotification(status: AsmStatusNotificationStatus.info, count: 12)`}
+/>
+
+
+## Overflow (99+)
+
+Counts exceeding 99 display as "99+".
+
+<PreviewCard
+  webCode={`<asm-status-notification status="critical" count="100"></asm-status-notification>\n<asm-status-notification status="info" count="250"></asm-status-notification>`}
+  flutterCode={`AsmStatusNotification(status: AsmStatusNotificationStatus.critical, count: 100)\nAsmStatusNotification(status: AsmStatusNotificationStatus.info, count: 250)`}
+/>
+
+
+## Loader
+
+Show a loading spinner for async status updates.
+
+<PreviewCard
+  webCode={`<asm-status-notification status="loader"></asm-status-notification>`}
+  flutterCode={`AsmStatusNotification(\n  status: AsmStatusNotificationStatus.loader,\n)`}
+/>
+
+
+## Guidelines
+
+- Position overlapping the top-right corner of the related element
+- Use for notification counts, unread items, or pending alerts
+- Don't show "0" — hide the badge entirely when count is zero
+- Use the loader status for real-time updates being fetched
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `status` | `critical` \| `attention` \| `info` \| `loader` | `info` | Status (color) |
+| `count` | `number` | `0` | Count to display (>99 shows "99+") |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `status` | `AsmStatusNotificationStatus` | required | Status type |
+| `count` | `int` | `0` | Count to display |

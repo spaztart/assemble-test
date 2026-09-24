@@ -1,0 +1,348 @@
+{
+  "md": {
+    "type": {
+      "ls": {
+        "negative150": {
+          "$type": "letterSpacing",
+          "$value": "-1.5%"
+        },
+        "negative125": {
+          "$type": "letterSpacing",
+          "$value": "-1.25%"
+        },
+        "negative100": {
+          "$type": "letterSpacing",
+          "$value": "-1%"
+        },
+        "negative075": {
+          "$type": "letterSpacing",
+          "$value": "-0.75%"
+        },
+        "negative050": {
+          "$type": "letterSpacing",
+          "$value": "-0.5%"
+        },
+        "negative025": {
+          "$type": "letterSpacing",
+          "$value": "-0.25%"
+        },
+        "zero": {
+          "$type": "letterSpacing",
+          "$value": "0"
+        },
+        "positive025": {
+          "$type": "letterSpacing",
+          "$value": "0.25%"
+        },
+        "positive050": {
+          "$type": "letterSpacing",
+          "$value": "0.5%"
+        },
+        "positive075": {
+          "$type": "letterSpacing",
+          "$value": "0.75%"
+        },
+        "positive100": {
+          "$type": "letterSpacing",
+          "$value": "1%"
+        },
+        "positive125": {
+          "$type": "letterSpacing",
+          "$value": "1.25%"
+        },
+        "positive150": {
+          "$type": "letterSpacing",
+          "$value": "1.5%"
+        }
+      },
+      "lh": {
+        "100": {
+          "$type": "lineHeights",
+          "$value": "100%"
+        },
+        "110": {
+          "$type": "lineHeights",
+          "$value": "110%"
+        },
+        "120": {
+          "$type": "lineHeights",
+          "$value": "120%"
+        },
+        "125": {
+          "$type": "lineHeights",
+          "$value": "125%"
+        },
+        "130": {
+          "$type": "lineHeights",
+          "$value": "130%"
+        },
+        "140": {
+          "$type": "lineHeights",
+          "$value": "140%"
+        },
+        "150": {
+          "$type": "lineHeights",
+          "$value": "150%"
+        },
+        "160": {
+          "$type": "lineHeights",
+          "$value": "160%"
+        },
+        "170": {
+          "$type": "lineHeights",
+          "$value": "170%"
+        },
+        "180": {
+          "$type": "lineHeights",
+          "$value": "180%"
+        },
+        "190": {
+          "$type": "lineHeights",
+          "$value": "190%"
+        },
+        "200": {
+          "$type": "lineHeights",
+          "$value": "200%"
+        }
+      },
+      "size": {
+        "10": {
+          "$type": "fontSizes",
+          "$value": "10"
+        },
+        "11": {
+          "$type": "fontSizes",
+          "$value": "11"
+        },
+        "12": {
+          "$type": "fontSizes",
+          "$value": "12"
+        },
+        "14": {
+          "$type": "fontSizes",
+          "$value": "14"
+        },
+        "16": {
+          "$type": "fontSizes",
+          "$value": "16"
+        },
+        "18": {
+          "$type": "fontSizes",
+          "$value": "18"
+        },
+        "20": {
+          "$type": "fontSizes",
+          "$value": "20"
+        },
+        "22": {
+          "$type": "fontSizes",
+          "$value": "22"
+        },
+        "24": {
+          "$type": "fontSizes",
+          "$value": "24"
+        },
+        "28": {
+          "$type": "fontSizes",
+          "$value": "28"
+        },
+        "32": {
+          "$type": "fontSizes",
+          "$value": "32"
+        },
+        "36": {
+          "$type": "fontSizes",
+          "$value": "36"
+        },
+        "40": {
+          "$type": "fontSizes",
+          "$value": "40"
+        },
+        "44": {
+          "$type": "fontSizes",
+          "$value": "44"
+        },
+        "48": {
+          "$type": "fontSizes",
+          "$value": "48"
+        },
+        "57": {
+          "$type": "fontSizes",
+          "$value": "57"
+        },
+        "64": {
+          "$type": "fontSizes",
+          "$value": "64"
+        },
+        "72": {
+          "$type": "fontSizes",
+          "$value": "72"
+        },
+        "84": {
+          "$type": "fontSizes",
+          "$value": "84"
+        },
+        "96": {
+          "$type": "fontSizes",
+          "$value": "96"
+        }
+      }
+    },
+    "spacing": {
+      "0": {
+        "$type": "spacing",
+        "$value": "0"
+      },
+      "50": {
+        "$type": "spacing",
+        "$value": "2"
+      },
+      "100": {
+        "$type": "spacing",
+        "$value": "4"
+      },
+      "200": {
+        "$type": "spacing",
+        "$value": "8"
+      },
+      "250": {
+        "$type": "spacing",
+        "$value": "10"
+      },
+      "300": {
+        "$type": "spacing",
+        "$value": "12"
+      },
+      "400": {
+        "$type": "spacing",
+        "$value": "16"
+      },
+      "500": {
+        "$type": "spacing",
+        "$value": "20"
+      },
+      "600": {
+        "$type": "spacing",
+        "$value": "24"
+      },
+      "700": {
+        "$type": "spacing",
+        "$value": "28"
+      },
+      "800": {
+        "$type": "spacing",
+        "$value": "32"
+      },
+      "900": {
+        "$type": "spacing",
+        "$value": "36"
+      },
+      "1000": {
+        "$type": "spacing",
+        "$value": "40"
+      },
+      "1100": {
+        "$type": "spacing",
+        "$value": "44"
+      },
+      "1200": {
+        "$type": "spacing",
+        "$value": "48"
+      },
+      "1300": {
+        "$type": "spacing",
+        "$value": "56"
+      },
+      "1400": {
+        "$type": "spacing",
+        "$value": "64"
+      }
+    },
+    "border": {
+      "size": {
+        "0": {
+          "$type": "borderWidth",
+          "$value": "0"
+        },
+        "100": {
+          "$type": "borderWidth",
+          "$value": "1"
+        },
+        "200": {
+          "$type": "borderWidth",
+          "$value": "2"
+        },
+        "300": {
+          "$type": "borderWidth",
+          "$value": "3"
+        },
+        "400": {
+          "$type": "borderWidth",
+          "$value": "4"
+        }
+      },
+      "radius": {
+        "0": {
+          "$type": "borderRadius",
+          "$value": "0"
+        },
+        "2": {
+          "$type": "borderRadius",
+          "$value": "2"
+        },
+        "4": {
+          "$type": "borderRadius",
+          "$value": "4"
+        },
+        "6": {
+          "$type": "borderRadius",
+          "$value": "6"
+        },
+        "8": {
+          "$type": "borderRadius",
+          "$value": "8"
+        },
+        "12": {
+          "$type": "borderRadius",
+          "$value": "12"
+        },
+        "16": {
+          "$type": "borderRadius",
+          "$value": "16"
+        },
+        "24": {
+          "$type": "borderRadius",
+          "$value": "24"
+        },
+        "32": {
+          "$type": "borderRadius",
+          "$value": "32"
+        },
+        "36": {
+          "$type": "borderRadius",
+          "$value": "36"
+        },
+        "40": {
+          "$type": "borderRadius",
+          "$value": "40"
+        },
+        "48": {
+          "$type": "borderRadius",
+          "$value": "48"
+        },
+        "56": {
+          "$type": "borderRadius",
+          "$value": "56"
+        },
+        "64": {
+          "$type": "borderRadius",
+          "$value": "64"
+        },
+        "999": {
+          "$type": "borderRadius",
+          "$value": "999"
+        }
+      }
+    }
+  }
+}

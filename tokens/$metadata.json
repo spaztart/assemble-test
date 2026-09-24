@@ -1,0 +1,23 @@
+{
+  "tokenSetOrder": [
+    "utilities",
+    "material/assemble",
+    "material/default",
+    "material/rga",
+    "modes/assemble/light",
+    "modes/assemble/dark",
+    "modes/assemble/contrast",
+    "modes/default/dark",
+    "modes/default/dark-high-contrast",
+    "modes/default/dark-medium-contrast",
+    "modes/default/light",
+    "modes/default/light-high-contrast",
+    "modes/default/light-medium-contrast",
+    "modes/rga/dark",
+    "modes/rga/dark-high-contrast",
+    "modes/rga/dark-medium-contrast",
+    "modes/rga/light",
+    "modes/rga/light-high-contrast",
+    "modes/rga/light-medium-contrast"
+  ]
+}

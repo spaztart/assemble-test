@@ -1,0 +1,101 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Empty State - Design System
+description: Empty state component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Empty State
+
+Empty states communicate that a section has no content to display. They provide context and optional actions to help users move forward.
+
+<div class="hero-preview">
+  <asm-empty-state
+    icon="inbox"
+    title="No messages"
+    description="When you receive messages, they'll appear here."
+  ></asm-empty-state>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/empty-state"
+  componentUsage={`<asm-empty-state\n  icon="inbox"\n  title="No items"\n  description="Add items to get started."\n></asm-empty-state>`}
+  flutterUsage={`AsmEmptyState(\n  icon: Icons.inbox,\n  title: 'No items',\n  description: 'Add items to get started.',\n)`}
+/>
+
+## Basic
+
+<PreviewCard
+  webCode={`<asm-empty-state\n  icon="search_off"\n  title="No results found"\n  description="Try adjusting your search or filter criteria."\n></asm-empty-state>`}
+  flutterCode={`AsmEmptyState(\n  icon: Icons.search_off,\n  title: 'No results found',\n  description: 'Try adjusting your search or filter criteria.',\n)`}
+/>
+
+
+## With Action
+
+Slot in a button to give users a clear next step.
+
+<PreviewCard
+  webCode={`<asm-empty-state\n  icon="add_circle"\n  title="No projects yet"\n  description="Create your first project to get started."\n>\n  <asm-button slot="action" label="Create project" start-icon="add"></asm-button>\n</asm-empty-state>`}
+  flutterCode={`AsmEmptyState(\n  icon: Icons.add_circle,\n  title: 'No projects yet',\n  description: 'Create your first project to get started.',\n  action: AsmButton(\n    label: 'Create project',\n    startIcon: Icon(Icons.add),\n    onPressed: () {},\n  ),\n)`}
+/>
+
+
+## Without Icon
+
+Set `show-icon` to false to hide the icon circle.
+
+<PreviewCard
+  webCode={`<asm-empty-state\n  title="All caught up!"\n  description="You have no pending notifications."\n  show-icon="false"\n></asm-empty-state>`}
+  flutterCode={`AsmEmptyState(\n  showIcon: false,\n  title: 'All caught up!',\n  description: 'You have no pending notifications.',\n)`}
+/>
+
+
+## Custom Sizes
+
+<PreviewCard
+  webCode={`<asm-empty-state\n  icon="cloud_off"\n  title="Offline"\n  description="Check your connection."\n  icon-size="64"\n  icon-background-size="120"\n></asm-empty-state>`}
+  flutterCode={`AsmEmptyState(\n  icon: Icons.cloud_off,\n  title: 'Offline',\n  description: 'Check your connection.',\n  iconSize: 64,\n  iconBackgroundSize: 120,\n)`}
+/>
+
+
+## Guidelines
+
+- Always provide a clear title explaining the empty state
+- Include helpful description text suggesting what to do next
+- Provide an action button when there's a clear next step
+- Use relevant icons that reinforce the message
+- Keep messaging positive and encouraging
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `icon` | `string` | `''` | Material Symbols icon name |
+| `show-icon` | `boolean` | `true` | Whether to show the icon |
+| `title` | `string` | `''` | Title text |
+| `description` | `string` | `''` | Description text |
+| `icon-size` | `number` | `48` | Icon size in pixels |
+| `icon-background-size` | `number` | `96` | Background circle size |
+
+**Slots:**
+| Slot | Description |
+|------|-------------|
+| `action` | Action button(s) below the description |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `icon` | `IconData?` | `null` | Icon |
+| `showIcon` | `bool` | `true` | Whether to show icon |
+| `title` | `String` | required | Title text |
+| `description` | `String?` | `null` | Description text |
+| `action` | `Widget?` | `null` | Action widget |
+| `iconSize` | `double` | `48` | Icon size |
+| `iconBackgroundSize` | `double` | `96` | Background size |

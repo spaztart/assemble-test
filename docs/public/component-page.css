@@ -1,0 +1,259 @@
+/* ====================================
+   Component Page — Shared Styles
+   Used by all component documentation pages.
+   ==================================== */
+
+/* Install tabs & panels */
+#installTabs {
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+.install-panel {
+  display: none;
+}
+.install-panel.active {
+  display: block;
+}
+
+/* Stepper */
+.stepper {
+  list-style: none;
+  padding: 24px 0 0 0;
+  margin: 0;
+}
+.stepper__step {
+  display: flex;
+  gap: 20px;
+}
+.stepper__indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.stepper__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  font-family: 'McAfee Sans', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.stepper__line {
+  width: 1px;
+  flex: 1;
+  background: var(--md-sys-color-outline-variant);
+  margin: 8px 0;
+}
+.stepper__content {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 32px;
+}
+.stepper__step:last-child .stepper__content {
+  padding-bottom: 0;
+}
+.stepper__title {
+  font-family: 'McAfee Sans', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  margin: 0 0 12px 0;
+  line-height: 32px;
+}
+.stepper__content pre {
+  margin: 0 !important;
+}
+
+/* Preview card */
+.preview-card {
+  border: 1px solid var(--md-sys-color-outline-variant);
+  overflow: hidden;
+  border-radius: 12px;
+}
+.preview-card .component-preview,
+.preview-card .code-block-wrapper {
+  margin: 0;
+}
+.component-preview {
+  border-radius: 12px 12px 0 0;
+  border-bottom: none;
+  padding: 48px;
+  background: var(--md-sys-color-background);
+}
+.preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Hero preview */
+.hero-preview {
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 12px;
+  padding: 48px 32px;
+  margin: 16px 0 0 0;
+  display: flex;
+  min-height: 50vh;
+  align-items: center;
+  justify-content: center;
+  background: var(--md-sys-color-background);
+}
+
+/* Code block wrapper */
+.code-block-wrapper {
+  position: relative;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.code-block-wrapper.collapsed {
+  max-height: 72px;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* Code tabs */
+.code-tabs {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-background, #f5f5f5);
+}
+.code-block-wrapper.collapsed .code-tabs {
+  display: none;
+}
+.code-block-wrapper.collapsed .code-copy-btn {
+  display: none;
+}
+.code-copy-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface-variant, #666);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.code-copy-tab-btn:hover {
+  color: var(--md-sys-color-on-surface, #000);
+}
+.code-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-family: 'McAfee Sans', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant, #666);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.code-tab:hover {
+  color: var(--md-sys-color-on-surface, #000);
+}
+.code-tab.active {
+  color: var(--md-sys-color-on-surface, #000);
+  font-weight: 600;
+}
+.code-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--md-sys-color-on-surface, #000);
+  border-radius: 2px 2px 0 0;
+}
+.tab-icon {
+  display: block;
+  flex-shrink: 0;
+  font-size: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Code panels */
+.code-block-inner {
+  display: none;
+  overflow: hidden;
+}
+.code-block-inner .code-copy-btn {
+  display: none;
+}
+.code-block-inner.active {
+  display: block;
+}
+.code-block-inner pre {
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Fade overlay */
+.code-block-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to top,
+    var(--md-sys-color-surface-container-low, #f5f5f5) 0%,
+    color-mix(in oklch, var(--md-sys-color-surface-container-low, #f5f5f5) 60%, transparent) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.code-block-wrapper:not(.collapsed) .code-block-fade {
+  display: none;
+}
+
+/* View Code button */
+.view-code-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.code-block-wrapper:not(.collapsed) .view-code-btn {
+  display: none;
+}
+
+/* Collapse button */
+.collapse-code-btn {
+  display: none;
+}
+.code-block-wrapper:not(.collapsed) .collapse-code-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-surface-variant);
+  transition: color 0.15s, background 0.15s;
+}
+.collapse-code-btn:hover {
+  color: var(--md-sys-color-on-surface, #000);
+  background: var(--md-sys-color-surface-container, #f0f0f0);
+}

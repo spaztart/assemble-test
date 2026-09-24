@@ -1,0 +1,21 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate-search-index": "node src/integrations/generate-search-index.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.14",
+    "@mcafee-eng/assemble": "*",
+    "astro": "^5.17.1",
+    "minisearch": "^7.2.0",
+    "three": "^0.183.2",
+    "typescript": "^5.9.3"
+  }
+}

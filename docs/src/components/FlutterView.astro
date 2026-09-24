@@ -1,0 +1,105 @@
+---
+/**
+ * FlutterView — Embeds a live Flutter web demo via an <iframe>.
+ *
+ * The demo is a static Flutter web build committed under
+ * `docs/public/flutter/<name>/` so it works in local dev and when deployed —
+ * no separate server required.
+ *
+ * To rebuild the bundle after changing the Flutter app:
+ *
+ *   cd assemble_flutter
+ *   flutter build web --release --base-href /flutter/button-demo/
+ *   rm -rf ../docs/public/flutter/button-demo
+ *   mkdir -p ../docs/public/flutter/button-demo
+ *   cp -R build/web/. ../docs/public/flutter/button-demo/
+ *
+ * Props:
+ *   path?: string    — Public path of the build (default '/flutter/button-demo/index.html').
+ *   demo?: string    — Optional `demo` query value selecting which section renders.
+ *   height?: number  — Iframe height in px (default 460).
+ *   title?: string   — Accessible iframe title (default 'Flutter demo').
+ */
+interface Props {
+  path?: string;
+  demo?: string;
+  height?: number;
+  title?: string;
+}
+
+const {
+  path = '/flutter/button-demo/index.html',
+  demo,
+  height = 460,
+  title = 'Flutter demo',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const query = demo ? `?demo=${encodeURIComponent(demo)}` : '';
+const src = `${base}${path}${query}`;
+---
+<div class="flutter-view">
+  <div class="flutter-view__frame" style={`height:${height}px`}>
+    <div class="flutter-view__placeholder">
+      <span class="flutter-view__spinner" aria-hidden="true"></span>
+      <p class="flutter-view__placeholder-note">Loading Flutter demo…</p>
+    </div>
+    <iframe
+      data-src={src}
+      title={title}
+      allow="clipboard-write"
+      referrerpolicy="no-referrer"
+    ></iframe>
+  </div>
+</div>
+
+<style>
+  .flutter-view {
+    overflow: hidden;
+    margin: 24px 0;
+  }
+  .flutter-view__frame {
+    position: relative;
+    width: 100%;
+    background: var(--md-sys-color-surface);
+    transition: background-color 0.2s;
+  }
+  .flutter-view__frame iframe {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .flutter-view__placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+    padding: 24px;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+  .flutter-view__spinner {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 3px solid var(--md-sys-color-outline-variant);
+    border-top-color: var(--md-sys-color-primary);
+    animation: flutter-view-spin 0.8s linear infinite;
+  }
+  .flutter-view__placeholder-note {
+    margin: 0;
+    font-size: 13px;
+  }
+  @keyframes flutter-view-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

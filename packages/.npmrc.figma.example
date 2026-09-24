@@ -1,0 +1,11 @@
+# Figma private npm registry configuration TEMPLATE.
+#
+# Copy this file to `.npmrc.figma` (which is gitignored) and replace the
+# contents with the snippet from your Figma organization:
+#   Figma > Admin > Resources > npm registry > View configuration
+#
+# The real snippet looks like the two lines below, with your org's host/path
+# and a freshly generated auth token. Keep the token secret — never commit it.
+#
+# @mcafee-eng:registry=https://www.figma.com/api/npm-registry/<org>/
+# //www.figma.com/api/npm-registry/<org>/:_authToken=<YOUR_TOKEN>

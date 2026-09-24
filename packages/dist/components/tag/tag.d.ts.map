@@ -1,0 +1,1 @@
+{"version":3,"file":"tag.d.ts","sourceRoot":"","sources":["../../../src/components/tag/tag.ts"],"names":[],"mappings":"AAAA,OAAO,MAAM,MAAM,oBAAoB,CAAC;AAExC,cAAc,oBAAoB,CAAC;AACnC,eAAe,MAAM,CAAC;AAItB,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,SAAS,EAAE,MAAM,CAAC;KACnB;CACF"}

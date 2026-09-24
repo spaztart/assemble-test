@@ -1,0 +1,133 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Date Input - Design System
+description: Date Input component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Date Input
+
+A text input field with `MM/DD/YYYY` masking and an inline calendar picker dropdown. Supports single date and date range variants with auto-formatting, validation, and a calendar toggle for visual date selection.
+
+<div class="hero-preview">
+  <div class="preview-row" style="gap: 24px; align-items: flex-start;">
+    <asm-date-input label="Start Date" placeholder="MM/DD/YYYY" supporting-text="MM/DD/YYYY"></asm-date-input>
+    <asm-date-input label="End Date" value="2026-06-15"></asm-date-input>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/date-input"
+  componentUsage='<asm-date-input label="Date" placeholder="MM/DD/YYYY"></asm-date-input>'
+  flutterUsage={`AsmDateInput(\n  automationIdentifier: 'my-date-input',\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  onChanged: (date) {},\n)`}
+/>
+
+## Single Date
+
+A single input field with date masking. Typing inserts `/` automatically after MM and DD.
+
+<PreviewCard
+  webCode={`<asm-date-input label="Start Date" placeholder="MM/DD/YYYY" supporting-text="MM/DD/YYYY"></asm-date-input>`}
+  flutterCode={`AsmDateInput(\n  automationIdentifier: 'start-date',\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  label: 'Select date',\n  headline: 'Enter date',\n  placeholder: 'MM/DD/YYYY',\n  onChanged: (date) {},\n)`}
+/>
+
+## With Pre-filled Value
+
+Pass an ISO date to display it formatted in the field.
+
+<PreviewCard
+  webCode={`<asm-date-input label="Selected Date" value="2026-06-15"></asm-date-input>`}
+  flutterCode={`AsmDateInput(\n  automationIdentifier: 'prefilled-date',\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  value: DateTime(2026, 6, 15),\n  onChanged: (date) {},\n)`}
+/>
+
+## Date Range
+
+Two fields side-by-side for selecting a start and end date.
+
+<PreviewCard
+  webCode={`<asm-date-input variant="range" label="Date Range" placeholder="Start date" end-placeholder="End date"></asm-date-input>`}
+  flutterCode={`AsmDateRangeInput(\n  automationIdentifier: 'date-range',\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  startPlaceholder: 'Start date',\n  endPlaceholder: 'End date',\n  onChanged: (range) {},\n)`}
+/>
+
+## States
+
+### Disabled
+
+<PreviewCard
+  webCode={`<asm-date-input label="Date" disabled></asm-date-input>`}
+  flutterCode={`AsmDateInput(\n  automationIdentifier: 'disabled-date',\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  onChanged: null,\n)`}
+/>
+
+### Error
+
+<PreviewCard
+  webCode={`<asm-date-input label="Date" error error-text="Invalid date format"></asm-date-input>`}
+  flutterCode={`AsmDateField(\n  automationIdentifier: 'error-date',\n  firstDate: DateTime(2020, 1, 1),\n  lastDate: DateTime(2030, 12, 31),\n  supportingText: 'Invalid date format',\n  onChanged: (date) {},\n)`}
+/>
+
+## With Min/Max Constraints
+
+Restrict the calendar picker to valid date ranges.
+
+<PreviewCard
+  webCode={`<asm-date-input label="Booking Date" min-date="2026-06-01" max-date="2026-12-31" supporting-text="Jun 2026 – Dec 2026"></asm-date-input>`}
+  flutterCode={`AsmDateInput(\n  automationIdentifier: 'constrained-date',\n  firstDate: DateTime(2026, 6, 1),\n  lastDate: DateTime(2026, 12, 31),\n  onChanged: (date) {},\n)`}
+/>
+
+## Guidelines
+
+- Use date input for form fields where users may type or pick a date
+- Always show the expected format as supporting text or placeholder
+- The mask auto-inserts `/` — users only need to type digits
+- Pair with the inline calendar picker for visual selection
+- Use the range variant for booking flows or filter date ranges
+- Validate dates against `min-date` / `max-date` constraints
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `variant` | `single` \| `range` | `single` | Input variant |
+| `label` | `string` | `Date` | Label text above the field |
+| `placeholder` | `string` | `MM/DD/YYYY` | Placeholder text |
+| `supporting-text` | `string` | `MM/DD/YYYY` | Helper text below field |
+| `value` | `string` | `''` | Date value (ISO YYYY-MM-DD) |
+| `range-start` | `string` | `''` | Range start (ISO) |
+| `range-end` | `string` | `''` | Range end (ISO) |
+| `min-date` | `string` | `''` | Earliest selectable (ISO) |
+| `max-date` | `string` | `''` | Latest selectable (ISO) |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `error` | `boolean` | `false` | Error state |
+| `error-text` | `string` | `''` | Error message |
+| `end-placeholder` | `string` | `MM/DD/YYYY` | Range end placeholder |
+
+**Events:**
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `change` | `{ value: string }` | Date changed (single) |
+| `range-change` | `{ start: string, end: string }` | Range changed |
+| `picker-open` | — | Calendar picker opened |
+| `picker-close` | — | Calendar picker closed |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `automationIdentifier` | `String` | required | Test automation ID |
+| `firstDate` | `DateTime` | required | Earliest selectable date |
+| `lastDate` | `DateTime` | required | Latest selectable date |
+| `label` | `String` | `'Select date'` | Header label |
+| `headline` | `String` | `'Enter date'` | Bold heading text |
+| `placeholder` | `String` | `'MM/DD/YYYY'` | Field placeholder |
+| `value` | `DateTime?` | `null` | Current date value |
+| `onChanged` | `ValueChanged<DateTime>?` | `null` | Date changed. `null` disables |
+| `onConfirm` | `VoidCallback?` | `null` | OK pressed |
+| `onCancel` | `VoidCallback?` | `null` | Cancel pressed |
+| `onClear` | `VoidCallback?` | `null` | Clear pressed |
+| `onPickerRequested` | `VoidCallback?` | `null` | Calendar icon pressed |
+| `showClearButton` | `bool` | `false` | Show Clear button |

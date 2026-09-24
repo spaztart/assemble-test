@@ -1,0 +1,74 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Radio - Design System
+description: Radio button component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Radio
+
+Radio buttons allow users to select exactly one option from a set. Use when there are two or more mutually exclusive choices.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-radio label="Option A" value="a" group-value="a"></asm-radio>
+    <asm-radio label="Option B" value="b" group-value="a"></asm-radio>
+    <asm-radio label="Option C" value="c" group-value="a"></asm-radio>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/radio"
+  componentUsage='<asm-radio label="Option" value="opt1" group-value="opt1"></asm-radio>'
+  flutterUsage={`AsmRadio<String>(\n  value: 'opt1',\n  groupValue: 'opt1',\n  label: 'Option',\n  onChanged: (value) {},\n)`}
+/>
+
+## States
+
+### Selected / Unselected
+
+A radio is selected when its `value` matches the `group-value`.
+
+<PreviewCard
+  webCode={`<asm-radio label="Selected" value="a" group-value="a"></asm-radio>\n<asm-radio label="Unselected" value="b" group-value="a"></asm-radio>`}
+  flutterCode={`AsmRadio<String>(\n  value: 'a',\n  groupValue: 'a',\n  label: 'Selected',\n  onChanged: (value) {},\n)\n\nAsmRadio<String>(\n  value: 'b',\n  groupValue: 'a',\n  label: 'Unselected',\n  onChanged: (value) {},\n)`}
+/>
+
+
+### Disabled
+
+<PreviewCard
+  webCode={`<asm-radio label="Disabled" value="a" group-value="a" disabled></asm-radio>\n<asm-radio label="Disabled unselected" value="b" group-value="a" disabled></asm-radio>`}
+  flutterCode={`AsmRadio<String>(\n  value: 'a',\n  groupValue: 'a',\n  label: 'Disabled',\n  onChanged: null,\n)\n\nAsmRadio<String>(\n  value: 'b',\n  groupValue: 'a',\n  label: 'Disabled unselected',\n  onChanged: null,\n)`}
+/>
+
+
+## Guidelines
+
+- Always provide at least two radio options
+- One option should be selected by default when possible
+- Use radio buttons only for mutually exclusive selections
+- For binary on/off choices, prefer a switch instead
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `string` | `''` | This radio's value |
+| `group-value` | `string` | `''` | Currently selected value in the group |
+| `label` | `string` | `''` | Label text |
+| `disabled` | `boolean` | `false` | Disabled state |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | `T` | required | This radio's value |
+| `groupValue` | `T?` | required | Currently selected value in the group |
+| `label` | `String?` | `null` | Label text |
+| `onChanged` | `ValueChanged<T?>?` | required | Change handler. `null` disables |

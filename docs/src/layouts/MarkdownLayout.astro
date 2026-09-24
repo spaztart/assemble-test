@@ -1,0 +1,122 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getNavGroups } from '../data/nav';
+import '../styles/docs-layout.css';
+
+const { frontmatter, rawContent } = Astro.props;
+const { title, description = 'Design System Documentation', tabs = false } = frontmatter;
+const rawMarkdown = typeof rawContent === 'function' ? rawContent() : '';
+
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const navGroups = getNavGroups(base);
+
+const navItems = navGroups.flatMap(group => group.items);
+const normalizedPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
+const currentIndex = navItems.findIndex(item => item.href === normalizedPath);
+const prevPage = currentIndex > 0 ? navItems[currentIndex - 1] : null;
+const nextPage = currentIndex < navItems.length - 1 ? navItems[currentIndex + 1] : null;
+---
+
+<BaseLayout title={title} description={description} hasSidebar={true}>
+  <div class="docs-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Navigation</span>
+        <button class="close-sidebar" id="closeSidebar" aria-label="Close sidebar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        {navGroups.map(group => (
+          <div class="sidebar-group">
+            <button class="sidebar-group-label" aria-expanded="true">
+              <span class="sidebar-group-label-left">
+                <svg class="sidebar-group-icon folder-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M5 19h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-6.5l-2-2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2z" />
+                  <path d="M3 10h18" />
+                </svg>
+                <svg class="sidebar-group-icon folder-closed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M5 19h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-6.5l-2-2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2z" />
+                </svg>
+                <span>{group.label}</span>
+              </span>
+              <svg class="sidebar-group-toggle" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line class="toggle-h" x1="5" y1="12" x2="19" y2="12"></line>
+                <line class="toggle-v" x1="12" y1="5" x2="12" y2="19"></line>
+              </svg>
+            </button>
+            <div class="sidebar-group-items">
+            {group.items.map(item => (
+          <a
+            href={item.href}
+            class={`sidebar-link ${currentPath === item.href || currentPath === item.href + '/' ? 'active' : ''}`}
+            data-path={item.href}
+          >
+            {item.label}
+          </a>
+            ))}
+            </div>
+          </div>
+        ))}
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <article class="markdown-content" id="markdownContent" data-tabs={tabs ? 'true' : undefined}
+        data-prev-href={prevPage?.href || ''}
+        data-prev-label={prevPage?.label || ''}
+        data-next-href={nextPage?.href || ''}
+        data-next-label={nextPage?.label || ''}>
+        <slot />
+      </article>
+      <script type="text/plain" id="rawMarkdownSource" set:text={rawMarkdown}></script>
+      <footer class="page-footer">
+        <div class="page-footer-contribute">
+          <p>Want to help improve the design system?</p>
+          <a href={`${base}/contributing`} class="page-footer-link">
+            <asm-button label="Contribution Guide" start-icon="edit" variant="tonal" size="compact"></asm-button>
+          </a>
+        </div>
+        <div class="page-footer-nav">
+        {prevPage && (
+          <a href={prevPage.href} class="page-footer-link prev">
+            <asm-button label={prevPage.label} start-icon="arrow_back" variant="outline" size="compact"></asm-button>
+          </a>
+        )}
+        <div class="page-footer-spacer"></div>
+        {nextPage && (
+          <a href={nextPage.href} class="page-footer-link next">
+            <asm-button label={nextPage.label} end-icon="arrow_forward" variant="outline" size="compact"></asm-button>
+          </a>
+        )}
+        </div>
+      </footer>
+    </main>
+
+    <aside class="toc">
+      <nav class="toc-nav" id="tocNav">
+      </nav>
+        <asm-card variant="outlined">
+            <h4>Browse every component in Flutter</h4>
+          <p style="margin:0 0 12px; font-size:13px; opacity:0.7;">Widgetbook hosts the full, interactive build of this design system in Flutter. Use it to check real behavior before you implement.</p>
+          <asm-button label="Open in Widgetbook" variant="filled" size="compact" end-icon="open_in_new" onclick="window.open('https://cuddly-meme-mwy78l5.pages.github.io/#/?path=getting-started', '_blank')"></asm-button>
+        </asm-card>
+    </aside>
+  </div>
+
+  <div class="toc-dropdown-menu" id="tocDropdownMenu"></div>
+  <div class="toc-dropdown-backdrop" id="tocDropdownBackdrop"></div>
+</BaseLayout>
+
+<script>
+  import '../scripts/docs-page-init';
+</script>
+
+<script>
+  import '@mcafee-eng/assemble';
+</script>

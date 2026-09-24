@@ -1,0 +1,14 @@
+{
+  "md": {
+    "border": {
+      "contrast": {
+        "$type": "border",
+        "$value": {
+          "color": "{md.sys.color.outline}",
+          "width": "{md.border.size.100}",
+          "style": "Solid"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+---
+/**
+ * FlutterPreviewCard — Live Flutter preview + collapsible code block.
+ *
+ * Flutter-first counterpart to PreviewCard: the live preview is a Flutter web
+ * build embedded via FlutterView, and the code block defaults to the Flutter
+ * (Dart) tab with Web available as a secondary tab.
+ *
+ * Props:
+ *   demo: string        — `demo` query value selecting the section to render
+ *   flutterCode: string — Dart code for the Flutter tab (primary)
+ *   webCode: string     — HTML code for the Web tab (secondary)
+ *   webLang?: string    — Language for web code block (default: "html")
+ *   height?: number     — Iframe height in px (default: 320)
+ *   title?: string      — Accessible iframe title (default: 'Flutter demo')
+ */
+import FlutterView from './FlutterView.astro';
+import CodeBlock from './CodeBlock.astro';
+
+interface Props {
+  demo: string;
+  flutterCode: string;
+  webCode: string;
+  webLang?: string;
+  height?: number;
+  title?: string;
+}
+
+const {
+  demo,
+  flutterCode,
+  webCode,
+  webLang = 'html',
+  height = 320,
+  title = 'Flutter demo',
+} = Astro.props;
+---
+<div class="preview-card">
+  <FlutterView demo={demo} height={height} title={title} />
+  <CodeBlock webCode={webCode} flutterCode={flutterCode} webLang={webLang} flutterPrimary={true} />
+</div>

@@ -1,0 +1,122 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Tabs - Design System
+description: Tabs component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Tabs
+
+Tabs organize content across different screens, data sets, and other interactions. They allow users to navigate between groups of related content.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-tab-group>
+      <asm-tab label="Overview" icon="info" active></asm-tab>
+      <asm-tab label="Features" icon="star"></asm-tab>
+      <asm-tab label="Settings" icon="settings"></asm-tab>
+    </asm-tab-group>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/tabs"
+  componentUsage={`<asm-tab-group>\n  <asm-tab label="Tab 1" active></asm-tab>\n  <asm-tab label="Tab 2"></asm-tab>\n</asm-tab-group>`}
+  flutterUsage={`AsmTabs(\n  items: [\n    AsmTabItem(\n      label: 'Tab 1',\n      automationIdentifier: 'tab-1',\n    ),\n    AsmTabItem(\n      label: 'Tab 2',\n      automationIdentifier: 'tab-2',\n    ),\n  ],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)`}
+/>
+
+## Variants
+
+### Text
+
+The default tab style with text labels only. Best for most use cases.
+
+<PreviewCard
+  webCode={`<asm-tab-group variant="text">\n  <asm-tab label="All" active></asm-tab>\n  <asm-tab label="Active"></asm-tab>\n  <asm-tab label="Completed"></asm-tab>\n</asm-tab-group>`}
+  flutterCode={`AsmTabs(\n  items: [\n    AsmTabItem(\n      label: 'All',\n      automationIdentifier: 'tab-all',\n    ),\n    AsmTabItem(\n      label: 'Active',\n      automationIdentifier: 'tab-active',\n    ),\n    AsmTabItem(\n      label: 'Completed',\n      automationIdentifier: 'tab-completed',\n    ),\n  ],\n  selectedIndex: 0,\n  type: AsmTabType.text,\n  onChanged: (index) {},\n)`}
+/>
+
+
+### Icon + Label (Horizontal)
+
+Tabs with an icon and label side by side. Use when icons provide meaningful context.
+
+<PreviewCard
+  webCode={`<asm-tab-group variant="icon-horizontal">\n  <asm-tab label="Home" icon="home" active></asm-tab>\n  <asm-tab label="Search" icon="search"></asm-tab>\n  <asm-tab label="Profile" icon="person"></asm-tab>\n</asm-tab-group>`}
+  flutterCode={`AsmTabs(\n  items: [\n    AsmTabItem(\n      label: 'Home',\n      icon: Icons.home,\n      automationIdentifier: 'tab-home',\n    ),\n    AsmTabItem(\n      label: 'Search',\n      icon: Icons.search,\n      automationIdentifier: 'tab-search',\n    ),\n    AsmTabItem(\n      label: 'Profile',\n      icon: Icons.person,\n      automationIdentifier: 'tab-profile',\n    ),\n  ],\n  selectedIndex: 0,\n  type: AsmTabType.iconLabelHorizontal,\n  onChanged: (index) {},\n)`}
+/>
+
+
+### Icon + Label (Vertical)
+
+Tabs with the icon stacked above the label. Use for navigation-style tabs.
+
+<PreviewCard
+  webCode={`<asm-tab-group variant="icon-vertical">\n  <asm-tab label="Dashboard" icon="dashboard" active></asm-tab>\n  <asm-tab label="Analytics" icon="analytics"></asm-tab>\n  <asm-tab label="Reports" icon="description"></asm-tab>\n</asm-tab-group>`}
+  flutterCode={`AsmTabs(\n  items: [\n    AsmTabItem(\n      label: 'Dashboard',\n      icon: Icons.dashboard,\n      automationIdentifier: 'tab-dashboard',\n    ),\n    AsmTabItem(\n      label: 'Analytics',\n      icon: Icons.analytics,\n      automationIdentifier: 'tab-analytics',\n    ),\n    AsmTabItem(\n      label: 'Reports',\n      icon: Icons.description,\n      automationIdentifier: 'tab-reports',\n    ),\n  ],\n  selectedIndex: 0,\n  type: AsmTabType.iconLabelVertical,\n  onChanged: (index) {},\n)`}
+/>
+
+
+### Icon Only
+
+Tabs with only icons. Best for compact layouts where labels are unnecessary.
+
+<PreviewCard
+  webCode={`<asm-tab-group variant="icon">\n  <asm-tab icon="format_bold" label="Bold" active></asm-tab>\n  <asm-tab icon="format_italic" label="Italic"></asm-tab>\n  <asm-tab icon="format_underlined" label="Underline"></asm-tab>\n</asm-tab-group>`}
+  flutterCode={`AsmTabs(\n  items: [\n    AsmTabItem(\n      icon: Icons.format_bold,\n      semanticLabel: 'Bold',\n      automationIdentifier: 'tab-bold',\n    ),\n    AsmTabItem(\n      icon: Icons.format_italic,\n      semanticLabel: 'Italic',\n      automationIdentifier: 'tab-italic',\n    ),\n    AsmTabItem(\n      icon: Icons.format_underlined,\n      semanticLabel: 'Underline',\n      automationIdentifier: 'tab-underline',\n    ),\n  ],\n  selectedIndex: 0,\n  type: AsmTabType.icon,\n  onChanged: (index) {},\n)`}
+/>
+
+
+## Guidelines
+
+- Use clear, concise labels that describe the content within each tab
+- Keep the number of tabs manageable — 2 to 6 is ideal
+- Don't nest tabs within tabs
+- Always provide a `label` even for icon-only tabs (used as accessible name)
+- In Flutter, provide `semanticLabel` for icon-only tabs for accessibility
+- Use the `tab-change` event (Web) or `onChanged` callback (Flutter) to respond to tab selection
+
+## API
+
+### asm-tab-group (Web)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `variant` | `text` \| `icon-horizontal` \| `icon-vertical` \| `icon` | `text` | The tab layout style |
+
+#### Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `tab-change` | `{ index: number }` | Fired when the active tab changes |
+
+### asm-tab (Web)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | The tab label text |
+| `icon` | `string` | `''` | Material Symbols icon name |
+| `active` | `boolean` | `false` | Whether the tab is active |
+
+### AsmTabs (Flutter)
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `items` | `List<AsmTabItem>` | required | List of tab items |
+| `selectedIndex` | `int` | required | Index of the selected tab |
+| `onChanged` | `ValueChanged<int>?` | `null` | Selection callback. `null` disables the strip |
+| `type` | `AsmTabType` | `.iconLabelHorizontal` | Tab layout type |
+| `showFocusIndicator` | `bool` | `true` | Show focus ring on focused tabs |
+
+### AsmTabItem (Flutter)
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `automationIdentifier` | `String` | required | Stable ID for UI automation |
+| `label` | `String?` | `null` | Tab label (required except for icon-only) |
+| `icon` | `IconData?` | `null` | Tab icon (required except for text-only) |
+| `showBadge` | `bool` | `false` | Show notification badge dot |
+| `semanticLabel` | `String?` | `null` | Override announced label |

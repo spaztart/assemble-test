@@ -1,0 +1,259 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import '../styles/base-layout.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  hasSidebar?: boolean;
+}
+
+const { title, description = 'Design System Documentation', hasSidebar = false } = Astro.props;
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const topNavItems = [
+  { label: 'Docs', href: `${base}/introduction` },
+  { label: 'Components', href: `${base}/components` },
+  { label: 'Assemblies', href: `${base}/assemblies` },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script is:inline>
+    // Render-blocking: prevent theme flicker before CSS loads
+    (function() {
+      const mode = localStorage.getItem('theme-mode') || 'light';
+      document.documentElement.setAttribute('data-theme', mode);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <title>{title}</title>
+  <link rel="icon" href={`${base}/favicon.ico`} sizes="any">
+  <style set:html={`
+    @font-face {
+      font-family: 'Departure Mono';
+      src: url('${base}/fonts/DepartureMono-Regular.woff2') format('woff2'),
+           url('${base}/fonts/DepartureMono-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'McAfee Sans Mono';
+      src: url('${base}/fonts/McAfeeSansMono-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'McAfee Sans Mono';
+      src: url('${base}/fonts/McAfeeSansMono-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  `} />
+  <link rel="stylesheet" href={`${base}/tokens.css`}>
+  <link rel="stylesheet" href={`${base}/component-page.css`}>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" id="prism-light">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" id="prism-dark" disabled>
+  <ViewTransitions />
+</head>
+<body>
+  <div class="site-container">
+    <header class="top-nav" role="banner" transition:persist>
+      <div class="top-nav-content">
+        <div class="header-left">
+          <a href={`${base}/`} class="logo" aria-label="Assemble Home" style="position: relative;">
+            <img class="logo-img" src={`${base}/assemble-logo.svg`} alt="Assemble" />
+            <asm-badge label="Beta" status="high" style="position: absolute; top: -4px; right: -28px; transform: scale(0.85); transform-origin: center; outline: 1px solid var(--md-sys-color-error); border-radius: 999px;"></asm-badge>
+          </a>
+          <nav id="header-nav-panel" class="header-nav" aria-label="Main navigation">
+            <button type="button" class="mobile-nav-close" aria-label="Close menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <ul class="nav-list" role="menubar">
+              {topNavItems.map(item => (
+                <li role="none">
+                  <a href={item.href} role="menuitem" class="nav-link">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+        <div class="header-right">
+          <div class="header-search">
+            <button type="button" class="search-trigger" id="search-trigger" aria-label="Open search">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M13 13l4 4" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <span class="search-placeholder">Search</span>
+              <kbd class="search-shortcut"><span>⌘</span>K</kbd>
+            </button>
+          </div>
+          <div class="theme-controls" transition:persist>
+            <asm-tooltip message="Toggle light/dark mode" position="bottom">
+              <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+                <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </button>
+            </asm-tooltip>
+            <asm-tooltip message="Toggle contrast" position="bottom">
+              <button class="theme-btn" id="contrastToggle" aria-label="Toggle contrast">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2 A 10 10 0 0 1 12 22 Z" fill="currentColor"></path>
+                </svg>
+                <span class="contrast-badge" id="contrastBadge"></span>
+              </button>
+            </asm-tooltip>
+          </div>
+          <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="header-nav-panel" style="display:none !important">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-nav-container">
+      {hasSidebar && (
+        <button type="button" class="mobile-sidebar-toggle" aria-label="Open sidebar navigation" aria-expanded="false">
+          <asm-icon name="dock_to_right" style="font-size: 20px;"></asm-icon>
+        </button>
+      )}
+      <nav class="mobile-nav-links">
+        <a href={`${base}/introduction`} class="mobile-nav-link">Docs</a>
+        <a href={`${base}/components`} class="mobile-nav-link">Components</a>
+        <a href={`${base}/assemblies`} class="mobile-nav-link">Assemblies</a>
+      </nav>
+    </div>
+
+    <slot />
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <img class="footer-logo" src={`${base}/assemble-logo.svg`} alt="Assemble" />
+            <p class="footer-description">
+              Assemble is an adaptable system of guidelines, components, and tools that support the best practices of user interface design. Backed by design tokens, Assemble streamlines collaboration between designers and developers, and helps teams quickly build beautiful products.
+            </p>
+          </div>
+          <div class="footer-links" style="display:none;">
+            <div class="footer-column">
+              <h3 class="footer-heading">Social</h3>
+              <ul class="footer-list">
+                <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">X</a></li>
+                <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                <li><a href={`${base}/blog`}>Blog RSS</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h3 class="footer-heading">Resources</h3>
+              <ul class="footer-list">
+                <li><a href={`${base}/introduction`}>Documentation</a></li>
+                <li><a href={`${base}/components`}>Components</a></li>
+                <li><a href={`${base}/assemblies`}>Assemblies</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-legal">
+            <a href={`${base}/privacy`}>Privacy Policy</a>
+            <a href={`${base}/terms`}>Terms of Service</a>
+            <a href={`${base}/feedback`}>Feedback</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay" aria-hidden="true" transition:persist>
+    <div class="search-overlay-backdrop"></div>
+    <div class="search-overlay-container" role="dialog" aria-modal="true" aria-label="Search documentation">
+      <div class="search-overlay-content">
+        <div class="search-overlay-header">
+          <svg class="search-overlay-icon" width="24" height="24" viewBox="0 0 20 20" aria-hidden="true">
+            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M13 13l4 4" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <input type="search"
+                 id="search-overlay-input"
+                 class="search-overlay-input"
+                 placeholder="Search documentation"
+                 autocomplete="off"
+                 role="combobox"
+                 aria-expanded="true"
+                 aria-controls="search-results"
+                 aria-autocomplete="list"
+                 aria-label="Search documentation">
+        </div>
+        <div class="search-overlay-body" role="listbox" aria-label="Search results">
+          <div class="search-recent" id="search-recent" style="display: none;">
+            <div class="search-section-label">Recent searches</div>
+            <ul class="search-recent-list" id="search-recent-list" role="group" aria-label="Recent searches"></ul>
+          </div>
+          <div class="search-results" id="search-results" style="display: none;" role="group" aria-label="Search results"></div>
+          <div class="search-empty" id="search-empty" style="display: none;" role="status" aria-live="polite">
+            <p>No results found</p>
+          </div>
+        </div>
+        <div class="search-overlay-footer">
+          <div class="search-hint">
+            <kbd>↑</kbd><kbd>↓</kbd> to navigate
+          </div>
+          <div class="search-hint">
+            <kbd>Enter</kbd> to select
+          </div>
+          <div class="search-hint">
+            <kbd>Esc</kbd> to dismiss
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Snackbar -->
+  <asm-snackbar id="global-snackbar"></asm-snackbar>
+
+  <!-- Prism.js for syntax highlighting -->
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
+
+<script>
+  import '../scripts/base-layout-init';
+  import '../scripts/flutter-view';
+</script>

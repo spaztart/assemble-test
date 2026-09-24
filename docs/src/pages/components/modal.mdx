@@ -1,0 +1,219 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Modal - Design System
+description: Modal component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Modal
+
+A centered modal dialog with a blurred backdrop. Use for confirmation prompts, promotional callouts, or any focused decision point. Supports a default surface variant and a gradient promotional variant.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-button label="Open Modal" variant="filled" id="hero-modal-trigger"></asm-button>
+    <asm-button label="Open Gradient" variant="tonal" id="hero-gradient-trigger"></asm-button>
+    <asm-button label="Custom Content" variant="outline" id="hero-custom-trigger"></asm-button>
+  </div>
+</div>
+
+<asm-modal id="hero-modal" header="Confirm Action" body="Are you sure you want to proceed? This action cannot be undone.">
+  <div slot="actions">
+    <asm-button label="Cancel" variant="text" id="hero-modal-cancel"></asm-button>
+    <asm-button label="Confirm" variant="filled" id="hero-modal-confirm"></asm-button>
+  </div>
+</asm-modal>
+
+<asm-modal id="hero-gradient-modal" gradient header="Upgrade to Pro" body="Get unlimited access to all features and priority support.">
+  <div slot="actions">
+    <asm-button label="Later" variant="text" id="hero-gradient-cancel"></asm-button>
+    <asm-button label="Upgrade" variant="filled" id="hero-gradient-confirm"></asm-button>
+  </div>
+</asm-modal>
+
+<asm-modal id="hero-custom-modal">
+  <div style="width: 360px; text-align: center; padding: 16px;">
+    <asm-icon name="check_circle" style="font-size: 48px; color: var(--mcafee-color-extended-positive);"></asm-icon>
+    <h2 style="margin: 16px 0 8px;">Success!</h2>
+    <p style="margin: 0 0 24px; opacity: 0.7;">Your changes have been saved.</p>
+    <asm-button label="Done" variant="filled" id="hero-custom-done"></asm-button>
+  </div>
+</asm-modal>
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('hero-modal-trigger')?.addEventListener('click', () => {
+      document.getElementById('hero-modal').open = true;
+    });
+    document.getElementById('hero-modal-cancel')?.addEventListener('click', () => {
+      document.getElementById('hero-modal').open = false;
+    });
+    document.getElementById('hero-modal-confirm')?.addEventListener('click', () => {
+      document.getElementById('hero-modal').open = false;
+    });
+    document.getElementById('hero-gradient-trigger')?.addEventListener('click', () => {
+      document.getElementById('hero-gradient-modal').open = true;
+    });
+    document.getElementById('hero-gradient-cancel')?.addEventListener('click', () => {
+      document.getElementById('hero-gradient-modal').open = false;
+    });
+    document.getElementById('hero-gradient-confirm')?.addEventListener('click', () => {
+      document.getElementById('hero-gradient-modal').open = false;
+    });
+    document.getElementById('hero-custom-trigger')?.addEventListener('click', () => {
+      document.getElementById('hero-custom-modal').open = true;
+    });
+    document.getElementById('hero-custom-done')?.addEventListener('click', () => {
+      document.getElementById('hero-custom-modal').open = false;
+    });
+  });
+`}</script>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/modal"
+  componentUsage={`<asm-modal open header="Title" body="Message content.">\n  <div slot="actions">\n    <asm-button label="OK" variant="filled"></asm-button>\n  </div>\n</asm-modal>`}
+  flutterUsage={`AsmModal.showStandard(\n  context: context,\n  header: 'Title',\n  body: 'Message content.',\n  primaryAction: AsmButton(\n    label: 'OK',\n    onPressed: () => Navigator.pop(context),\n  ),\n)`}
+/>
+
+## Standard Text Modal
+
+Uses `header` and `body` properties for structured content with an actions slot.
+
+<div class="preview-card">
+  <div class="component-preview">
+    <div class="preview-row" style="justify-content: center;">
+      <div style="position: relative; background: var(--md-sys-color-surface); border-radius: 28px; box-shadow: 0 0 20px rgba(0,0,0,0.15); padding: 24px; max-width: 420px; width: 100%;">
+        <button style="position: absolute; top: 20px; right: 20px; border: none; background: none; cursor: pointer; color: var(--md-sys-color-on-surface); font-size: 24px; padding: 0;"><asm-icon name="close"></asm-icon></button>
+        <h2 style="font-family: 'McAfee Sans', sans-serif; font-weight: 700; font-size: 28px; line-height: 36px; margin: 0 32px 0 0; color: var(--md-sys-color-on-surface);">Delete Item?</h2>
+        <p style="font-family: 'McAfee Sans', sans-serif; font-size: 16px; line-height: 24px; margin: 16px 0 0; color: var(--md-sys-color-on-surface);">This will permanently remove the item from your library. This action cannot be undone.</p>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px;">
+          <asm-button label="Cancel" variant="text"></asm-button>
+          <asm-button label="Delete" variant="filled" destructive></asm-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <CodeBlock
+    webCode={`<asm-modal open header="Delete Item?" body="This will permanently remove the item from your library. This action cannot be undone.">\n  <div slot="actions">\n    <asm-button label="Cancel" variant="text"></asm-button>\n    <asm-button label="Delete" variant="filled" destructive></asm-button>\n  </div>\n</asm-modal>`}
+    flutterCode={`AsmModal.showStandard(\n  context: context,\n  header: 'Delete Item?',\n  body: 'This will permanently remove the item from your library. This action cannot be undone.',\n  primaryAction: AsmButton(\n    label: 'Cancel',\n    variant: AsmButtonVariant.text,\n    onPressed: () => Navigator.pop(context),\n  ),\n  secondaryAction: AsmButton(\n    label: 'Delete',\n    destructive: true,\n    onPressed: () {\n      // Delete logic\n      Navigator.pop(context);\n    },\n  ),\n)`}
+  />
+</div>
+
+## Gradient Modal
+
+Promotional variant with gradient background. Close icon and text automatically switch to white.
+
+<div class="preview-card">
+  <div class="component-preview">
+    <div class="preview-row" style="justify-content: center;">
+      <div style="position: relative; background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-secondary)); border-radius: 28px; box-shadow: 0 0 20px rgba(0,0,0,0.15); padding: 24px; max-width: 420px; width: 100%;">
+        <button style="position: absolute; top: 20px; right: 20px; border: none; background: none; cursor: pointer; color: #fff; font-size: 24px; padding: 0;"><asm-icon name="close"></asm-icon></button>
+        <h2 style="font-family: 'McAfee Sans', sans-serif; font-weight: 700; font-size: 28px; line-height: 36px; margin: 0 32px 0 0; color: #fff;">Upgrade to Pro</h2>
+        <p style="font-family: 'McAfee Sans', sans-serif; font-size: 16px; line-height: 24px; margin: 16px 0 0; color: #fff;">Get unlimited access to all premium features and priority support.</p>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px;">
+          <asm-button label="Maybe Later" variant="text"></asm-button>
+          <asm-button label="Upgrade" variant="filled"></asm-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <CodeBlock
+    webCode={`<asm-modal open gradient header="Upgrade to Pro" body="Get unlimited access to all premium features and priority support.">\n  <div slot="actions">\n    <asm-button label="Maybe Later" variant="text"></asm-button>\n    <asm-button label="Upgrade" variant="filled"></asm-button>\n  </div>\n</asm-modal>`}
+    flutterCode={`AsmModal.showStandard(\n  context: context,\n  header: 'Upgrade to Pro',\n  body: 'Get unlimited access to all premium features and priority support.',\n  gradient: context.asmExtendedColors.brandGradient,\n  primaryAction: AsmButton(\n    label: 'Maybe Later',\n    variant: AsmButtonVariant.text,\n    onPressed: () => Navigator.pop(context),\n  ),\n  secondaryAction: AsmButton(\n    label: 'Upgrade',\n    onPressed: () {\n      // Upgrade logic\n      Navigator.pop(context);\n    },\n  ),\n)`}
+  />
+</div>
+
+## Custom Content
+
+Use the default slot for fully custom modal content (success states, forms, media, etc.).
+
+<div class="preview-card">
+  <div class="component-preview">
+    <div class="preview-row" style="justify-content: center;">
+      <div style="position: relative; background: var(--md-sys-color-surface); border-radius: 28px; box-shadow: 0 0 20px rgba(0,0,0,0.15); padding: 24px; max-width: 420px; width: 100%; text-align: center;">
+        <button style="position: absolute; top: 20px; right: 20px; border: none; background: none; cursor: pointer; color: var(--md-sys-color-on-surface); font-size: 24px; padding: 0;"><asm-icon name="close"></asm-icon></button>
+        <asm-icon name="check_circle" style="font-size: 48px; color: var(--mcafee-color-extended-positive);"></asm-icon>
+        <h2 style="margin: 16px 0 8px;">Success!</h2>
+        <p style="margin: 0 0 24px; opacity: 0.7;">Your changes have been saved.</p>
+        <asm-button label="Done" variant="filled"></asm-button>
+      </div>
+    </div>
+  </div>
+  <CodeBlock
+    webCode={`<asm-modal open>\n  <div style="width: 360px; text-align: center; padding: 16px;">\n    <asm-icon name="check_circle" style="font-size: 48px; color: var(--mcafee-color-extended-positive);"></asm-icon>\n    <h2 style="margin: 16px 0 8px;">Success!</h2>\n    <p style="margin: 0 0 24px; opacity: 0.7;">Your changes have been saved.</p>\n    <asm-button label="Done" variant="filled"></asm-button>\n  </div>\n</asm-modal>`}
+    flutterCode={`AsmModal.show(\n  context: context,\n  child: Column(\n    mainAxisSize: MainAxisSize.min,\n    children: [\n      Icon(Icons.check_circle, size: 48, color: extended.positive),\n      SizedBox(height: 16),\n      Text('Success!', style: typography.headlineMediumEmphasized),\n      SizedBox(height: 8),\n      Text('Your changes have been saved.'),\n      SizedBox(height: 24),\n      AsmButton(label: 'Done', onPressed: () => Navigator.pop(context)),\n    ],\n  ),\n)`}
+  />
+</div>
+
+## Without Close Button
+
+Hide the X button when dismissal should only happen via action buttons.
+
+<div class="preview-card">
+  <div class="component-preview">
+    <div class="preview-row" style="justify-content: center;">
+      <div style="position: relative; background: var(--md-sys-color-surface); border-radius: 28px; box-shadow: 0 0 20px rgba(0,0,0,0.15); padding: 24px; max-width: 420px; width: 100%;">
+        <h2 style="font-family: 'McAfee Sans', sans-serif; font-weight: 700; font-size: 28px; line-height: 36px; margin: 0; color: var(--md-sys-color-on-surface);">Terms of Service</h2>
+        <p style="font-family: 'McAfee Sans', sans-serif; font-size: 16px; line-height: 24px; margin: 16px 0 0; color: var(--md-sys-color-on-surface);">Please review and accept the terms to continue.</p>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px;">
+          <asm-button label="Decline" variant="text"></asm-button>
+          <asm-button label="Accept" variant="filled"></asm-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <CodeBlock
+    webCode={`<asm-modal open header="Terms of Service" body="Please review and accept the terms to continue." show-close="false">\n  <div slot="actions">\n    <asm-button label="Decline" variant="text"></asm-button>\n    <asm-button label="Accept" variant="filled"></asm-button>\n  </div>\n</asm-modal>`}
+    flutterCode={`AsmModal.showStandard(\n  context: context,\n  header: 'Terms of Service',\n  body: 'Please review and accept the terms to continue.',\n  showCloseButton: false,\n  primaryAction: AsmButton(\n    label: 'Decline',\n    variant: AsmButtonVariant.text,\n    onPressed: () => Navigator.pop(context),\n  ),\n  secondaryAction: AsmButton(\n    label: 'Accept',\n    onPressed: () => Navigator.pop(context),\n  ),\n)`}
+  />
+</div>
+
+## Guidelines
+
+- Use modals for focused tasks that require attention (confirmations, promotions)
+- Keep modal content concise — avoid scrolling inside modals
+- Always provide a clear way to dismiss (close button, backdrop click, or Escape key)
+- Use the gradient variant sparingly for promotional content
+- Place the primary action button on the right
+- Avoid stacking multiple modals
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `open` | `boolean` | `false` | Whether the modal is visible |
+| `header` | `string` | `''` | Header text (standard variant) |
+| `body` | `string` | `''` | Body text (standard variant) |
+| `gradient` | `boolean` | `false` | Use gradient background |
+| `show-close` | `boolean` | `true` | Show close button |
+| `barrier-dismiss` | `boolean` | `true` | Close on backdrop click |
+| `aria-label` | `string` | `''` | Accessible label |
+
+**Slots:**
+| Slot | Description |
+|------|-------------|
+| default | Custom content (replaces header/body) |
+| actions | Action buttons row |
+
+**Events:**
+| Event | Description |
+|-------|-------------|
+| `close` | Fired when modal is dismissed |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `child` | `Widget` | required | Content widget |
+| `onClose` | `VoidCallback?` | `null` | Close handler |
+| `showCloseButton` | `bool` | `true` | Show close button |
+| `gradient` | `Gradient?` | `null` | Gradient background |
+| `contentPadding` | `EdgeInsets` | `EdgeInsets.all(24)` | Content padding |
+| `semanticLabel` | `String?` | `null` | Accessible label |
+| `barrierDismissible` | `bool` | `true` | Close on backdrop tap |

@@ -1,0 +1,1 @@
+{"version":3,"file":"status-notification.d.ts","sourceRoot":"","sources":["../../../src/components/status-notification/status-notification.ts"],"names":[],"mappings":"AAAA,OAAO,qBAAqB,MAAM,oCAAoC,CAAC;AAEvE,cAAc,oCAAoC,CAAC;AACnD,eAAe,qBAAqB,CAAC;AAIrC,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,yBAAyB,EAAE,qBAAqB,CAAC;KAClD;CACF"}

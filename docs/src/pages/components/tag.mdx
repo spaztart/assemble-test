@@ -1,0 +1,88 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Tag - Design System
+description: Tag component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Tag
+
+Tags are compact elements used for labeling, filtering, or triggering actions. They support icons, close actions, and multiple visual variants.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-tag label="Standard"></asm-tag>
+    <asm-tag label="Critical" variant="critical"></asm-tag>
+    <asm-tag label="Filter" variant="filter" closable></asm-tag>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/tag"
+  componentUsage='<asm-tag label="Category"></asm-tag>'
+  flutterUsage={`AsmTag(\n  label: 'Category',\n)`}
+/>
+
+## Variants
+
+### Standard
+
+The default tag style for general labeling and categorization.
+
+<PreviewCard
+  webCode={`<asm-tag label="Label"></asm-tag>\n<asm-tag label="With icon" leading-icon="folder"></asm-tag>\n<asm-tag label="Closable" closable></asm-tag>`}
+  flutterCode={`AsmTag(label: 'Label')\n\nAsmTag(\n  label: 'With icon',\n  leadingIcon: Icons.folder,\n)\n\nAsmTag(\n  label: 'Closable',\n  closable: true,\n  onClose: () {},\n)`}
+/>
+
+
+### Critical
+
+For high-severity or error-related labels.
+
+<PreviewCard
+  webCode={`<asm-tag label="Error" variant="critical"></asm-tag>\n<asm-tag label="Critical" variant="critical" leading-icon="error"></asm-tag>`}
+  flutterCode={`AsmTag(label: 'Error', variant: AsmTagVariant.critical)\n\nAsmTag(\n  label: 'Critical',\n  variant: AsmTagVariant.critical,\n  leadingIcon: Icons.error,\n)`}
+/>
+
+
+### Filter
+
+Used in filter interfaces, typically closable to remove filters.
+
+<PreviewCard
+  webCode={`<asm-tag label="Active filter" variant="filter" closable></asm-tag>\n<asm-tag label="Category" variant="filter" leading-icon="label" closable></asm-tag>`}
+  flutterCode={`AsmTag(\n  label: 'Active filter',\n  variant: AsmTagVariant.filter,\n  closable: true,\n  onClose: () {},\n)\n\nAsmTag(\n  label: 'Category',\n  variant: AsmTagVariant.filter,\n  leadingIcon: Icons.label,\n  closable: true,\n  onClose: () {},\n)`}
+/>
+
+
+## Guidelines
+
+- Keep tag text concise (1-3 words)
+- Use closable tags for user-removable filters
+- Use the critical variant sparingly for genuine issues
+- Group related tags together horizontally with consistent spacing
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Tag label text |
+| `variant` | `standard` \| `critical` \| `filter` | `standard` | Visual variant |
+| `leading-icon` | `string` | `''` | Material Symbols icon name |
+| `closable` | `boolean` | `false` | Show close button |
+| `close-label` | `string` | `'Remove'` | Accessible label for close button |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `label` | `String` | required | Tag label text |
+| `variant` | `AsmTagVariant` | `.standard` | Visual variant |
+| `leadingIcon` | `IconData?` | `null` | Leading icon |
+| `closable` | `bool` | `false` | Show close button |
+| `onClose` | `VoidCallback?` | `null` | Close handler |

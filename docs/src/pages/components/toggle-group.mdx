@@ -1,0 +1,107 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Toggle Group - Design System
+description: Toggle group component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Toggle Group
+
+Toggle groups provide a set of mutually exclusive options presented as connected segments. Use for switching between views, filters, or modes.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-toggle-group>
+      <asm-toggle-item label="Day"></asm-toggle-item>
+      <asm-toggle-item label="Week"></asm-toggle-item>
+      <asm-toggle-item label="Month"></asm-toggle-item>
+    </asm-toggle-group>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/toggle-group"
+  componentUsage={`<asm-toggle-group>\n  <asm-toggle-item label="Option A"></asm-toggle-item>\n  <asm-toggle-item label="Option B"></asm-toggle-item>\n</asm-toggle-group>`}
+  flutterUsage={`AsmToggleGroup(\n  items: [\n    AsmToggleItem(label: 'Option A'),\n    AsmToggleItem(label: 'Option B'),\n  ],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)`}
+/>
+
+## Variants
+
+### Page
+
+The default pill-shaped variant for page-level navigation and mode switching.
+
+<PreviewCard
+  webCode={`<asm-toggle-group variant="page">\n  <asm-toggle-item label="Overview"></asm-toggle-item>\n  <asm-toggle-item label="Details"></asm-toggle-item>\n  <asm-toggle-item label="History"></asm-toggle-item>\n</asm-toggle-group>`}
+  flutterCode={`AsmToggleGroup(\n  variant: AsmToggleGroupVariant.page,\n  items: [\n    AsmToggleItem(label: 'Overview'),\n    AsmToggleItem(label: 'Details'),\n    AsmToggleItem(label: 'History'),\n  ],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)`}
+/>
+
+
+### Section
+
+A chip-style variant for section-level filtering, supports wrapping.
+
+<PreviewCard
+  webCode={`<asm-toggle-group variant="section">\n  <asm-toggle-item label="All"></asm-toggle-item>\n  <asm-toggle-item label="Active"></asm-toggle-item>\n  <asm-toggle-item label="Resolved"></asm-toggle-item>\n  <asm-toggle-item label="Archived"></asm-toggle-item>\n</asm-toggle-group>`}
+  flutterCode={`AsmToggleGroup(\n  variant: AsmToggleGroupVariant.section,\n  items: [\n    AsmToggleItem(label: 'All'),\n    AsmToggleItem(label: 'Active'),\n    AsmToggleItem(label: 'Resolved'),\n    AsmToggleItem(label: 'Archived'),\n  ],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)`}
+/>
+
+
+## Sizes
+
+Page variant supports four sizes.
+
+<PreviewCard
+  webCode={`<asm-toggle-group size="xsmall">\n  <asm-toggle-item label="A"></asm-toggle-item>\n  <asm-toggle-item label="B"></asm-toggle-item>\n</asm-toggle-group>\n\n<asm-toggle-group size="small">\n  <asm-toggle-item label="A"></asm-toggle-item>\n  <asm-toggle-item label="B"></asm-toggle-item>\n</asm-toggle-group>\n\n<asm-toggle-group size="medium">\n  <asm-toggle-item label="A"></asm-toggle-item>\n  <asm-toggle-item label="B"></asm-toggle-item>\n</asm-toggle-group>\n\n<asm-toggle-group size="large">\n  <asm-toggle-item label="A"></asm-toggle-item>\n  <asm-toggle-item label="B"></asm-toggle-item>\n</asm-toggle-group>`}
+  flutterCode={`AsmToggleGroup(\n  size: AsmToggleGroupSize.xsmall,\n  items: [AsmToggleItem(label: 'A'), AsmToggleItem(label: 'B')],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)\n\nAsmToggleGroup(\n  size: AsmToggleGroupSize.small,\n  items: [AsmToggleItem(label: 'A'), AsmToggleItem(label: 'B')],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)\n\nAsmToggleGroup(\n  size: AsmToggleGroupSize.medium,\n  items: [AsmToggleItem(label: 'A'), AsmToggleItem(label: 'B')],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)\n\nAsmToggleGroup(\n  size: AsmToggleGroupSize.large,\n  items: [AsmToggleItem(label: 'A'), AsmToggleItem(label: 'B')],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)`}
+/>
+
+
+## With Icons
+
+Items can have leading and trailing icons.
+
+<PreviewCard
+  webCode={`<asm-toggle-group>\n  <asm-toggle-item label="List" start-icon="view_list"></asm-toggle-item>\n  <asm-toggle-item label="Grid" start-icon="grid_view"></asm-toggle-item>\n</asm-toggle-group>`}
+  flutterCode={`AsmToggleGroup(\n  items: [\n    AsmToggleItem(label: 'List', startIcon: Icons.view_list),\n    AsmToggleItem(label: 'Grid', startIcon: Icons.grid_view),\n  ],\n  selectedIndex: 0,\n  onChanged: (index) {},\n)`}
+/>
+
+
+## Guidelines
+
+- Use 2-5 items in a toggle group
+- Keep labels short (1-2 words)
+- One item should always be selected
+- Use page variant for top-level navigation, section variant for local filtering
+
+## API
+
+### Web — asm-toggle-group
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `variant` | `page` \| `section` | `page` | Visual variant |
+| `size` | `xsmall` \| `small` \| `medium` \| `large` | `medium` | Group size (page variant) |
+| `selected-index` | `number` | `0` | Currently selected index |
+| `disabled` | `boolean` | `false` | Disabled state |
+
+### Web — asm-toggle-item
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Item label text |
+| `start-icon` | `string` | `''` | Leading icon name |
+| `end-icon` | `string` | `''` | Trailing icon name |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `items` | `List<AsmToggleItem>` | required | Toggle items |
+| `selectedIndex` | `int` | `0` | Currently selected index |
+| `onChanged` | `ValueChanged<int>` | required | Change handler |
+| `variant` | `AsmToggleGroupVariant` | `.page` | Visual variant |
+| `size` | `AsmToggleGroupSize` | `.medium` | Group size |

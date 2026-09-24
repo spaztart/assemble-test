@@ -1,0 +1,159 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Topbar - Design System
+description: Topbar component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Topbar
+
+A top navigation bar available in compact (mobile/tablet) and desktop variants. Supports home, back, general, and progress layouts.
+
+<div class="hero-preview">
+  <div class="preview-row" style="flex-direction: column; gap: 16px; width: 100%; max-width: 420px;">
+    <div style="border: 1px solid var(--md-sys-color-outline-variant, #e0e0e0); border-radius: 12px; overflow: hidden;">
+      <asm-topbar type="home" show-badge>
+        <span slot="brand" style="font-weight: 700; font-size: 18px;">McAfee</span>
+      </asm-topbar>
+    </div>
+    <div style="border: 1px solid var(--md-sys-color-outline-variant, #e0e0e0); border-radius: 12px; overflow: hidden;">
+      <asm-topbar type="back" title="Account Settings" show-title></asm-topbar>
+    </div>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/topbar"
+  componentUsage={`<asm-topbar type="home">\n  <span slot="brand">McAfee</span>\n</asm-topbar>`}
+  flutterUsage={`AsmTopbarCompact(\n  type: AsmTopbarCompactType.home,\n  showNotificationBadge: true,\n)`}
+/>
+
+## Home Type
+
+Menu tile (left) + centered brand slot + notifications tile (right) with optional badge.
+
+<PreviewCard
+  webCode={`<asm-topbar type="home" show-badge>\n  <span slot="brand" style="font-weight: 700;">McAfee</span>\n</asm-topbar>`}
+  flutterCode={`AsmTopbarCompact(\n  type: AsmTopbarCompactType.home,\n  showNotificationBadge: true,\n  onLeftPressed: () => openDrawer(),\n  onRightPressed: () => openNotifications(),\n)`}
+/>
+
+## Back Type
+
+Back-arrow tile + optional title + optional right tile.
+
+<PreviewCard
+  webCode='<asm-topbar type="back" title="Account" show-title></asm-topbar>'
+  flutterCode={`AsmTopbarCompact(\n  type: AsmTopbarCompactType.back,\n  title: 'Account',\n  showTitle: true,\n  onLeftPressed: () => Navigator.pop(context),\n)`}
+/>
+
+## General Type
+
+Optional left/right actions with optional title.
+
+<PreviewCard
+  webCode='<asm-topbar type="general" title="Search" show-title left-icon="close" right-icon="filter_list"></asm-topbar>'
+  flutterCode={`AsmTopbarCompact(\n  type: AsmTopbarCompactType.general,\n  title: 'Search',\n  showTitle: true,\n  leftIcon: Icons.close,\n  rightIcon: Icons.filter_list,\n)`}
+/>
+
+## Progress Type
+
+Left action + brand-gradient progress bar + right action.
+
+<PreviewCard
+  webCode='<asm-topbar type="progress" progress="0.65"></asm-topbar>'
+  flutterCode={`AsmTopbarCompact(\n  type: AsmTopbarCompactType.progress,\n  progress: 0.65,\n  onLeftPressed: () => Navigator.pop(context),\n)`}
+/>
+
+## Desktop - Full Header
+
+Back chevron + icon tile + title + optional subtitle. Entire row is a single tap target.
+
+<PreviewCard
+  webCode='<asm-topbar-desktop title="Protection Score" sub-title="SECURITY" leading-icon="shield"></asm-topbar-desktop>'
+  flutterCode={`AsmTopbarDesktop(\n  title: 'Protection Score',\n  subTitle: 'SECURITY',\n  leadingIcon: Icons.shield,\n  onPressed: () => Navigator.pop(context),\n)`}
+/>
+
+## Desktop - Back Only
+
+Minimal back button variant.
+
+<PreviewCard
+  webCode='<asm-topbar-desktop type="back-only"></asm-topbar-desktop>'
+  flutterCode={`AsmTopbarDesktop(\n  type: AsmTopbarDesktopType.backOnly,\n  onPressed: () => Navigator.pop(context),\n)`}
+/>
+
+## Guidelines
+
+- Use compact topbar for mobile/tablet viewports
+- Use desktop topbar for wider layouts
+- Home type should show brand wordmark or logo in the brand slot
+- Back type automatically shows a back arrow
+- Progress type is for multi-step flows (value 0–1)
+- Tiles are 48×48 with 8px radius on surface-container
+- Desktop full-header supports hover/pressed state layers
+
+## API
+
+### Web (Compact)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `'home' \| 'back' \| 'general' \| 'progress'` | `'home'` | Layout variant |
+| `title` | `string` | `''` | Title text |
+| `show-title` | `boolean` | `false` | Render the title |
+| `show-left` | `boolean` | `true` | Show left tile |
+| `show-right` | `boolean` | `true` | Show right tile |
+| `left-icon` | `string` | varies | Left tile icon |
+| `right-icon` | `string` | `'notifications'` | Right tile icon |
+| `show-badge` | `boolean` | `false` | Notification badge |
+| `progress` | `number` | `0` | Progress value (0–1) |
+
+| Event | Description |
+|-------|-------------|
+| `left-press` | Left tile clicked |
+| `right-press` | Right tile clicked |
+
+### Web (Desktop)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `'full-header' \| 'back-only'` | `'full-header'` | Layout variant |
+| `title` | `string` | `''` | Title text |
+| `sub-title` | `string` | `''` | Mono uppercase subtitle |
+| `show-back` | `boolean` | `true` | Show back chevron |
+| `show-icon` | `boolean` | `true` | Show leading icon tile |
+| `leading-icon` | `string` | `'visibility'` | Icon in leading tile |
+
+| Event | Description |
+|-------|-------------|
+| `press` | Topbar activated |
+
+### Flutter (Compact)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `AsmTopbarCompactType` | `.home` | Layout variant |
+| `title` | `String?` | `null` | Title text |
+| `showTitle` | `bool` | `false` | Render title |
+| `leftIcon` | `IconData?` | varies | Left tile icon |
+| `rightIcon` | `IconData` | `notifications_outlined` | Right tile icon |
+| `showNotificationBadge` | `bool` | `false` | Badge on right tile |
+| `progress` | `double` | `0` | Progress value |
+| `onLeftPressed` | `VoidCallback?` | `null` | Left tap handler |
+| `onRightPressed` | `VoidCallback?` | `null` | Right tap handler |
+
+### Flutter (Desktop)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `AsmTopbarDesktopType` | `.fullHeader` | Layout variant |
+| `title` | `String?` | `null` | Title text |
+| `subTitle` | `String?` | `null` | Mono subtitle |
+| `showBack` | `bool` | `true` | Show back chevron |
+| `showIcon` | `bool` | `true` | Show icon tile |
+| `leadingIcon` | `IconData` | `visibility` | Leading icon |
+| `onPressed` | `VoidCallback?` | `null` | Tap handler |

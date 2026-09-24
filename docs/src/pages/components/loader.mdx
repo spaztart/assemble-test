@@ -1,0 +1,74 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Loader - Design System
+description: Loader component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# Loader
+
+An indeterminate circular loading spinner. Use when content is being fetched or a process is running.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-loader></asm-loader>
+    <asm-loader size="24" stroke-width="2"></asm-loader>
+    <asm-loader size="60" stroke-width="4"></asm-loader>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/loader"
+  componentUsage='<asm-loader></asm-loader>'
+  flutterUsage={`AsmLoader(\n  size: 40,\n  style: AsmLoaderStyle.bar,\n)`}
+/>
+
+## Bar Style (Default)
+
+Short arc spinner ideal for inline loading indicators.
+
+<PreviewCard
+  webCode='<asm-loader></asm-loader>'
+  flutterCode={`AsmLoader(\n  size: 40,\n  style: AsmLoaderStyle.bar,\n  strokeWidth: 3,\n)`}
+/>
+
+## Custom Sizes
+
+<PreviewCard
+  webCode={`<asm-loader size="24" stroke-width="2"></asm-loader>\n<asm-loader size="60" stroke-width="4"></asm-loader>`}
+  flutterCode={`Row(\n  children: [\n    AsmLoader(size: 24, strokeWidth: 2),\n    AsmLoader(size: 60, strokeWidth: 4),\n  ],\n)`}
+/>
+
+## Guidelines
+
+- Use the loader for inline loading (buttons, inputs, cards, nav items)
+- Always provide semantic labels for accessibility
+- Respect reduced-motion preferences — the spinner pauses automatically
+- Avoid multiple loaders in close proximity
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `size` | `number` | `40` | Width and height of the spinner in pixels |
+| `variant` | `'bar'` | `'bar'` | Visual style |
+| `stroke-width` | `number` | `3` | Stroke thickness |
+| `aria-label` | `string` | `'Loading'` | Accessible label |
+
+### Flutter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `size` | `double` | `40` | Outer dimension |
+| `style` | `AsmLoaderStyle` | `.bar` | Visual style (bar or halfTrack) |
+| `strokeWidth` | `double` | `3` | Stroke thickness |
+| `foregroundColor` | `Color?` | `secondary` | Arc color |
+| `trackColor` | `Color?` | `ghost` | Track color |
+| `duration` | `Duration` | `1100ms` | Full rotation duration |
+| `semanticLabel` | `String` | `'Loading'` | Screen-reader label |

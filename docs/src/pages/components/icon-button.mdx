@@ -1,0 +1,136 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Icon Button - Design System
+description: Icon button component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Icon Button
+
+Icon buttons help people take supplementary actions with a single tap. Use icon buttons for compact actions like toggling a favorite, opening a menu, or performing a delete.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-icon-button icon="favorite" variant="standard"></asm-icon-button>
+    <asm-icon-button icon="favorite" variant="filled"></asm-icon-button>
+    <asm-icon-button icon="favorite" variant="tonal"></asm-icon-button>
+    <asm-icon-button icon="favorite" variant="outline"></asm-icon-button>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/icon-button"
+  componentUsage='<asm-icon-button icon="favorite" label="Favorite"></asm-icon-button>'
+  flutterUsage={`AsmIconButton(\n  icon: Icon(Icons.favorite),\n  automationIdentifier: 'favorite-btn',\n  tooltip: 'Favorite',\n  onPressed: () {},\n)`}
+/>
+
+## Variants
+
+### Standard
+
+The default icon button with no background. Ideal for toolbar actions and less prominent controls.
+
+<PreviewCard
+  webCode={`<asm-icon-button icon="settings" label="Settings"></asm-icon-button>\n<asm-icon-button icon="share" label="Share"></asm-icon-button>\n<asm-icon-button icon="settings" label="Disabled" disabled></asm-icon-button>`}
+  flutterCode={`AsmIconButton(\n  icon: Icon(Icons.settings),\n  variant: AsmIconButtonVariant.iconOnly,\n  automationIdentifier: 'settings-btn',\n  tooltip: 'Settings',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.share),\n  variant: AsmIconButtonVariant.iconOnly,\n  automationIdentifier: 'share-btn',\n  tooltip: 'Share',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.settings),\n  variant: AsmIconButtonVariant.iconOnly,\n  automationIdentifier: 'settings-btn',\n  tooltip: 'Disabled',\n  onPressed: null,\n)`}
+/>
+
+
+### Filled
+
+High-emphasis icon button with a solid background. Use for primary icon actions.
+
+<PreviewCard
+  webCode={`<asm-icon-button icon="add" variant="filled" label="Add"></asm-icon-button>\n<asm-icon-button icon="edit" variant="filled" label="Edit"></asm-icon-button>\n<asm-icon-button icon="add" variant="filled" label="Disabled" disabled></asm-icon-button>`}
+  flutterCode={`AsmIconButton(\n  icon: Icon(Icons.add),\n  variant: AsmIconButtonVariant.filled,\n  automationIdentifier: 'add-btn',\n  tooltip: 'Add',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.edit),\n  variant: AsmIconButtonVariant.filled,\n  automationIdentifier: 'edit-btn',\n  tooltip: 'Edit',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.add),\n  variant: AsmIconButtonVariant.filled,\n  automationIdentifier: 'add-btn',\n  tooltip: 'Disabled',\n  onPressed: null,\n)`}
+/>
+
+
+### Tonal
+
+A softer emphasis icon button. Uses the surface container color for a subtler appearance.
+
+<PreviewCard
+  webCode={`<asm-icon-button icon="bookmark" variant="tonal" label="Bookmark"></asm-icon-button>\n<asm-icon-button icon="download" variant="tonal" label="Download"></asm-icon-button>\n<asm-icon-button icon="bookmark" variant="tonal" label="Disabled" disabled></asm-icon-button>`}
+  flutterCode={`AsmIconButton(\n  icon: Icon(Icons.bookmark),\n  variant: AsmIconButtonVariant.tonal,\n  automationIdentifier: 'bookmark-btn',\n  tooltip: 'Bookmark',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.download),\n  variant: AsmIconButtonVariant.tonal,\n  automationIdentifier: 'download-btn',\n  tooltip: 'Download',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.bookmark),\n  variant: AsmIconButtonVariant.tonal,\n  automationIdentifier: 'bookmark-btn',\n  tooltip: 'Disabled',\n  onPressed: null,\n)`}
+/>
+
+
+### Outline
+
+A medium-emphasis icon button with a border. Use alongside filled icon buttons for secondary actions.
+
+<PreviewCard
+  webCode={`<asm-icon-button icon="more_vert" variant="outline" label="More"></asm-icon-button>\n<asm-icon-button icon="close" variant="outline" label="Close"></asm-icon-button>\n<asm-icon-button icon="more_vert" variant="outline" label="Disabled" disabled></asm-icon-button>`}
+  flutterCode={`AsmIconButton(\n  icon: Icon(Icons.more_vert),\n  variant: AsmIconButtonVariant.outline,\n  automationIdentifier: 'more-btn',\n  tooltip: 'More',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.close),\n  variant: AsmIconButtonVariant.outline,\n  automationIdentifier: 'close-btn',\n  tooltip: 'Close',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.more_vert),\n  variant: AsmIconButtonVariant.outline,\n  automationIdentifier: 'more-btn',\n  tooltip: 'Disabled',\n  onPressed: null,\n)`}
+/>
+
+
+## Sizes
+
+Icon buttons come in four sizes. Use **default** as the standard size.
+
+<PreviewCard
+  align="center"
+  webCode={`<asm-icon-button icon="favorite" variant="filled" size="huge" label="Huge"></asm-icon-button>\n<asm-icon-button icon="favorite" variant="filled" size="spacious" label="Spacious"></asm-icon-button>\n<asm-icon-button icon="favorite" variant="filled" size="default" label="Default"></asm-icon-button>\n<asm-icon-button icon="favorite" variant="filled" size="compact" label="Compact"></asm-icon-button>`}
+  flutterCode={`AsmIconButton(\n  icon: Icon(Icons.favorite),\n  variant: AsmIconButtonVariant.filled,\n  size: AsmIconButtonSize.large,\n  automationIdentifier: 'fav-huge',\n  tooltip: 'Huge',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.favorite),\n  variant: AsmIconButtonVariant.filled,\n  size: AsmIconButtonSize.medium,\n  automationIdentifier: 'fav-spacious',\n  tooltip: 'Spacious',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.favorite),\n  variant: AsmIconButtonVariant.filled,\n  size: AsmIconButtonSize.small,\n  automationIdentifier: 'fav-default',\n  tooltip: 'Default',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.favorite),\n  variant: AsmIconButtonVariant.filled,\n  size: AsmIconButtonSize.xsmall,\n  automationIdentifier: 'fav-compact',\n  tooltip: 'Compact',\n  onPressed: () {},\n)`}
+/>
+
+
+## Destructive
+
+Add `destructive` for dangerous or irreversible actions.
+
+<PreviewCard
+  webCode={`<asm-icon-button icon="delete" variant="filled" destructive label="Delete"></asm-icon-button>\n<asm-icon-button icon="delete" variant="tonal" destructive label="Delete"></asm-icon-button>\n<asm-icon-button icon="delete" variant="standard" destructive label="Delete"></asm-icon-button>`}
+  flutterCode={`AsmIconButton(\n  icon: Icon(Icons.delete),\n  variant: AsmIconButtonVariant.filled,\n  destructive: true,\n  automationIdentifier: 'delete-btn',\n  tooltip: 'Delete',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.delete),\n  variant: AsmIconButtonVariant.tonal,\n  destructive: true,\n  automationIdentifier: 'delete-btn',\n  tooltip: 'Delete',\n  onPressed: () {},\n)\n\nAsmIconButton(\n  icon: Icon(Icons.delete),\n  variant: AsmIconButtonVariant.iconOnly,\n  destructive: true,\n  automationIdentifier: 'delete-btn',\n  tooltip: 'Delete',\n  onPressed: () {},\n)`}
+/>
+
+
+## Toggle
+
+Use the `selected` attribute to indicate a toggled state, such as a bookmarked or favorited item.
+
+<PreviewCard
+  webCode={`<asm-icon-button icon="favorite" variant="filled" selected label="Favorited"></asm-icon-button>\n<asm-icon-button icon="bookmark" variant="tonal" selected label="Bookmarked"></asm-icon-button>\n<asm-icon-button icon="star" variant="standard" selected label="Starred"></asm-icon-button>`}
+  flutterCode={`// Toggle state is managed by the parent widget.\n// Use onPressed to toggle a boolean state variable.`}
+/>
+
+
+## Guidelines
+
+- Always provide a `label` for accessibility — icon buttons have no visible text
+- Use `selected` for toggle states like bookmark, favorite, or pin
+- Use `destructive` only for irreversible actions like delete
+- Prefer `standard` variant for toolbars to reduce visual noise
+- Provide a `tooltip` in Flutter for hover/long-press discoverability
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `icon` | `string` | `''` | Material Symbols icon name |
+| `variant` | `standard` \| `filled` \| `tonal` \| `outline` | `standard` | The visual style |
+| `size` | `huge` \| `spacious` \| `default` \| `compact` | `default` | The button size |
+| `disabled` | `boolean` | `false` | Whether the button is disabled |
+| `destructive` | `boolean` | `false` | Destructive/danger mode |
+| `selected` | `boolean` | `false` | Toggle selected state |
+| `label` | `string` | `''` | Accessible label (aria-label) |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `icon` | `Widget` | required | Icon widget to display |
+| `automationIdentifier` | `String` | required | Stable ID for UI test automation |
+| `onPressed` | `VoidCallback?` | `null` | Tap handler. `null` disables the button |
+| `tooltip` | `String?` | `null` | Hover/long-press tooltip |
+| `semanticLabel` | `String?` | `null` | Override announced label for assistive tech |
+| `variant` | `AsmIconButtonVariant` | `.filled` | The visual style |
+| `size` | `AsmIconButtonSize` | `.large` | The button size |
+| `destructive` | `bool` | `false` | Destructive/danger mode |

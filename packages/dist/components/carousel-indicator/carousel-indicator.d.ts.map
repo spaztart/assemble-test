@@ -1,0 +1,1 @@
+{"version":3,"file":"carousel-indicator.d.ts","sourceRoot":"","sources":["../../../src/components/carousel-indicator/carousel-indicator.ts"],"names":[],"mappings":"AAAA,OAAO,oBAAoB,MAAM,mCAAmC,CAAC;AAErE,cAAc,mCAAmC,CAAC;AAClD,eAAe,oBAAoB,CAAC;AAIpC,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,wBAAwB,EAAE,oBAAoB,CAAC;KAChD;CACF"}

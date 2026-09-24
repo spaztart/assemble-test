@@ -1,0 +1,84 @@
+---
+/**
+ * InstallSteps — Installation stepper with Web/Flutter tabs.
+ * Props:
+ *   packageName: string     — npm package name (e.g. "@assemble/components")
+ *   componentImport: string — JS import path (e.g. "@assemble/components/button")
+ *   componentUsage: string  — HTML usage example
+ *   flutterPackage?: string — Flutter package name (default: "assemble_flutter")
+ *   flutterImport?: string  — Dart import (default: "package:assemble_flutter/assemble_flutter.dart")
+ *   flutterUsage: string    — Dart usage example
+ */
+interface Props {
+  packageName?: string;
+  componentImport: string;
+  componentUsage: string;
+  flutterPackage?: string;
+  flutterImport?: string;
+  flutterUsage: string;
+}
+
+const {
+  packageName = '@assemble/components',
+  componentImport,
+  componentUsage,
+  flutterPackage = 'assemble_flutter',
+  flutterImport = "package:assemble_flutter/assemble_flutter.dart",
+  flutterUsage,
+} = Astro.props;
+---
+<asm-tab-group variant="text" id="installTabs">
+  <asm-tab label="Web" active></asm-tab>
+  <asm-tab label="Flutter"></asm-tab>
+</asm-tab-group>
+
+<div class="install-panel install-panel--web active">
+  <ol class="stepper">
+    <li class="stepper__step">
+      <div class="stepper__indicator"><span class="stepper__number">1</span><span class="stepper__line"></span></div>
+      <div class="stepper__content">
+        <p class="stepper__title">Install the package</p>
+        <pre><code class="language-bash" set:text={`npm install ${packageName}`} /></pre>
+      </div>
+    </li>
+    <li class="stepper__step">
+      <div class="stepper__indicator"><span class="stepper__number">2</span><span class="stepper__line"></span></div>
+      <div class="stepper__content">
+        <p class="stepper__title">Import the component</p>
+        <pre><code class="language-js" set:text={`import '${componentImport}';`} /></pre>
+      </div>
+    </li>
+    <li class="stepper__step">
+      <div class="stepper__indicator"><span class="stepper__number">3</span></div>
+      <div class="stepper__content">
+        <p class="stepper__title">Use in your HTML</p>
+        <pre><code class="language-html" set:text={componentUsage} /></pre>
+      </div>
+    </li>
+  </ol>
+</div>
+<div class="install-panel install-panel--flutter">
+  <ol class="stepper">
+    <li class="stepper__step">
+      <div class="stepper__indicator"><span class="stepper__number">1</span><span class="stepper__line"></span></div>
+      <div class="stepper__content">
+        <p class="stepper__title">Add the dependency</p>
+        <pre><code class="language-yaml" set:text={`dependencies:\n  ${flutterPackage}: ^1.0.0`} /></pre>
+      </div>
+    </li>
+    <li class="stepper__step">
+      <div class="stepper__indicator"><span class="stepper__number">2</span><span class="stepper__line"></span></div>
+      <div class="stepper__content">
+        <p class="stepper__title">Install</p>
+        <pre><code class="language-bash">flutter pub get</code></pre>
+      </div>
+    </li>
+    <li class="stepper__step">
+      <div class="stepper__indicator"><span class="stepper__number">3</span></div>
+      <div class="stepper__content">
+        <p class="stepper__title">Import and use</p>
+        <pre><code class="language-dart" set:text={`import '${flutterImport}';\n\n${flutterUsage}`} /></pre>
+      </div>
+    </li>
+  </ol>
+</div>

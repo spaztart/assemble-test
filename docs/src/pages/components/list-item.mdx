@@ -1,0 +1,154 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: List Item - Design System
+description: List item component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+# List Item
+
+A feature list item row for dashboards, settings lists, and accordion bodies. Supports leading icon, overline, title, supporting text, trailing chevron, expandable content, unread dot, and badge count states.
+
+<div class="hero-preview">
+  <div class="preview-row" style="flex-direction: column; gap: 4px; width: 100%; max-width: 480px;">
+    <asm-list-item title="Account Settings" supporting-text="Manage your profile and preferences">
+      <asm-icon slot="leading" name="person" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+    </asm-list-item>
+    <asm-list-item title="Notifications" supporting-text="Configure alert preferences" state="unread">
+      <asm-icon slot="leading" name="notifications" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+    </asm-list-item>
+    <asm-list-item title="Messages" supporting-text="View your inbox" state="badge" badge-count="3">
+      <asm-icon slot="leading" name="mail" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>
+    </asm-list-item>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/list-item"
+  componentUsage={`<asm-list-item title="Settings" supporting-text="Manage preferences">\n  <asm-icon slot="leading" name="settings"></asm-icon>\n</asm-list-item>`}
+  flutterUsage={`AsmListItemFeature(\n  title: 'Settings',\n  supportingText: 'Manage preferences',\n  leading: AsmIconContainer(icon: Icons.settings),\n  onPressed: () {},\n)`}
+/>
+
+## Interactive (Default)
+
+Full button contract with hover, focus, keyboard activation, and trailing chevron.
+
+<PreviewCard
+  webCode={`<asm-list-item title="Account Settings" supporting-text="Manage your profile">\n  <asm-icon slot="leading" name="person" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>\n</asm-list-item>`}
+  flutterCode={`AsmListItemFeature(\n  title: 'Account Settings',\n  supportingText: 'Manage your profile',\n  leading: AsmIconContainer(icon: Icons.person),\n  onPressed: () => navigateTo('/account'),\n)`}
+/>
+
+## With Overline
+
+Optional uppercase mono overline above the title for categorization.
+
+<PreviewCard
+  webCode={`<asm-list-item overline="Security" title="Protection Score" supporting-text="Your device is protected">\n  <asm-icon slot="leading" name="shield" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>\n</asm-list-item>`}
+  flutterCode={`AsmListItemFeature(\n  overline: 'Security',\n  title: 'Protection Score',\n  supportingText: 'Your device is protected',\n  leading: AsmIconContainer(icon: Icons.shield),\n  onPressed: () {},\n)`}
+/>
+
+## Unread State
+
+Appends a small secondary-colored dot next to the title.
+
+<PreviewCard
+  webCode={`<asm-list-item title="Notifications" supporting-text="3 new alerts" state="unread">\n  <asm-icon slot="leading" name="notifications" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>\n</asm-list-item>`}
+  flutterCode={`AsmListItemFeature(\n  title: 'Notifications',\n  supportingText: '3 new alerts',\n  state: AsmListItemFeatureState.unread,\n  leading: AsmIconContainer(icon: Icons.notifications),\n  onPressed: () {},\n)`}
+/>
+
+## Badge State
+
+Shows a count badge on the leading icon.
+
+<PreviewCard
+  webCode={`<asm-list-item title="Messages" supporting-text="View your inbox" state="badge" badge-count="5">\n  <asm-icon slot="leading" name="mail" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>\n</asm-list-item>`}
+  flutterCode={`AsmListItemFeature(\n  title: 'Messages',\n  supportingText: 'View your inbox',\n  state: AsmListItemFeatureState.badge,\n  leading: AsmIconContainer(icon: Icons.mail, badgeCount: 5),\n  onPressed: () {},\n)`}
+/>
+
+## Read-Only
+
+No hover, no focus, no chevron. Use for informational rows.
+
+<PreviewCard
+  webCode={`<asm-list-item kind="read-only" title="Last Scan" supporting-text="June 29, 2026 at 10:42 AM">\n  <asm-icon slot="leading" name="schedule" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>\n</asm-list-item>`}
+  flutterCode={`AsmListItemFeature(\n  title: 'Last Scan',\n  supportingText: 'June 29, 2026 at 10:42 AM',\n  kind: AsmListItemFeatureKind.readOnly,\n  leading: AsmIconContainer(icon: Icons.schedule),\n)`}
+/>
+
+## Disabled
+
+Dimmed to 38% opacity with no interaction.
+
+<PreviewCard
+  webCode={`<asm-list-item title="Premium Features" supporting-text="Upgrade to unlock" disabled>\n  <asm-icon slot="leading" name="lock" style="font-size: 24px; padding: 8px; background: var(--md-sys-color-surface-container-high); border-radius: 8px;"></asm-icon>\n</asm-list-item>`}
+  flutterCode={`AsmListItemFeature(\n  title: 'Premium Features',\n  supportingText: 'Upgrade to unlock',\n  onPressed: null, // disabled\n  leading: AsmIconContainer(icon: Icons.lock),\n)`}
+/>
+
+## Expandable
+
+Use the `expanded` slot and attribute to reveal additional content below the row.
+
+<CodeBlock
+  webCode={`<asm-list-item title="Advanced Options" expanded>\n  <asm-icon slot="leading" name="tune"></asm-icon>\n  <div slot="expanded">\n    <p>Additional settings and configuration options appear here.</p>\n  </div>\n</asm-list-item>`}
+  flutterCode={`AsmListItemFeature(\n  title: 'Advanced Options',\n  leading: AsmIconContainer(icon: Icons.tune),\n  expandedSlot: Text('Additional settings appear here.'),\n  expanded: true,\n  onPressed: () => setState(() => _expanded = !_expanded),\n)`}
+/>
+
+## Guidelines
+
+- Always provide a `title` — it's required for accessibility
+- Use overline sparingly for categorization (uppercase mono style)
+- Interactive rows have hover overlay, focus ring, and trailing chevron
+- Read-only rows have no interaction — use for static information
+- Disabled rows are dimmed to 38% opacity
+- The unread dot is secondary-colored and decorative
+- Badge count shows on the leading icon area (caps at 99+)
+- Expanded content animates open in a surface-container panel
+- Min row height is 76px with 16px border radius
+- Leading slot typically holds an icon in a 40×40 container
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `title` | `string` | `''` | Primary title text |
+| `overline` | `string` | `''` | Uppercase overline above title |
+| `supporting-text` | `string` | `''` | Secondary line below title |
+| `kind` | `'interactive' \| 'read-only'` | `'interactive'` | Interaction model |
+| `state` | `'default' \| 'unread' \| 'badge'` | `'default'` | Content state |
+| `badge-count` | `number` | `0` | Badge number (when state is badge) |
+| `show-trailing-icon` | `boolean` | `true` | Show trailing chevron |
+| `expanded` | `boolean` | `false` | Expanded slot visible |
+| `disabled` | `boolean` | `false` | Disabled state |
+
+| Slot | Description |
+|------|-------------|
+| `leading` | Leading content (icon, avatar) |
+| (default) | Right-content area |
+| `trailing` | Custom trailing widget |
+| `expanded` | Expandable body content |
+
+| Event | Description |
+|-------|-------------|
+| `press` | Row activated (click or Enter/Space) |
+
+### Flutter
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `title` | `String` | required | Primary text |
+| `overline` | `String?` | `null` | Uppercase overline |
+| `supportingText` | `String?` | `null` | Secondary text |
+| `kind` | `AsmListItemFeatureKind` | `.interactive` | Interaction model |
+| `state` | `AsmListItemFeatureState` | `.defaultState` | Content state |
+| `leading` | `Widget?` | `null` | Leading widget |
+| `trailing` | `Widget?` | `null` | Custom trailing widget |
+| `showTrailingIcon` | `bool` | `true` | Show chevron |
+| `expandedSlot` | `Widget?` | `null` | Expandable content |
+| `expanded` | `bool` | `false` | Expanded state |
+| `onPressed` | `VoidCallback?` | `null` | Tap handler (null = disabled) |
+| `rightContent` | `Widget?` | `null` | Right-aligned content |

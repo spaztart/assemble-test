@@ -1,0 +1,102 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Badge - Design System
+description: Badge component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Badge
+
+Badges are compact status indicators that convey severity, counts, or categorical information. They support multiple statuses and visual types for flexible communication.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-badge label="High" status="high"></asm-badge>
+    <asm-badge label="Moderate" status="moderate"></asm-badge>
+    <asm-badge label="Low" status="low"></asm-badge>
+    <asm-badge label="Neutral" status="neutral"></asm-badge>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/badge"
+  componentUsage='<asm-badge label="Critical" status="high"></asm-badge>'
+  flutterUsage={`AsmBadge(\n  label: 'Critical',\n  status: AsmBadgeStatus.high,\n)`}
+/>
+
+## Status
+
+Badges support multiple status levels to convey severity.
+
+<PreviewCard
+  webCode={`<asm-badge label="High" status="high"></asm-badge>\n<asm-badge label="Moderate" status="moderate"></asm-badge>\n<asm-badge label="Low" status="low"></asm-badge>\n<asm-badge label="Neutral" status="neutral"></asm-badge>\n<asm-badge label="Dismissed" status="dismissed"></asm-badge>`}
+  flutterCode={`AsmBadge(label: 'High', status: AsmBadgeStatus.high)\nAsmBadge(label: 'Moderate', status: AsmBadgeStatus.moderate)\nAsmBadge(label: 'Low', status: AsmBadgeStatus.low)\nAsmBadge(label: 'Neutral', status: AsmBadgeStatus.neutral)\nAsmBadge(label: 'Dismissed', status: AsmBadgeStatus.dismissed)`}
+/>
+
+
+## Types
+
+### Primary
+
+<PreviewCard
+  webCode={`<asm-badge label="High" status="high" type="primary"></asm-badge>\n<asm-badge label="Moderate" status="moderate" type="primary"></asm-badge>`}
+  flutterCode={`AsmBadge(label: 'High', status: AsmBadgeStatus.high, type: AsmBadgeType.primary)\nAsmBadge(label: 'Moderate', status: AsmBadgeStatus.moderate, type: AsmBadgeType.primary)`}
+/>
+
+
+### Secondary
+
+<PreviewCard
+  webCode={`<asm-badge label="High" status="high" type="secondary"></asm-badge>\n<asm-badge label="Moderate" status="moderate" type="secondary"></asm-badge>`}
+  flutterCode={`AsmBadge(label: 'High', status: AsmBadgeStatus.high, type: AsmBadgeType.secondary)\nAsmBadge(label: 'Moderate', status: AsmBadgeStatus.moderate, type: AsmBadgeType.secondary)`}
+/>
+
+
+### Tertiary
+
+<PreviewCard
+  webCode={`<asm-badge label="High" status="high" type="tertiary"></asm-badge>\n<asm-badge label="Moderate" status="moderate" type="tertiary"></asm-badge>`}
+  flutterCode={`AsmBadge(label: 'High', status: AsmBadgeStatus.high, type: AsmBadgeType.tertiary)\nAsmBadge(label: 'Moderate', status: AsmBadgeStatus.moderate, type: AsmBadgeType.tertiary)`}
+/>
+
+
+## With Icon
+
+<PreviewCard
+  webCode={`<asm-badge label="Alert" status="high" icon="warning"></asm-badge>\n<asm-badge label="Info" status="neutral" icon="info"></asm-badge>`}
+  flutterCode={`AsmBadge(label: 'Alert', status: AsmBadgeStatus.high, icon: Icons.warning)\nAsmBadge(label: 'Info', status: AsmBadgeStatus.neutral, icon: Icons.info)`}
+/>
+
+
+## Guidelines
+
+- Use badges for status, severity, or category labels
+- Keep label text short (1-2 words)
+- Use consistent status colors across the application
+- Don't overload a single view with too many badges
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Badge label text |
+| `status` | `high` \| `moderate` \| `low` \| `neutral` \| `dismissed` \| `stat` \| `offline` | `neutral` | Severity status |
+| `type` | `primary` \| `secondary` \| `tertiary` | `primary` | Visual emphasis type |
+| `icon` | `string` | `''` | Material Symbols icon name |
+| `number` | `number` | `0` | Numeric count display |
+| `dot-position` | `string` | `''` | Position for dot indicator |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `label` | `String` | required | Badge label text |
+| `status` | `AsmBadgeStatus` | `.neutral` | Severity status |
+| `type` | `AsmBadgeType` | `.primary` | Visual emphasis type |
+| `icon` | `IconData?` | `null` | Leading icon |
+| `number` | `int?` | `null` | Numeric count |

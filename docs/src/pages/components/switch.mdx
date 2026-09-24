@@ -1,0 +1,121 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Switch - Design System
+description: Switch component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Switch
+
+Switches toggle the state of a single setting on or off. They provide immediate results without requiring a form submission.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-switch value></asm-switch>
+    <asm-switch></asm-switch>
+    <asm-switch value size="small"></asm-switch>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/switch"
+  componentUsage='<asm-switch value></asm-switch>'
+  flutterUsage={`AsmSwitch(\n  value: true,\n  onChanged: (value) {},\n)`}
+/>
+
+## States
+
+### On / Off
+
+<PreviewCard
+  webCode={`<asm-switch value></asm-switch>\n<asm-switch></asm-switch>`}
+  flutterCode={`AsmSwitch(\n  value: true,\n  onChanged: (value) {},\n)\n\nAsmSwitch(\n  value: false,\n  onChanged: (value) {},\n)`}
+/>
+
+
+### Disabled
+
+<PreviewCard
+  webCode={`<asm-switch value disabled></asm-switch>\n<asm-switch disabled></asm-switch>`}
+  flutterCode={`AsmSwitch(\n  value: true,\n  onChanged: null,\n)\n\nAsmSwitch(\n  value: false,\n  onChanged: null,\n)`}
+/>
+
+
+## Sizes
+
+<PreviewCard
+  webCode={`<asm-switch value size="large"></asm-switch>\n<asm-switch value size="medium"></asm-switch>\n<asm-switch value size="small"></asm-switch>`}
+  flutterCode={`AsmSwitch(\n  value: true,\n  size: AsmSwitchSize.large,\n  onChanged: (value) {},\n)\n\nAsmSwitch(\n  value: true,\n  size: AsmSwitchSize.medium,\n  onChanged: (value) {},\n)\n\nAsmSwitch(\n  value: true,\n  size: AsmSwitchSize.small,\n  onChanged: (value) {},\n)`}
+/>
+
+
+## Tones
+
+### Secondary (Default)
+
+<PreviewCard
+  webCode={`<asm-switch value tone="secondary"></asm-switch>`}
+  flutterCode={`AsmSwitch(\n  value: true,\n  tone: AsmSwitchTone.secondary,\n  onChanged: (value) {},\n)`}
+/>
+
+
+### Primary
+
+<PreviewCard
+  webCode={`<asm-switch value tone="primary"></asm-switch>`}
+  flutterCode={`AsmSwitch(\n  value: true,\n  tone: AsmSwitchTone.primary,\n  onChanged: (value) {},\n)`}
+/>
+
+
+## With Icon
+
+Display an icon on the handle when the switch is on.
+
+<PreviewCard
+  webCode={`<asm-switch value icon="check"></asm-switch>`}
+  flutterCode={`AsmSwitch(\n  value: true,\n  icon: Icons.check,\n  onChanged: (value) {},\n)`}
+/>
+
+
+## Loading
+
+<PreviewCard
+  webCode={`<asm-switch value loading></asm-switch>`}
+  flutterCode={`AsmSwitch(\n  value: true,\n  loading: true,\n  onChanged: (value) {},\n)`}
+/>
+
+
+## Guidelines
+
+- Use switches for immediate binary settings (on/off, enable/disable)
+- Don't use switches when a save/submit action is required — use checkboxes instead
+- Always provide a visible label alongside the switch
+- Use the loading state for async operations
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `boolean` | `false` | Whether the switch is on |
+| `size` | `large` \| `medium` \| `small` | `medium` | Switch size |
+| `tone` | `secondary` \| `primary` | `secondary` | Color tone |
+| `icon` | `string` | `''` | Icon shown when on |
+| `loading` | `boolean` | `false` | Loading spinner state |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `label` | `string` | `''` | Accessible label (aria-label) |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | `bool` | required | Whether on |
+| `onChanged` | `ValueChanged<bool>?` | required | Change handler. `null` disables |
+| `size` | `AsmSwitchSize` | `.medium` | Switch size |
+| `tone` | `AsmSwitchTone` | `.secondary` | Color tone |
+| `icon` | `IconData?` | `null` | Icon when on |
+| `loading` | `bool` | `false` | Loading state |

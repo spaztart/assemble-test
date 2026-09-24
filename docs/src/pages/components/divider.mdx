@@ -1,0 +1,82 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Divider - Design System
+description: Divider component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Divider
+
+Dividers are thin lines that separate content into clear groups. They help establish visual hierarchy and organize layout sections.
+
+<div class="hero-preview">
+  <div class="preview-row" style="flex-direction:column;width:100%;max-width:400px;gap:16px">
+    <p style="margin:0;color:var(--md-sys-color-on-surface)">Section above</p>
+    <asm-divider></asm-divider>
+    <p style="margin:0;color:var(--md-sys-color-on-surface)">Section below</p>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/divider"
+  componentUsage='<asm-divider></asm-divider>'
+  flutterUsage={`AsmDivider()`}
+/>
+
+## Default
+
+A simple full-width horizontal line using the outline-variant color.
+
+<PreviewCard
+  webCode={`<asm-divider></asm-divider>`}
+  flutterCode={`AsmDivider()`}
+/>
+
+
+## With Indent
+
+Use `indent` and `end-indent` to inset the divider from the edges.
+
+<PreviewCard
+  webCode={`<asm-divider indent="16" end-indent="16"></asm-divider>\n<asm-divider indent="48"></asm-divider>`}
+  flutterCode={`AsmDivider(indent: 16, endIndent: 16)\n\nAsmDivider(indent: 48)`}
+/>
+
+
+## Custom Thickness
+
+<PreviewCard
+  webCode={`<asm-divider thickness="2"></asm-divider>\n<asm-divider thickness="4"></asm-divider>`}
+  flutterCode={`AsmDivider(thickness: 2)\n\nAsmDivider(thickness: 4)`}
+/>
+
+
+## Guidelines
+
+- Use dividers to separate distinct content groups
+- Avoid overusing dividers — whitespace alone is often sufficient
+- Use indented dividers within lists to align with text content
+- Default 1px thickness is appropriate for most cases
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `thickness` | `number` | `1` | Line thickness in pixels |
+| `indent` | `number` | `0` | Leading indent in pixels |
+| `end-indent` | `number` | `0` | Trailing indent in pixels |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `thickness` | `double` | `1` | Line thickness |
+| `height` | `double?` | `null` | Total height including spacing |
+| `indent` | `double` | `0` | Leading indent |
+| `endIndent` | `double` | `0` | Trailing indent |
+| `color` | `Color?` | `null` | Custom line color |

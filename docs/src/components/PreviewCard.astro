@@ -1,0 +1,30 @@
+---
+/**
+ * PreviewCard — Component preview area + collapsible code block.
+ * Props:
+ *   webCode: string      — HTML code for the Web tab
+ *   flutterCode: string  — Dart code for the Flutter tab
+ *   webLang?: string     — Language for web code block (default: "html")
+ *   align?: string       — Alignment for preview-row (default: "flex-start")
+ *
+ * Default slot: The live component preview content.
+ */
+import CodeBlock from './CodeBlock.astro';
+
+interface Props {
+  webCode: string;
+  flutterCode: string;
+  webLang?: string;
+  align?: string;
+}
+
+const { webCode, flutterCode, webLang = 'html', align = 'flex-start' } = Astro.props;
+---
+<div class="preview-card">
+  <div class="component-preview">
+    <div class="preview-row" style={align !== 'flex-start' ? `align-items: ${align};` : undefined}>
+      <Fragment set:html={webCode} />
+    </div>
+  </div>
+  <CodeBlock webCode={webCode} flutterCode={flutterCode} webLang={webLang} />
+</div>

@@ -1,0 +1,132 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Alert Banner - Design System
+description: Alert Banner component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Alert Banner
+
+A compact, dismissable alert banner for short messages anchored to the top or bottom of a region. Use for informational messages with an optional action link — for example "Trial ends in 11 days" with a "View plans" action.
+
+<div class="hero-preview">
+  <div class="preview-row" style="flex-direction: column; gap: 12px; width: 100%;">
+    <asm-alert-banner title="Trial ends in 11 days" mode="neutral" action-label="View plans" style="width: 100%;"></asm-alert-banner>
+    <asm-alert-banner title="New features available" mode="info" action-label="Learn more" style="width: 100%;"></asm-alert-banner>
+    <asm-alert-banner title="Your subscription has expired" mode="critical" action-label="Renew now" style="width: 100%;"></asm-alert-banner>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/alert-banner"
+  componentUsage='<asm-alert-banner title="Trial ends in 11 days" action-label="View plans"></asm-alert-banner>'
+  flutterUsage={`AsmAlertBanner(\n  title: 'Trial ends in 11 days',\n  actionLabel: 'View plans',\n  onActionPressed: () {},\n  onClosePressed: () {},\n)`}
+/>
+
+## Modes
+
+### Neutral
+
+The default mode. Transparent surface with a 1px `on-surface-variant` border.
+
+<PreviewCard
+  webCode={`<asm-alert-banner title="Trial ends in 11 days" mode="neutral" action-label="View plans"></asm-alert-banner>`}
+  flutterCode={`AsmAlertBanner(\n  title: 'Trial ends in 11 days',\n  mode: AsmAlertBannerMode.neutral,\n  actionLabel: 'View plans',\n  onActionPressed: () {},\n  onClosePressed: () {},\n)`}
+/>
+
+### Info
+
+Secondary fill with `on-secondary` content. Use for informational messages.
+
+<PreviewCard
+  webCode={`<asm-alert-banner title="New features available" mode="info" action-label="Learn more"></asm-alert-banner>`}
+  flutterCode={`AsmAlertBanner(\n  title: 'New features available',\n  mode: AsmAlertBannerMode.info,\n  actionLabel: 'Learn more',\n  onActionPressed: () {},\n  onClosePressed: () {},\n)`}
+/>
+
+### Critical
+
+Error fill with `on-secondary` content. Use for urgent or error messages.
+
+<PreviewCard
+  webCode={`<asm-alert-banner title="Your subscription has expired" mode="critical" action-label="Renew now"></asm-alert-banner>`}
+  flutterCode={`AsmAlertBanner(\n  title: 'Your subscription has expired',\n  mode: AsmAlertBannerMode.critical,\n  actionLabel: 'Renew now',\n  onActionPressed: () {},\n  onClosePressed: () {},\n)`}
+/>
+
+### Positive
+
+Extended-positive fill with `on-secondary` content. Use for success confirmations.
+
+<PreviewCard
+  webCode={`<asm-alert-banner title="Account successfully verified" mode="positive"></asm-alert-banner>`}
+  flutterCode={`AsmAlertBanner(\n  title: 'Account successfully verified',\n  mode: AsmAlertBannerMode.positive,\n  onClosePressed: () {},\n)`}
+/>
+
+### Status
+
+Extended-attention fill with `on-secondary` content. Use for warnings or status updates.
+
+<PreviewCard
+  webCode={`<asm-alert-banner title="Maintenance scheduled for tonight" mode="status" action-label="Details"></asm-alert-banner>`}
+  flutterCode={`AsmAlertBanner(\n  title: 'Maintenance scheduled for tonight',\n  mode: AsmAlertBannerMode.status,\n  actionLabel: 'Details',\n  onActionPressed: () {},\n  onClosePressed: () {},\n)`}
+/>
+
+## Custom Icon
+
+Override the default `notification_important` icon with any Material Symbols name.
+
+<PreviewCard
+  webCode={`<asm-alert-banner title="Security scan complete" mode="positive" icon="shield"></asm-alert-banner>\n<asm-alert-banner title="Update available" mode="info" icon="system_update" action-label="Install"></asm-alert-banner>`}
+  flutterCode={`AsmAlertBanner(\n  title: 'Security scan complete',\n  mode: AsmAlertBannerMode.positive,\n  icon: Icons.shield,\n  onClosePressed: () {},\n)\n\nAsmAlertBanner(\n  title: 'Update available',\n  mode: AsmAlertBannerMode.info,\n  icon: Icons.system_update,\n  actionLabel: 'Install',\n  onActionPressed: () {},\n  onClosePressed: () {},\n)`}
+/>
+
+## Without Close Button
+
+Omit the close button for persistent banners.
+
+<PreviewCard
+  webCode={`<asm-alert-banner title="This banner cannot be dismissed" mode="info" show-close="false"></asm-alert-banner>`}
+  flutterCode={`AsmAlertBanner(\n  title: 'This banner cannot be dismissed',\n  mode: AsmAlertBannerMode.info,\n  onClosePressed: null,\n)`}
+/>
+
+## Guidelines
+
+- Keep banner titles concise — one line preferred
+- Use the action link for a clear next step (e.g. "View plans", "Renew now")
+- Use `neutral` for general messages, `critical` only for genuinely urgent issues
+- The banner auto-wraps long text; the action link flows inline on the second line
+- Always provide a close mechanism unless the banner is truly permanent
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `title` | `string` | `''` | Headline text shown right of the icon |
+| `mode` | `neutral` \| `info` \| `critical` \| `positive` \| `status` | `neutral` | Visual mode controlling colors |
+| `icon` | `string` | `notification_important` | Leading Material Symbols icon name |
+| `action-label` | `string` | `''` | Action link text. Empty = no link |
+| `show-close` | `boolean` | `true` | Whether the close button is shown |
+| `close-label` | `string` | `Dismiss` | Accessible label for close button |
+
+**Events:**
+| Event | Description |
+|-------|-------------|
+| `action` | Fired when the action link is clicked |
+| `close` | Fired when the close button is clicked |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `title` | `String` | required | Headline text |
+| `mode` | `AsmAlertBannerMode` | `.neutral` | Visual mode |
+| `icon` | `IconData` | `Icons.notification_important` | Leading icon |
+| `actionLabel` | `String?` | `null` | Action link text |
+| `onActionPressed` | `VoidCallback?` | `null` | Action handler |
+| `onClosePressed` | `VoidCallback?` | `null` | Close handler. `null` hides the button |
+| `closeSemanticLabel` | `String` | `'Dismiss'` | Accessible label for close |
+| `semanticLabel` | `String?` | `null` | Override announced text |

@@ -1,0 +1,86 @@
+---
+layout: ../../layouts/MarkdownLayout.astro
+title: Tooltip - Design System
+description: Tooltip component usage and guidelines
+---
+import PreviewCard from '../../components/PreviewCard.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+
+# Tooltip
+
+Tooltips display brief informational text when hovering or focusing on an element. They provide additional context without cluttering the UI.
+
+<div class="hero-preview">
+  <div class="preview-row">
+    <asm-tooltip message="This is a tooltip">
+      <asm-button label="Hover me" variant="tonal"></asm-button>
+    </asm-tooltip>
+  </div>
+</div>
+
+## Installation
+
+<InstallSteps
+  componentImport="@assemble/components/tooltip"
+  componentUsage={`<asm-tooltip message="Helpful text">\n  <button>Trigger</button>\n</asm-tooltip>`}
+  flutterUsage={`AsmTooltip(\n  message: 'Helpful text',\n  child: ElevatedButton(\n    onPressed: () {},\n    child: Text('Trigger'),\n  ),\n)`}
+/>
+
+## Types
+
+### Single Line
+
+The default compact tooltip for short messages.
+
+<PreviewCard
+  webCode={`<asm-tooltip message="Save changes">\n  <asm-icon-button icon="save" variant="tonal"></asm-icon-button>\n</asm-tooltip>`}
+  flutterCode={`AsmTooltip(\n  message: 'Save changes',\n  child: AsmIconButton(\n    icon: Icons.save,\n    onPressed: () {},\n  ),\n)`}
+/>
+
+
+### Multi Line
+
+For longer messages that wrap within a 200px max width.
+
+<PreviewCard
+  webCode={`<asm-tooltip message="This action will permanently remove the item from your account. This cannot be undone." type="multi-line">\n  <asm-button label="Delete" destructive></asm-button>\n</asm-tooltip>`}
+  flutterCode={`AsmTooltip(\n  message: 'This action will permanently remove the item from your account. This cannot be undone.',\n  type: AsmTooltipType.multiLine,\n  child: AsmButton(\n    label: 'Delete',\n    destructive: true,\n    onPressed: () {},\n  ),\n)`}
+/>
+
+
+## Positions
+
+Tooltips can be positioned on any side of the trigger element.
+
+<PreviewCard
+  webCode={`<asm-tooltip message="Top" position="top">\n  <asm-icon-button icon="arrow_upward" variant="tonal"></asm-icon-button>\n</asm-tooltip>\n\n<asm-tooltip message="Bottom" position="bottom">\n  <asm-icon-button icon="arrow_downward" variant="tonal"></asm-icon-button>\n</asm-tooltip>\n\n<asm-tooltip message="Left" position="left">\n  <asm-icon-button icon="arrow_back" variant="tonal"></asm-icon-button>\n</asm-tooltip>\n\n<asm-tooltip message="Right" position="right">\n  <asm-icon-button icon="arrow_forward" variant="tonal"></asm-icon-button>\n</asm-tooltip>`}
+  flutterCode={`AsmTooltip(\n  message: 'Top',\n  position: AsmTooltipPosition.top,\n  child: AsmIconButton(icon: Icons.arrow_upward, onPressed: () {}),\n)\n\nAsmTooltip(\n  message: 'Bottom',\n  position: AsmTooltipPosition.bottom,\n  child: AsmIconButton(icon: Icons.arrow_downward, onPressed: () {}),\n)\n\nAsmTooltip(\n  message: 'Left',\n  position: AsmTooltipPosition.left,\n  child: AsmIconButton(icon: Icons.arrow_back, onPressed: () {}),\n)\n\nAsmTooltip(\n  message: 'Right',\n  position: AsmTooltipPosition.right,\n  child: AsmIconButton(icon: Icons.arrow_forward, onPressed: () {}),\n)`}
+/>
+
+
+## Guidelines
+
+- Keep tooltip text brief (1-2 sentences max)
+- Don't put essential information only in tooltips
+- Use for icon-only buttons to explain their purpose
+- Avoid tooltips on touch-only devices (no hover)
+- Don't use for form validation messages — use inline error text instead
+
+## API
+
+### Web
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `message` | `string` | `''` | Tooltip text content |
+| `type` | `single-line` \| `multi-line` | `single-line` | Display type |
+| `position` | `top` \| `bottom` \| `left` \| `right` | `top` | Position relative to trigger |
+
+### Flutter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `message` | `String` | required | Tooltip text |
+| `type` | `AsmTooltipType` | `.singleLine` | Display type |
+| `position` | `AsmTooltipPosition` | `.top` | Position relative to trigger |
+| `child` | `Widget` | required | Trigger widget |

@@ -1,0 +1,670 @@
+{
+  "mcafee": {
+    "color": {
+      "extended": {
+        "gradient": {
+          "surface": {
+            "high": {
+              "stop-1": {
+                "$type": "color",
+                "$value": "{md.ref.brand.safety-orange}"
+              },
+              "stop-2": {
+                "$type": "color",
+                "$value": "{md.key.secondary}"
+              }
+            },
+            "moderate": {
+              "stop-1": {
+                "$type": "color",
+                "$value": "{md.key.secondary}"
+              },
+              "stop-2": {
+                "$type": "color",
+                "$value": "{md.ref.brand.mcafee-red}"
+              }
+            },
+            "low": {
+              "stop-1": {
+                "$type": "color",
+                "$value": "{md.key.positive}"
+              },
+              "stop-2": {
+                "$type": "color",
+                "$value": "{md.key.secondary}"
+              }
+            },
+            "loader": {
+              "stop-1": {
+                "$type": "color",
+                "$value": "{md.sys.color.surface-container-highest}"
+              },
+              "stop-2": {
+                "$type": "color",
+                "$value": "{md.sys.color.surface}"
+              }
+            }
+          },
+          "opaque": {
+            "stop-1": {
+              "$type": "color",
+              "$value": "{md.sys.color.background}"
+            },
+            "stop-2": {
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "alpha",
+                    "value": "0",
+                    "space": "srgb"
+                  }
+                }
+              },
+              "$type": "color",
+              "$value": "{md.sys.color.background}"
+            }
+          },
+          "brand": {
+            "stop-1": {
+              "$type": "color",
+              "$value": "{md.ref.brand.safety-orange}"
+            },
+            "stop-2": {
+              "$type": "color",
+              "$value": "{md.key.secondary}"
+            }
+          }
+        },
+        "opaque": {
+          "dark-40": {
+            "$type": "color",
+            "$value": "#00000066"
+          },
+          "dark-60": {
+            "$type": "color",
+            "$value": "#00000099"
+          },
+          "dark-70": {
+            "$type": "color",
+            "$value": "#000000b3"
+          },
+          "dark-80": {
+            "$type": "color",
+            "$value": "#000000CC"
+          }
+        },
+        "positive": {
+          "$type": "color",
+          "$value": "{md.ref.palette.positive40}"
+        },
+        "on-positive": {
+          "$type": "color",
+          "$value": "{md.ref.palette.positive100}"
+        },
+        "positive-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.positive90}"
+        },
+        "on-positive-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.positive20}"
+        },
+        "attention": {
+          "$type": "color",
+          "$value": "{md.ref.palette.attention50}"
+        },
+        "on-attention": {
+          "$type": "color",
+          "$value": "{md.ref.palette.attention100}"
+        },
+        "attention-container": {
+          "$type": "color",
+          "$value": "{md.ref.brand.light-orange}"
+        },
+        "on-attention-container": {
+          "$type": "color",
+          "$value": "{md.ref.brand.product-orange}"
+        },
+        "brand": {
+          "$type": "color",
+          "$value": "{md.ref.brand.mcafee-red}"
+        },
+        "brand-orange": {
+          "$type": "color",
+          "$value": "{md.ref.brand.product-orange}"
+        },
+        "on-brand": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary100}"
+        },
+        "brand-subtle": {
+          "$type": "color",
+          "$value": "{md.ref.brand.mcafee-light-red}"
+        },
+        "on-brand-subtle": {
+          "$type": "color",
+          "$value": "{mcafee.color.extended.brand}"
+        },
+        "ghost": {
+          "$type": "color",
+          "$value": "#00000030"
+        },
+        "transparent": {
+          "$type": "color",
+          "$value": "#0000000"
+        },
+        "black": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary0}"
+        },
+        "white": {
+          "$type": "color",
+          "$value": "#ffffff"
+        }
+      },
+      "chart": {
+        "tint": {
+          "0": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary5}"
+          },
+          "10": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary15}"
+          },
+          "20": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary25}"
+          },
+          "30": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary30}"
+          },
+          "40": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary40}"
+          },
+          "50": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary50}"
+          },
+          "60": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary60}"
+          },
+          "70": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary70}"
+          },
+          "80": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary80}"
+          },
+          "90": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary90}"
+          }
+        }
+      }
+    },
+    "shadow": {
+      "special": {
+        "$type": "boxShadow",
+        "$value": {
+          "x": "0",
+          "y": "2",
+          "blur": "48",
+          "spread": "0",
+          "color": "#00000020",
+          "type": "dropShadow"
+        }
+      }
+    }
+  },
+  "md": {
+    "sys": {
+      "color": {
+        "primary": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary0}"
+        },
+        "on-primary": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary100}"
+        },
+        "primary-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary10}"
+        },
+        "on-primary-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary70}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{md.ref.palette.secondary50}"
+        },
+        "on-secondary": {
+          "$type": "color",
+          "$value": "{md.ref.palette.secondary100}"
+        },
+        "secondary-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.secondary80}"
+        },
+        "on-secondary-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary35}"
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary40}"
+        },
+        "on-tertiary": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary100}"
+        },
+        "tertiary-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary90}"
+        },
+        "on-tertiary-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary40}"
+        },
+        "error": {
+          "$type": "color",
+          "$value": "{md.ref.palette.error50}"
+        },
+        "on-error": {
+          "$type": "color",
+          "$value": "{md.ref.palette.error100}"
+        },
+        "error-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.error90}"
+        },
+        "on-error-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.error30}"
+        },
+        "background": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral95}"
+        },
+        "on-background": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral50}"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral99}"
+        },
+        "on-surface": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral10}"
+        },
+        "surface-variant": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral98}"
+        },
+        "on-surface-variant": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutralvariant30}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral70}"
+        },
+        "outline-variant": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral85}"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "#8E8E8E30"
+        },
+        "scrim": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral0}"
+        },
+        "inverse-surface": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral20}"
+        },
+        "inverse-on-surface": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral98}"
+        },
+        "inverse-primary": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary80}"
+        },
+        "primary-fixed": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary90}"
+        },
+        "on-primary-fixed": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary10}"
+        },
+        "primary-fixed-dim": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary80}"
+        },
+        "on-primary-fixed-variant": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary30}"
+        },
+        "secondary-fixed": {
+          "$type": "color",
+          "$value": "{md.ref.palette.secondary90}"
+        },
+        "on-secondary-fixed": {
+          "$type": "color",
+          "$value": "{md.ref.palette.secondary10}"
+        },
+        "secondary-fixed-dim": {
+          "$type": "color",
+          "$value": "{md.ref.palette.secondary80}"
+        },
+        "on-secondary-fixed-variant": {
+          "$type": "color",
+          "$value": "{md.ref.palette.secondary30}"
+        },
+        "tertiary-fixed": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary90}"
+        },
+        "on-tertiary-fixed": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary10}"
+        },
+        "tertiary-fixed-dim": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary80}"
+        },
+        "on-tertiary-fixed-variant": {
+          "$type": "color",
+          "$value": "{md.ref.palette.tertiary30}"
+        },
+        "surface-dim": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral90}"
+        },
+        "surface-tint": {
+          "$type": "color",
+          "$value": "{md.ref.palette.primary40}"
+        },
+        "surface-bright": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral100}"
+        },
+        "surface-container-lowest": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral100}"
+        },
+        "surface-container-low": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral98}"
+        },
+        "surface-container": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral90}"
+        },
+        "surface-container-high": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral85}"
+        },
+        "surface-container-highest": {
+          "$type": "color",
+          "$value": "{md.ref.palette.neutral80}"
+        }
+      },
+      "state": {
+        "primary": {
+          "key": {
+            "$type": "color",
+            "$value": "{md.sys.color.on-primary}"
+          },
+          "hover": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.08",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.primary.key}"
+          },
+          "pressed": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.primary.key}"
+          },
+          "focus": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.primary.key}"
+          },
+          "dragged": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.16",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.primary.key}"
+          }
+        },
+        "secondary": {
+          "key": {
+            "$type": "color",
+            "$value": "{md.ref.palette.secondary10}"
+          },
+          "hover": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.08",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.secondary.key}"
+          },
+          "pressed": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.secondary.key}"
+          },
+          "focus": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.secondary.key}"
+          },
+          "dragged": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.16",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.secondary.key}"
+          }
+        },
+        "neutral": {
+          "key": {
+            "$type": "color",
+            "$value": "{md.ref.palette.neutral60}"
+          },
+          "hover": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.08",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.neutral.key}"
+          },
+          "pressed": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.neutral.key}"
+          },
+          "focus": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.neutral.key}"
+          },
+          "dragged": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.16",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.neutral.key}"
+          }
+        },
+        "error": {
+          "key": {
+            "$type": "color",
+            "$value": "{md.ref.palette.error5}"
+          },
+          "hover": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.08",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.error.key}"
+          },
+          "pressed": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.error.key}"
+          },
+          "focus": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.10",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.error.key}"
+          },
+          "dragged": {
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.16",
+                  "space": "srgb"
+                }
+              }
+            },
+            "$type": "color",
+            "$value": "{md.sys.state.error.key}"
+          }
+        }
+      }
+    },
+    "border": {
+      "focus": {
+        "$type": "border",
+        "$value": {
+          "color": "{md.sys.color.primary}",
+          "width": "{md.border.size.200}",
+          "style": "solid"
+        }
+      }
+    }
+  }
+}
